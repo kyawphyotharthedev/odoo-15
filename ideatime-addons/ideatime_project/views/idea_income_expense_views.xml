@@ -1,0 +1,50 @@
+<odoo>
+    <data>
+        <record id="action_idea_in_ex" model="ir.actions.act_window">
+            <field name="name">Income Expense</field>
+            <field name="res_model">idea.income.expense</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new record
+                </p>
+            </field>
+        </record>
+
+        <record id="idea_in_ex_tree" model="ir.ui.view">
+            <field name="name">idea.income.expense.tree</field>
+            <field name="model">idea.income.expense</field>
+            <field name="arch" type="xml">
+                <tree string="Income Expense" create="false">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="idea_in_ex_form" model="ir.ui.view">
+            <field name="name">idea.income.expense.form</field>
+            <field name="model">idea.income.expense</field>
+            <field name="arch" type="xml">
+                <form string="Income Expense" create="false">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                            </group>
+                            <group>
+                                <button type='object' name='compute_in_ex'>Fetch</button>
+                            </group>
+                        </group>
+                        <field name="in_ex_line_ids" mode="tree">
+                            <tree string="Material Lines" editable="bottom">
+                                <field name="product_id"/>
+                                <field name="income"/>
+                                <field name="expense"/>
+                            </tree>
+                        </field>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

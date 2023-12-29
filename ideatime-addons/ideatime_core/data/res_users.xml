@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data noupdate="1">
+        <record model="res.partner" id="ideatime_partner_kyawmyohlaing">
+            <field name="name">Kyaw Myo Hlaing</field>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="email">kyawmyohlaing@ideatime.com</field>
+        </record>
+        <record id="ideatime_user_kyawmyohlaing" model="res.users">
+            <field name="login">kyawmyohlaing@ideatime.com</field>
+            <field name="password">123</field>
+            <field name="partner_id" ref="ideatime_partner_kyawmyohlaing"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="company_ids" eval="[Command.link(ref('base.main_company'))]"/>
+        </record>
+         <record model="res.partner" id="ideatime_partner_yinwinaye">
+            <field name="name">Ma Yin Win Aye</field>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="email">yinwinaye@ideatime.com</field>
+        </record>
+        <record id="ideatime_user_yinwinaye" model="res.users">
+            <field name="login">yinwinaye@ideatime.com</field>
+            <field name="password">123</field>
+            <field name="partner_id" ref="ideatime_partner_yinwinaye"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="company_ids" eval="[Command.link(ref('base.main_company'))]"/>
+        </record>
+    </data>
+</odoo>

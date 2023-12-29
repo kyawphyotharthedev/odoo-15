@@ -1,0 +1,36 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="product_attribute_view_search">
+            <field name="name">product.attribute.search</field>
+            <field name="model">product.attribute</field>
+            <field name="arch" type="xml">
+                <search string="Products Attribute Search">
+                    <field name="label" string="Label"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="product_attribute_view_form_ideatime" model="ir.ui.view">
+            <field name="name">product.attribute.form.ideatime</field>
+            <field name="model">product.attribute</field>
+            <field name="inherit_id" ref="product.product_attribute_view_form"/>
+            <field name="arch" type="xml">
+                <field name='name' position='after'>
+                    <field name="label"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="ideatime_attribute_tree_view" model="ir.ui.view">
+            <field name="name">product.attribute.tree</field>
+            <field name="model">product.attribute</field>
+            <field name="inherit_id" ref="product.attribute_tree_view"/>
+            <field name="arch" type="xml">
+                <field name="name" position="replace">
+                    <field name="name" string="Attribute Name"/>
+                    <field name="label"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

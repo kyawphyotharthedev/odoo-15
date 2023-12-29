@@ -1,0 +1,736 @@
+<odoo>
+    <record id="ideatime_view_sales_order_filter" model="ir.ui.view">
+        <field name="name">sale.order.list.select</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_sales_order_filter"/>
+        <field name="priority" eval="15"/>
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="project_id"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="sale_action_quotations" model="ir.actions.act_window">
+        <field name="name">Quotations</field>
+        <field name="res_model">sale.order</field>
+        <field name="search_view_id" ref="sale.sale_order_view_search_inherit_quotation"/>
+        <field name="domain">[('project_id', '=', active_id)]</field>
+        <field name="context">{'default_project_id': active_id}</field>
+    </record>
+    <record id="ideatime_view_quotation_tree" model="ir.ui.view">
+        <field name="name">sale.order.tree</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_quotation_tree"/>
+        <field name="arch" type="xml">
+            <field name="name" position="before">
+                <field name="project_id" string="Project Code"/>
+                <field name="project_client_id" string="Client Name"/>
+                <field name="client_order_ref" string="PO Number"/>
+                <field name="project_site_id"/>
+                <field name="project_name"/>
+                <field name="particular"/>
+
+            </field>
+            <xpath expr="//tree/field[@name='partner_id']" position="attributes">
+                <attribute name="invisible"></attribute>
+            </xpath>
+
+        </field>
+    </record>
+    <record id="view_order_agreement_line" model="ir.ui.view">
+        <field name="name">sale.order.line.form</field>
+        <field name="model">sale.order.line</field>
+        <field eval="20" name="priority"/>
+        <field name="arch" type="xml">
+            <form>
+                <separator string='Item Order Confirmation'/>
+                <group>
+
+                    <field name="item_order_confirm_ids" nolabel="1">
+                        <tree string="Item Order Confirmation" editable="bottom">
+                            <field name="particular_id"/>
+                            <field name="description"/>
+
+                        </tree>
+                    </field>
+                </group>
+
+                <separator string='Demand Requirement'/>
+                <group>
+                    <field name="client_demand_ids" nolabel="1">
+                        <tree string="Client Demand" editable="bottom">
+                            <field name="particular_id"/>
+                            <field name="description"/>
+                        </tree>
+                    </field>
+                </group>
+
+                <separator string='Reference Photo'/>
+
+                <group>
+                    <field name="reference_photo" widget="image" nolabel="1"/>
+                </group>
+                <group>
+                    <field name="column_product"/>
+                </group>
+                <separator string='Title'/>
+
+                <group>
+                    <field name="title1"/>
+                    <field name="title2"/>
+                    <field name="title3"/>
+                    <field name="title4"/>
+                    <field name="title5"/>
+                    <field name="title6"/>
+                    <field name="title7"/>
+                    <field name="title8"/>
+                    <field name="title9"/>
+                    <field name="title10"/>
+                </group>
+
+                <footer>
+                    <button name="save" type="object" string="Save" class="oe_highlight"/>
+                    <button string="Discard" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="view_material_cost_line" model="ir.ui.view">
+        <field name="name">sale.order.line.form</field>
+        <field name="model">sale.order.line</field>
+        <field eval="20" name="priority"/>
+        <field name="arch" type="xml">
+            <form>
+                <separator string='Project Cost Estimate Part A'/>
+
+                <!--                <separator string='Direct Item Cost'/>-->
+                <group>
+                    <field name="order_line_direct_material_cost_ids" nolabel="1"
+                           widget="configure_section_and_note_one2many">
+                        <tree string="Direct Material Cost" editable="bottom">
+                            <control>
+                                <create string="Add a product"/>
+                                <create string="Configure a product" context="{'open_product_configurator': True}"
+                                        groups="product.group_product_variant"/>
+                            </control>
+                            <field name="cost_type_id"
+                                   options="{'no_open':False,'no_create':True,'no_create_edit':False}"/>
+                            <field name="product_id" domain="[('cost_type_id', '=', cost_type_id)]"/>
+                            <!--    <field name="name"/> -->
+                            <field name="pcs"/>
+                            <field name="length"/>
+                            <field name="width"/>
+                            <field name="height"/>
+                            <field name="qty" invisible="1"/>
+                            <field name="product_uom_qty" string="Qty" readonly="1"/>
+                            <field name="qty_delivered" invisible="1"/>
+                            <field name="product_uom" string="Unit"/>
+                            <field name="product_uom_label" invisible="1"/>
+                            <field name="unit_price"/>
+
+
+                        </tree>
+                    </field>
+                </group>
+
+
+            </form>
+        </field>
+    </record>
+    <record id="ideatime_sale_view_order_form_inherit" model="ir.ui.view">
+        <field name="name">ideatime.sale.order.form.inherit</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <field name="client_order_ref" position="replace">
+                <field name="client_order_ref" string="PO Number"/>
+            </field>
+            <field name="state" position="after">
+                <field name="w_state" widget="statusbar"/>
+            </field>
+            <xpath expr="//field[@name='payment_term_id']" position="after">
+                <field name="sale_order_img" t-field-options='{"widget":"image"}' invisible="1"/>
+                <field name="partner_shipping_id" invisible="1"/>
+                <field name="project_name"/>
+                <field name="budget_pricelist_id"/>
+                <field name="bd_senior_manger" invisible="1"/>
+                <field name="project_senior_manger" invisible="1"/>
+                <field name="project_director" invisible="1"/>
+                <field name="finance_senior_manager" invisible="1"/>
+                <field name="finance_approve" invisible="1"/>
+                <field name="project_director_approve" invisible="1"/>
+                <field name="current_user" invisible="1"/>
+                <field name="project_senior_approve" invisible="1"/>
+                <field name="bd_senior_approve" invisible="1"/>
+                <field name="date_printed" invisible="1"/>
+                <field name="project_implement_approve" invisible="1"/>
+                <field name="estimate_file_confirm" invisible="1"/>
+                <field name="invoice_validate" invisible="1"/>
+                <field name="is_contract_client" invisible="1"/>
+            </xpath>
+            <xpath expr="//field[@name='partner_id']" position="replace">
+
+                <field name="partner_id" widget="res_partner_many2one" domain="[('customer_rank','>',0)]"
+                       context="{'search_default_customer':1, 'show_project_site': 1,'show_phone': 1, 'show_mobile': 1,'show_vat': True}"
+                       options='{"always_reload": True,"no_create": True}'/>
+
+            </xpath>
+
+
+            <xpath expr="//header" position="replace">
+                <header>
+                    <field name="agreement_confirm" invisible="1"/>
+                    <field name="w_state" invisible="1"/>
+                    <field name="authorized_transaction_ids" invisible="1"/>
+                    <button name="payment_action_capture" type="object"
+                            string="Capture Transaction" class="oe_highlight"
+                            attrs="{'invisible': [('authorized_transaction_ids', '=', [])]}"/>
+                    <button name="payment_action_void" type="object"
+                            string="Void Transaction"
+                            confirm="Are you sure you want to void the authorized transaction? This action can't be undone."
+                            attrs="{'invisible': [('authorized_transaction_ids', '=', [])]}"/>
+
+                    <button name="%(sale.action_view_sale_advance_payment_inv)d" string="Create Invoice"
+                            type="action" class="btn-primary" data-hotkey="q"
+                            attrs="{'invisible': [('invoice_status', '!=', 'to invoice')]}"/>
+                    <button name="%(sale.action_view_sale_advance_payment_inv)d" string="Create Invoice"
+                            type="action" context="{'default_advance_payment_method': 'percentage'}" data-hotkey="q"
+                            attrs="{'invisible': ['|',('invoice_status', '!=', 'no'), ('state', '!=', 'sale')]}"/>
+                    <button name="action_quotation_send" string="Send by Email" type="object" states="draft"
+                            class="btn-primary"/>
+                    <button name="action_quotation_send" type="object" string="Send PRO-FORMA Invoice"
+                            groups="sale.group_proforma_sales" class="btn-primary"
+                            attrs="{'invisible': ['|', ('state', '!=', 'draft'), ('invoice_count','&gt;=',1)]}"
+                            context="{'proforma': True}"/>
+
+                    <button name="action_confirm" id="action_confirm"
+                            string="Confirm" class="btn-primary" type="object"
+                            attrs="{'invisible': ['|', ('state', 'not in', ['draft']),('w_state', 'in', ['initial'])]}"/>
+
+                    <button name="preview_sale_order" type="object" string="Preview"/>
+                    <button name="action_quotation_send" type="object" string="Send PRO-FORMA Invoice"
+                            groups="sale.group_proforma_sales"
+                            attrs="{'invisible': ['|', ('state', '=', 'draft'), ('invoice_count','&gt;=',1)]}"
+                            context="{'proforma': True}"/>
+
+                    <button name="action_quotation_send" string="Send by Email" type="object" states="sent,sale"/>
+                    <button name="action_cancel" type="object" string="Cancel"
+                            attrs="{'invisible': [('state', 'not in', ('draft','sent','sale'))]}"/>
+                    <button name="action_draft" type="object" string="Set to Quotation"
+                            attrs="{'invisible': [('state', 'not in', ['cancel'])]}"/>
+
+
+                    <button name="action_order_agreement" type="object" class="btn-primary"
+                            string="Order Agreement Confirm"
+                            attrs="{'invisible': ['|',('w_state', '!=', 'initial'),('agreement_confirm','=',False)]}"
+                            groups="ideatime_core.ideatime_order_agreement"
+                    />
+
+                    <button name="action_budget" type="object" class="btn-primary" string="Budget Available"
+                            attrs="{'invisible': ['|','|',('w_state','!=','order_agreement'),('estimate_file_confirm','=',False),('project_senior_approve','=',False)]}"
+                    />
+                    <button name="action_detail_check" string="Detail Check"
+                            type="object" class="btn-primary"
+                            attrs="{'invisible': ['|',('w_state', '!=', 'budget'),('finance_approve','=',False)]}"
+                    />
+
+                    <button name="action_approve" string="Project Implement  Approve"
+                            type="object" class="btn-primary"
+                            attrs="{'invisible': ['|',('w_state', '!=', 'check'),('project_director_approve','=',False)]}"
+
+                    />
+
+                    <button name="action_delivery_direct_mat_product" string="Create Delivery"
+                            type="object" class="btn-primary" attrs="{'invisible': [('w_state', '!=', 'approve')]}"
+                            groups="ideatime_core.ideatime_group_create_deliver"
+                    />
+
+                    <button name="action_done" type="object" string="Lock"
+                            attrs="{'invisible': [('state', 'not in', ['sale'])]}"
+                            help="If the sale is locked, you can not modify it anymore. However, you will still be able to invoice or deliver."/>
+                    <button name="action_unlock" type="object" string="Unlock"
+                            attrs="{'invisible': [('state', 'not in', ['done'])]}"
+                            groups="sales_team.group_sale_manager"/>
+
+                    <field name="state" widget="statusbar" statusbar_visible="draft,sent,sale"/>
+
+                </header>
+            </xpath>
+            <button name="action_cancel" position="replace">
+                <button name="action_cancel" type="object" string="Cancel"/>
+            </button>
+        </field>
+    </record>
+
+    <record id="ideatime_sale_order_form_pages" model="ir.ui.view">
+        <field name="name">ideatime.sale.order.form.pages</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <field name="order_line" position="attributes">
+                <attribute name="widget">configure_section_and_note_one2many</attribute>
+                <attribute name="attrs">{'readonly': [('state', 'in', ('done','cancel','sale'))]}</attribute>
+            </field>
+            <xpath expr="//control/create[1]" position="after">
+                <create string="Configure a product" context="{'open_product_configurator': True}"
+                        groups="product.group_product_variant"/>
+            </xpath>
+            <xpath expr="//tree/field[@name='name']" position="after">
+                <field name="size" string="Size/Service Specification"/>
+                <button name="calculate_cbm" type="object" icon="fa-calculator"/>
+            </xpath>
+            <xpath expr="//tree/field[@name='price_subtotal']" position="after">
+                <field name="remark" string="Remark"/>
+                <field name="is_contract_client" invisible="1"/>
+                <field name="state" invisible="1"/>
+                <button name="open_order_agreement" type="object" icon="fa-bars"/>
+                <!--                <button name="open_material_cost"  type="object"-->
+                <!--                        attrs="{'invisible': ['&amp;', ('is_contract_client', '!=', True), ('state', 'in', ['draft','sent'])]}"-->
+                <!--                        icon="fa-bars"/>-->
+            </xpath>
+            <xpath expr="//page[@name='other_information']" position="after">
+                <page string="Project Cost Estimate Part B" name="order_expense_line"
+                      attrs="{'invisible': ['&amp;', ('is_contract_client', '!=', True), ('state', 'in', ['draft','sent','sale'])]}">
+                    <field name="is_contract_client" invisible="1"/>
+                    <field name="project_cost_estimate_confirm" invisible="1"/>
+                    <field name="order_expense_line" widget="configure_section_and_note_one2many" mode="tree">
+                        <form>
+                            <field name="display_type" invisible="1"/>
+
+                            <group>
+                                <group attrs="{'invisible': [('display_type', '!=', False)]}">
+
+                                    <field name="product_id"
+                                           attrs="{
+                                                    'required': [('display_type', '=', False)],
+                                                }"
+                                           force_save="0"
+                                    />
+
+
+                                    <label for="product_uom_qty" string="Ordered Quantity"/>
+                                    <div>
+                                        <field
+                                                name="product_uom_qty" class="oe_inline"/>
+                                        <field
+                                                name="product_uom"
+                                                groups="uom.group_uom"
+                                                class="oe_inline oe_no_button"
+                                                attrs="{
+
+                                                        'required': [('display_type', '=', False)],
+                                                    }"
+                                                string="Unit"
+                                        />
+                                    </div>
+
+                                    <field name="price_unit"/>
+                                </group>
+
+                            </group>
+                            <label for="name" string="Description"
+                                   attrs="{'invisible': [('display_type', '!=', False)]}" invisible="1"/>
+
+
+                            <label for="name" string="Note"
+                                   attrs="{'invisible': [('display_type', '!=', 'line_note')]}"/>
+                            <field name="name"/>
+                            <div groups="base.group_no_one" attrs="{'invisible': [('display_type', '!=', False)]}">
+
+                            </div>
+
+                        </form>
+
+                        <tree string="Expense Order Lines" editable="bottom">
+                            <control>
+                                <create string="Add a product"/>
+                                <create string="Configure a product" context="{'open_product_configurator': True}"
+                                        groups="product.group_product_variant"/>
+                                <create string="Add a section"
+                                        context="{'default_display_type': 'line_section'}"/>
+
+                            </control>
+                            <field name="display_type" invisible="1"/>
+
+
+                            <field
+                                    name="product_id"
+                                    attrs="{
+                                            'required': [('display_type', '=', False)],
+                                        }"
+                                    force_save="1"
+
+                            />
+                            <field name='name' widget='section_and_note_text'
+                                   attrs="{'invisible': [('display_type', '!=', 'line_section')]}" invisible="1"/>
+
+                            <field name="particular_ids" widget='configure_section_and_note_one2many' attrs="{
+                                            'required': [('display_type', '=', 'line_expense_section')],
+                                        }"/>
+
+                            <button name="expense_calculate_cbm" string="Calculate CBM" type="object"
+                                    icon="fa-calculator"/>
+                            <field name="product_uom_qty" string="Ordered Qty"/>
+                            <field name="product_uom"/>
+                            <field name="product_uom_label" invisible="1"/>
+                            <field name="price_unit"/>
+                            <field name="price_subtotal"/>
+                            <field name="remark"/>
+                        </tree>
+
+                    </field>
+                    <div class="oe_clear"/>
+                    <group class="oe_subtotal_footer oe_right" colspan="2" name="sale_total">
+                        <div class="oe_subtotal_footer_separator oe_inline o_td_label">
+                            <label for="expense_total_amount"/>
+                        </div>
+                        <field name="expense_total_amount" nolabel="1" class="oe_subtotal_footer_separator"
+                               widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                    </group>
+                </page>
+                <page string="Project Budget Applicable Plan"
+                      groups="ideatime_core.group_project_budget_applicable_plan">
+                    <field name="project_budget_applicable_plan_confirm" invisible="1"/>
+                    <group>
+                        <group>
+                            <field name="estimate_filename" invisible="1"/>
+                            <field name="project_cost_estimate_file" string="Project Budget Applicable Plan"
+                                   filename="estimate_filename"/>
+                        </group>
+                        <group>
+                            <field name="analysis_filename" invisible="1"/>
+                            <field name="project_estimate_anlaysis_file" string="Project Cost
+                                Estimate Analysis" filename="analysis_filename"/>
+                            <field name="estimate_file_confirm" invisible="1"/>
+                            <field name="project_senior_approve" invisible="1"/>
+                        </group>
+                        <group>
+                            <field name="start_date" string="Start Date"/>
+                        </group>
+                        <group>
+                            <field name="end_date" string="End Date"/>
+                        </group>
+                        <group>
+                            <field name="no_of_day" string="Day"/>
+                        </group>
+                    </group>
+
+                    <field name="project_budget_applicable_plan_lines">
+                        <tree editable="bottom">
+                            <field name="name" string="Description"/>
+                            <field name="description" invisible="1"/>
+                            <field name="amount"/>
+                            <field name="currency"/>
+                            <field name="applicable_date"/>
+                            <field name="complete_date"/>
+                            <field name="remark"/>
+                        </tree>
+                    </field>
+                    <field name="grand_total_amount" invisible="1"/>
+                </page>
+                <page string="Additional Information">
+                    <center>
+                        <h1>BD additional information</h1>
+                    </center>
+                    <group>
+                        <group>
+                            <h3>Client info</h3>
+                            <field name="bd_date"/>
+                            <field name="client_name"
+                                   string="Client information"
+                                   widget="res_partner_many2one"
+                                   domain="[('customer_rank','>',0)]"
+                                   context="{'search_default_customer':1, 'show_project_site': 1,'show_phone': 1, 'show_mobile': 1,'show_vat': True}"
+                                   options='{"always_reload": True,"no_create": True}'/>
+
+                            <field name="business_type"/>
+                            <field name="bd_project_name"/>
+                            <field name="store_format"/>
+                            <field name="location"/>
+                            <field name="tax_id" string="Tax ID"/>
+                        </group>
+                        <group>
+                            <h3>PIC info</h3>
+                            <field name="employee_id" string="Employee information" widget="res_partner_many2one"
+                                   context="{'show_project_site': 1,'show_job_position':1,'show_phone': 1, 'show_mobile': 1,'show_vat': True}"
+                                   options='{"always_reload": True,"no_create": True}'/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <h3>Additional info</h3>
+                            <field name="bd_title1"/>
+                            <field name="bd_title2"/>
+                            <field name="bd_title3"/>
+                            <field name="bd_title4"/>
+                            <field name="bd_title5"/>
+                            <field name="bd_title6"/>
+                            <field name="bd_title7"/>
+                            <field name="bd_title8"/>
+                            <field name="bd_title9"/>
+                            <field name="bd_title10"/>
+                        </group>
+                    </group>
+                    <center>
+                        <h1>Finance additional information
+                        </h1>
+                    </center>
+                    <group>
+                        <group>
+                            <h3>Invoice info</h3>
+                            <field name="invoice_date"/>
+                            <field name="invoice_number"/>
+                            <field name="po_attached_file" filename="file_name"/>
+                            <field name="project_number"/>
+                            <field name="invoice_payment_term"/>
+                        </group>
+                        <group>
+                            <h3>Bank info</h3>
+                            <field name="vendor_name"/>
+                            <field name="bank_name"/>
+                            <field name="bank_account_no"/>
+                            <field name="swift_code"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <h3>Additional info</h3>
+                            <field name="invoice_title1"/>
+                            <field name="invoice_title2"/>
+                            <field name="invoice_title3"/>
+                            <field name="invoice_title4"/>
+                            <field name="invoice_title5"/>
+                            <field name="invoice_title6"/>
+                            <field name="invoice_title7"/>
+                            <field name="invoice_title8"/>
+                            <field name="invoice_title9"/>
+                            <field name="invoice_title10"/>
+                        </group>
+                    </group>
+                </page>
+                <page string="Order Agreement Information" name="order_agreement_information">
+                    <group>
+                        <group>
+                            <field name="agreement_period_id" string="Agreement type template"/>
+                            <field name="agreement_period_note" string="Agreement type"/>
+                            <field name="agreement_period_image"/>
+                        </group>
+                        <group>
+                            <field name="commencement_date" invisible="1"/>
+                            <field name="commencement_start_date"/>
+                            <field name="commencement_end_date"/>
+
+
+                            <!--  <field name="commencemnt_id" invisible="1"/>
+                              <field name="commencement_note" string="Date of Commencement" invisible="1"/> -->
+
+                        </group>
+                        <group>
+
+                            <field name="currency_template_id"/>
+                            <field name="currency_note" string="Currency"/>
+                            <field name="currency_note_image"/>
+                            <!-- <field name="price_fee_id"/> -->
+                        </group>
+                        <group>
+
+                            <field name="price_fee_id" string="Price and Fees Template"/>
+                            <field name="price_fee_note" string="Price and Fees"/>
+                            <field name="price_fee_note_image"/>
+
+                        </group>
+                        <group>
+
+                            <field name="taxation_template_id"/>
+                            <field name="taxation_note" string="Taxation"/>
+                            <field name="taxation_note_image"/>
+
+                        </group>
+                        <group>
+
+                            <field name="payment_template_id"/>
+                            <field name="payment_note" string="Term of Payment"/>
+                            <field name="payment_note_image"/>
+
+
+                        </group>
+                        <group>
+
+                            <field name="acceptance_template_id"/>
+                            <field name="acceptance_note" string="Acceptance"/>
+                            <field name="acceptance_note_image"/>
+
+                        </group>
+                        <group>
+
+                            <field name="obligation_template_id" string="Obilgation Template"/>
+                            <field name="obligation_note" string="Obilgation"/>
+                            <field name="obligation_note_image"/>
+
+                        </group>
+                        <group>
+
+                            <field name="contract_template_id" string="Liability of breach of contract template"/>
+                            <field name="contract_note" string="Liability of breach of contract"/>
+                            <field name="contract_note_image" string="Liability of breach of contract Image"/>
+
+                        </group>
+                        <group>
+
+                            <field name="termination_template_id"/>
+                            <field name="termination_note" string="Termination"/>
+                            <field name="termination_note_image"/>
+
+
+                        </group>
+                        <group>
+
+                            <field name="arbitration_template_id"/>
+                            <field name="arbitration_note" string="Arbitration"/>
+                            <field name="arbitration_note_image"/>
+                            <field name="additional_agreement"/>
+
+                        </group>
+                        <group>
+                            <field name="agreement_file" filename="file_name"/>
+                            <field name="file_name" invisible="1"/>
+                            <field name="agreement_confirm" invisible="1"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+
+        </field>
+    </record>
+    <record id="view_sales_order_auto_done_setting_inherit" model="ir.ui.view">
+        <field name="name">sale.order.action.done.add.state</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_sales_order_auto_done_setting"/>
+        <field name="arch" type="xml">
+            <button name="action_done" position="replace">
+                <button name="action_done" type="object" string="Lock"
+                        states="sale,order_agreement,budget,check,approve"
+                        help="If the sale is locked, you can not modify it anymore. However, you will still be able to invoice or deliver."
+                        groups="sales_team.group_sale_manager"/>
+            </button>
+        </field>
+    </record>
+    <record id="optional_products_page_hide" model="ir.ui.view">
+        <field name="name">optional.product.page.hide</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale_management.sale_order_form_quote"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[2]" position="replace">
+
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_expense_line_cbm_calc" model="ir.ui.view">
+        <field name="name">expense.order.line.form</field>
+        <field name="model">expense.order.line</field>
+        <field eval="20" name="priority"/>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+
+                    <group>
+                        <field name='Pcs'/>
+                        <field name='length'/>
+                        <field name='width'/>
+                        <field name='height'/>
+                    </group>
+                    <group>
+                        <field name="pcs_uom"/>
+                        <field name="length_uom"/>
+                        <field name="width_uom"/>
+                        <field name="height_uom"/>
+                    </group>
+                    <group>
+                        <field name='volume_weight' string="Result"/>
+                        <field name="product_uom_qty" invisible="1"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="save" type="object" string="Save" class="oe_highlight"/>
+                    <button string="Discard" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="view_sale_order_line_cbm_calc" model="ir.ui.view">
+        <field name="name">sale.order.line.form</field>
+        <field name="model">sale.order.line</field>
+        <field eval="20" name="priority"/>
+        <field name="arch" type="xml">
+            <form>
+                <field name="calculator_line_ids">
+                    <tree>
+                        <field name='state' invisible='1'/>
+                        <field name="size" attrs="{'readonly': [('state', 'in', ('done','cancel','sale'))]}"/>
+                        <field name="description" attrs="{'readonly': [('state', 'in', ('done','cancel','sale'))]}"/>
+                        <field name='Pcs' attrs="{'readonly': [('state', 'in', ('done','cancel','sale'))]}"/>
+                        <field name='length' attrs="{'readonly': [('state', 'in', ('done','cancel','sale'))]}"/>
+                        <field name='width' attrs="{'readonly': [('state', 'in', ('done','cancel','sale'))]}"/>
+                        <field name='height' attrs="{'readonly': [('state', 'in', ('done','cancel','sale'))]}"/>
+                        <field name="volume_weight" string="Result"/>
+                        <field name="product_uom" string="UOM"/>
+                    </tree>
+                    <form>
+                        <group>
+                            <field name="size"/>
+                        </group>
+                        <group>
+                            <field name="description"/>
+                        </group>
+                        <div class="w-50">
+                            <group>
+                                <field name="uom_type"/>
+                            </group>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="Pcs" attrs="{'invisible': [('uom_type', 'in', ('volume','liquid'))]}" required="True"/>
+                                <field name="length" attrs="{'invisible': [('uom_type', 'in', ('liquid','unit'))]}" required="True"/>
+                                <field name="width" attrs="{'invisible': [('uom_type', 'in', ('liquid','unit'))]}" required="True"/>
+                                <field name="height" attrs="{'invisible': [('uom_type', 'in', ('liquid','unit'))]}" required="True"/>
+                                <field name="volume_weight" attrs="{'invisible': [('uom_type', 'in', ('liquid','unit'))]}"/>
+                                <field name="state"/>
+                            </group>
+                            <group>
+                                <field name="pcs_uom" attrs="{'invisible': [('uom_type', 'in', ('liquid','liquid'))]}" required="True"/>
+                                <field name="length_uom" attrs="{'invisible': [('uom_type', 'in', ('liquid','unit'))]}"/>
+                                <field name="width_uom" attrs="{'invisible': [('uom_type', 'in', ('liquid','unit'))]}"/>
+                                <field name="height_uom" options="{'no_quick_create':True,'no_create_edit': True}" attrs="{'invisible': [('uom_type', 'in', ('liquid','unit'))]}"/>
+                                <field name="so_line_id"/>
+                                <field name="product_uom"/>
+                            </group>
+                        </group>
+                    </form>
+                </field>
+                <group>
+                    <!--                    <group></group>-->
+                    <group>
+                        <field name="volume_weight_total"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="save" type="object" string="Save" class="oe_highlight"/>
+                    <button string="Discard" special="cancel"/>
+                </footer>
+            </form>
+            <!--            <xpath expr="//description" position="after">-->
+            <!--                -->
+            <!--            </xpath>-->
+        </field>
+    </record>
+
+    <!--    <template id="customize_product_variants_view_on_sale_order" inherit_id="sale.variants">-->
+    <!--        <xpath expr="//ul/t/li" position="attributes">-->
+    <!--            <attribute name="t-attf-class">variant_attribute-->
+    <!--                #{'d-none' if len(variant_id.product_template_value_ids) == 1 and variant_id.product_template_value_ids[0].is_custom else ''}</attribute>-->
+    <!--        </xpath>-->
+    <!--    </template>-->
+
+</odoo>

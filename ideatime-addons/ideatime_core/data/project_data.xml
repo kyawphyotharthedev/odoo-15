@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="project_type_stage_01_task_stage" model="project.task.type">
+            <field name="name">Pending</field>
+            <field name="stage_type">task</field>
+        </record>
+
+        <record id="project_type_stage_02_task_stage" model="project.task.type">
+            <field name="name">Doing</field>
+            <field name="stage_type">task</field>
+        </record>
+
+        <record id="project_type_stage_03_task_stage" model="project.task.type">
+            <field name="name">Complete</field>
+            <field name="stage_type">task</field>
+        </record>
+
+        <record id="project_type_stage_04_task_stage" model="project.task.type">
+            <field name="name">Done</field>
+            <field name="stage_type">task</field>
+            <field name="stage_state">done</field>
+        </record>
+
+        <record id="project_type_stage_05_task_stage" model="project.task.type">
+            <field name="name">Cancel</field>
+            <field name="stage_type">task</field>
+            <field name="stage_state">cancel</field>
+        </record>
+    </data>
+</odoo>

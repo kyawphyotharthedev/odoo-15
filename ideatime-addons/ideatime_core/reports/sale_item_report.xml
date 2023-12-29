@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <template id="ideatime_sale_item_report_layout_standard">
+
+            <div class="header">
+                <t t-foreach="docs" t-as="o">
+                    <img src='/ideatime_core/static/src/img/ideatime_header.jpg'
+                         style="max-height: 27mm;max-width:100%"/>
+                    <h6/>
+                    <table class="table o_main_table table-sm table-bordered">
+                        <tr class="text-center">
+                            <th colspan="8">
+                                <span t-field="o.cate_sector_id"/>
+                            </th>
+                        </tr>
+                        <tr class="text-center">
+                            <th style="width:4.9%;">No.</th>
+                            <th style="width:19.7%;">Photo</th>
+                            <th style="width:11.3%;">Item name</th>
+                            <th style="width:10.1%;">Item code</th>
+                            <th style="width:5%">Unit</th>
+                            <th style="width:33.2%;">Variants</th>
+                            <th style="width:8.8%;">Cost extra (MMK)</th>
+                            <th style="width:7%;">Sale price (MMK)</th>
+                        </tr>
+                    </table>
+                </t>
+            </div>
+
+            <div class="article o_report_layout_standard" t-att-data-oe-model="o and o._name"
+                 t-att-data-oe-id="o and o.id"
+                 t-att-data-oe-lang="o and o.env.context.get('lang')">
+                <t t-call="web.address_layout"/>
+                <t t-raw="0"/>
+            </div>
+
+            <div class="footer o_standard_footer">
+                <img src='/ideatime_core/static/src/img/Header format for Idea Time Advertising Company down.jpg'
+                     style="max-height: 46mm; width:100%;"/>
+                <div style="text-align:right;">
+                    Page<span class="page"/>/
+                    <span class="topage"/>
+                </div>
+            </div>
+        </template>
+
+        <template id="ideatime_sale_item_report_layout_so">
+            <t t-if="not o" t-set="o" t-value="doc"/>
+            <t t-call="ideatime_core.ideatime_sale_item_report_layout_standard">
+                <t t-raw="0"/>
+            </t>
+        </template>
+        <template id="sale_item_report_template">
+            <t t-call="web.html_container">
+                <t t-call="ideatime_core.ideatime_sale_item_report_layout_so">
+                    <t t-foreach="docs" t-as="doc">
+                        <div class="page">
+                            <table class="table o_main_table table-sm table-bordered">
+                                <t t-foreach="doc.search_product()" t-as="line">
+                                    <tr>
+                                        <td class="text-center" style="width:5%;">
+                                            <span t-esc="line['no']"/>
+                                        </td>
+                                        <td class="text-center" style="width:20%;">
+                                            <img t-if="line['photo']"
+                                                 t-att-src="image_data_uri(line['photo'])"
+                                                 alt="Logo"/>
+                                        </td>
+                                        <td style="width:10%;">
+                                            <span t-esc="line['item_name']"/>
+                                        </td>
+                                        <td style="width:10%;">
+                                            <span t-esc="line['item_code']"/>
+                                        </td>
+                                        <td class="text-right" style="width:5%;">
+                                            <span t-esc="line['unit']"/>
+                                        </td>
+                                        <td style="width:34%;">
+                                            <div>
+                                                <t t-foreach="line['variants']" t-as="variant">
+                                                    <div>
+                                                        <div style="width:30%; float:left; text-align:right;">
+                                                            <span t-esc="variant.attribute_id.name"/>
+                                                            :
+                                                        </div>
+                                                        <div style="border-left:1px solid gray; width:70%; float:right;">
+                                                            <t t-foreach="variant.value_ids" t-as="value">
+                                                                &#160;&#160;<span t-esc="value.name"/>
+                                                                <br/>
+                                                            </t>
+                                                        </div>
+                                                    </div>
+                                                    <hr style="width:100%;"/>
+                                                </t>
+                                            </div>
+                                        </td>
+                                        <td class="text-right" style="width:9%;">
+                                            <span t-esc="line['cost_extra']"/>
+                                        </td>
+                                        <td class="text-right" style="width:7%;">
+                                            <span t-esc="line['sale_price']"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </table>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

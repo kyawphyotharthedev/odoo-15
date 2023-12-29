@@ -1,0 +1,91 @@
+<odoo>
+    <template id="beten_quotation_external_layout_standard">
+
+        <div class="header">
+            <t t-foreach="docs" t-as="doc">
+                <img src='/ideatime_core/static/src/img/beten_header.jpg'
+                     style="max-height: 27mm;max-width:221.5mm"/>
+                <h6/>
+                <table width="100%">
+                    <tr height="3mm" style="border:2px solid gray">
+                        <td style="font-family: Arial;font-size:18px;padding-left:14mm;border:2px solid gray"
+                            width="28%">
+                            <span>
+                                <strong>Document name:</strong>
+                            </span>
+                        </td>
+                        <td width="73%" style="text-align:center;border:2px solid gray;font-size:20px;color:gray">
+                            <strong>Quotation Form</strong>
+                        </td>
+                    </tr>
+
+                    <tr height="3mm" style="border:2px solid gray">
+                        <td style="font-family: Arial;font-size:18px;color:bold;padding-left:24mm;border:2px solid gray"
+                            width="28%">
+                            <span>
+                                <strong>Project code:</strong>
+                            </span>
+                        </td>
+                        <td width="73%" style="text-align:center;border:2px solid gray;color:gray">
+                            <strong>
+                                <span t-field="doc.project_id.name"/>
+                            </strong>
+                        </td>
+                    </tr>
+
+                    <tr height="3mm" style="border:2px solid gray">
+                        <td style="font-family: Arial;font-size:18px;color:bold;padding-left:21mm;border:2px solid gray"
+                            width="28%">
+                            <span>
+                                <strong>Project name:</strong>
+                            </span>
+                        </td>
+                        <td width="73%" style="text-align:center;border:2px solid gray;color:gray;font-size:18px">
+                            <div style="overflow:hidden;height:8mm">
+                                <strong>
+                                    <t t-if="doc.project_id.site_name">(<span t-field="doc.project_id.site_name"/>)
+                                    </t>
+                                    <span t-field="doc.partner_id.name"/>_
+                                    <t t-if="doc.project_id.cate_sector_id">
+                                        <span t-field="doc.project_id.cate_sector_id"/>
+                                    </t>
+                                    <t t-if="doc.project_id.manual_project_name">
+                                        <span></span>
+                                        <span t-field="doc.project_id.manual_project_name"/>
+                                    </t>
+                                </strong>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </t>
+
+        </div>
+
+
+        <div class="article o_report_layout_standard" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id"
+             t-att-data-oe-lang="o and o.env.context.get('lang')">
+            <t t-call="web.address_layout"/>
+            <t t-raw="0"/>
+        </div>
+
+        <div class="footer o_standard_footer">
+<!--            <img src='/ideatime_customization/static/src/img/Header format for Idea Time Advertising Company down.jpg'-->
+<!--                 style="max-height: 46mm;max-width:221.5mm"/>-->
+            <div style="text-align:right;">
+                Page<span class="page"/>/
+                <span class="topage"/>
+            </div>
+        </div>
+    </template>
+
+    <template id="beten_quotation_external_layout_so">
+        <t t-if="not o" t-set="o" t-value="doc"/>
+        <t t-call="ideatime_sale.beten_quotation_external_layout_standard">
+            <t t-raw="0"/>
+        </t>
+
+    </template>
+
+
+</odoo>

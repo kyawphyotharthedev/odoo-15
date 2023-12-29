@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_ideatime__uom_ideatime__uom,ideatime__uom.ideatime__uom,model_ideatime__uom_ideatime__uom,base.group_user,1,1,1,1

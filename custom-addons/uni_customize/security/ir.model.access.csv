@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_uni_customize_uni_customize,uni_customize.uni_customize,model_uni_customize_uni_customize,base.group_user,1,1,1,1

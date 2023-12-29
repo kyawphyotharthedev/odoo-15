@@ -1,0 +1,164 @@
+<odoo>
+    <data>
+        <template id="report_producttemplatedescription">
+            <template id="td_report_invoice_footer" inherit_id="web.external_layout_standard">
+                <xpath expr="//div[hasclass('header')]" position="replace">
+                    <div class="header">
+                        <img src='/ideatime_core/static/src/img/ideatime_header.jpg'
+                             style="max-height: 27mm;max-width:221.5mm"/>
+                    </div>
+                </xpath>
+                <xpath expr="//div[hasclass('footer o_standard_footer')]" position="replace">
+                    <div class="footer o_standard_footer">
+                        <img src='/ideatime_core/static/src/img/Header format for Idea Time Advertising Company down.jpg'
+                             style="max-height: 46mm;max-width:221.5mm"/>
+                        <div style="text-align:right;">
+                            Page<span class="page"/>/
+                            <span class="topage"/>
+                        </div>
+                    </div>
+                </xpath>
+            </template>
+            <t t-call="web.html_container">
+                <t t-call="web.internal_layout">
+                    <t t-foreach="docs" t-as="doc">
+                        <div class="page">
+                            <table width="100%" class="table table-sm o_main_table">
+                                <thead>
+                                    <tr>
+                                        <td width="20%"/>
+                                        <td width="20%"/>
+                                        <td width="30%"/>
+                                        <td width="30%"/>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td colspan="4" style="text-align:center;background-color:#40180B;color:white;">
+                                            Item description
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="4" style="text-align:center;"></td>
+                                    </tr>
+                                    <tr>
+                                        <td rowspan="5" style="text-align:center;border:2px solid white">
+                                            <img width="250mm" height="200mm"
+                                                 t-attf-src="data:image/*;base64,{{doc.image_512}}"/>
+                                        </td>
+                                        <td colspan="3"
+                                            style="text-align:center;background-color:#073054;border:2px solid #073054;color:white">
+                                            General information
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:right;border:2px solid white">Item name:</td>
+                                        <td colspan="2"
+                                            style="border:2px solid white;padding-left:0mm; text-align:justify;">
+                                            <span
+                                                    t-field="doc.name"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:right;border:2px solid white">Item introduction:</td>
+                                        <td colspan="2" style="border:2px solid white; text-align:justify;">
+                                            <t t-foreach="doc.item_intro_ids" t-as="intro">
+                                                <span t-field="intro.particular_id"/>:
+                                                <span t-field="intro.description"/>
+                                                <br/>
+                                            </t>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:right;border:2px solid white">Calculation method:</td>
+                                        <td colspan="2" style="text-align:justify;">
+                                            <span t-field="doc.calculation_method"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:right;border:2px solid white">Product environment and
+                                            status quantity:
+                                        </td>
+                                        <td colspan="2" style="border:2px solid white; text-align:justify;">
+                                            <t t-foreach="doc.product_env_qty_std_ids" t-as="std">
+                                                <span t-field="std.particular_id"/>:
+                                                <span t-field="std.description"/>
+                                                <br/>
+                                            </t>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <table width="100%" class="table table-sm">
+                                <tr style="border:2px solid gray;">
+                                    <td style="border:2px solid gray;" colspan="2">Variant:</td>
+                                </tr>
+                                <t t-foreach="doc.valid_product_attribute_ids" t-as="at">
+                                    <tr>
+                                        <td width="35%" style="border:2px solid gray; text-align:right;"><span
+                                                t-field="at.name"/>:
+                                        </td>
+                                        <td width="65%" style="border:2px solid gray; text-align:left;">
+                                            <t t-foreach="at.value_ids" t-as="value">
+                                                <span t-field="value.name"/>
+                                                /
+                                            </t>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </table>
+
+
+                            <table width="100%" class="table table-sm">
+                                <tr>
+                                    <td width="35%">Item Specification:</td>
+                                    <td width="65%"/>
+                                </tr>
+                                <tr width="35%" style="background-color:#FFEDA9;border:2px solid gray;">
+                                    <td style="border:2px solid gray;text-align:center">Particular</td>
+                                    <td width="65%" style="border:2px solid gray;text-align:center" colspan="3">
+                                        Description
+                                    </td>
+                                </tr>
+                                <tr style="border:2px solid gray" t-foreach="doc.item_spec_ids" t-as="spec">
+                                    <td width="35%"
+                                        style="border:2px solid gray; text-align:right;">
+                                        <span t-field="spec.particular_id"/>
+                                        :
+                                    </td>
+                                    <td width="65%"
+                                        style="border:2px solid gray; text-align:left;">
+                                        <span t-field="spec.description"/>
+                                    </td>
+                                </tr>
+                            </table>
+
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+        <record id="report_item_description" model="ir.actions.report">
+            <field name="name">Item Description</field>
+            <field name="model">product.template</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">ideatime_core.report_producttemplatedescription</field>
+            <field name="report_file">ideatime_core.report_producttemplatedescription</field>
+            <field name="print_report_name">'Item Description - %s' % (object.name)</field>
+            <field name="binding_model_id" ref="product.model_product_template"/>
+            <field name="binding_type">report</field>
+        </record>
+        <record id="item_description_a4" model="report.paperformat">
+            <field name="name">Item Description Report A4</field>
+            <field name="format">A4</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">35</field>
+            <field name="margin_bottom">15</field>
+            <field name="margin_left">7</field>
+            <field name="margin_right">7</field>
+            <field name="header_spacing">20</field>
+            <field name="report_ids" eval="[(4, ref('ideatime_core.report_item_description'))]"/>
+        </record>
+    </data>
+</odoo>

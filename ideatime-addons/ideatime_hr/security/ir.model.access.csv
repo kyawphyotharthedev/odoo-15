@@ -1,0 +1,17 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_education,access education,model_education,,1,1,1,1
+access_training,access training,model_training,,1,1,1,1
+access_work_experience,access work experience,model_work_experience,,1,1,1,1
+access_pchs_assessment,access pchs assessment,model_pchs_assessment,,1,1,1,1
+access_family_data,access family data,model_family_data,,1,1,1,1
+access_bosh_skill,access bosh skill,model_bosh_skill,,1,1,1,1
+access_language_4skills,access language 4skills,model_language_4skills,,1,1,1,1
+access_speciality_skill_assessment,access speciality skill assessment,model_speciality_skill_assessment,,1,1,1,1
+access_employee_history,access employee history,model_employee_history,,1,1,1,1
+access_appraisal_record,access appraisal record,model_appraisal_record,,1,1,1,1
+access_performance_management_record,access performance management record,model_performance_management_record,,1,1,1,1
+access_employee_self_assessment_management_record,access employee self assessment management record,model_employee_self_assessment_management_record,,1,1,1,1
+access_employee_violation_record,accesse employee violation record,model_employee_violation_record,,1,1,1,1
+
+access_office_skill,access office skill,model_office_skill,,1,1,1,1
+access_language_skill,access language skill,model_language_skill,,1,1,1,1

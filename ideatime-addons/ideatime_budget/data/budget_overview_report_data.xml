@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="action_budget_overview_report" model="ir.actions.client">
+        <field name="name">Budget Overview</field>
+        <field name="tag">budget_overview_report</field>
+        <field name="context" eval="{'model': 'budget.overview.report'}" />
+    </record>
+    <record id="action_pec_overview_report" model="ir.actions.client">
+        <field name="name">Budget Detail Reports...</field>
+        <field name="tag">pec_overview_report</field>
+        <field name="context" eval="{'model': 'pec.overview.report'}" />
+    </record>
+
+</odoo>

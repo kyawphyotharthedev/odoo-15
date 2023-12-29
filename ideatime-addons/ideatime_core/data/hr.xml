@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="dep_business_development" model="hr.department">
+            <field name="name">Business Development Department</field>
+        </record>
+
+        <record id="dep_design" model="hr.department">
+            <field name="name">Design Department</field>
+        </record>
+
+        <record id="dep_project" model="hr.department">
+            <field name="name">Project Department</field>
+        </record>
+
+        <record id="dep_procurement" model="hr.department">
+            <field name="name">Procurement Department</field>
+        </record>
+
+        <record id="dep_finance" model="hr.department">
+            <field name="name">Finance Department</field>
+        </record>
+
+        <record id="dep_production" model="hr.department">
+            <field name="name">Production Department</field>
+        </record>
+
+        <record id="dep_hr" model="hr.department">
+            <field name="name">HR Department</field>
+        </record>
+    </data>
+</odoo>

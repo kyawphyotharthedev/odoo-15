@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="action_open_project_cost_account_move" model="ir.actions.act_window">
+        <field name="name">Cost Journals</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">account.move</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('project_cost_picking_id','!=',False), ('project_id', '=', active_id)]</field>
+    </record>
+</odoo>

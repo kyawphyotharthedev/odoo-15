@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<record id="project_task_type_view" model="ir.ui.view">
+        <field name="name">ideatime.project.stage.view</field>
+        <field name="model">project.task.type</field>
+        <field name="inherit_id" ref="project.task_type_edit"/>
+        <field name="arch" type="xml">
+        	<field name='sequence' position='after'>
+        		<field name="project_type_ids" widget='many2many_tags' attrs="{'invisible': [('stage_type','=','task')]}" options="{'no_create': True}" />
+        		<field name='stage_type'/>
+        	</field>
+        	<field name='project_ids' position='replace'>
+        		<field name="project_ids" widget="many2many_tags" groups="base.group_no_one" attrs="{'invisible': [('stage_type','=','project')]}"/>
+        	</field>
+            <field name='mail_template_id' position='after'>
+                <field name="stage_state"/>
+            </field>
+        </field>
+    </record>
+</odoo>

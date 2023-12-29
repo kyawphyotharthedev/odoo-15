@@ -1,0 +1,40 @@
+<odoo>
+    <data>
+    	<record id="action_sale_item_category" model="ir.actions.act_window">
+            <field name="name">Sale Item Category</field>
+            <field name="res_model">sale.item.category</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Create a new record
+              </p>
+            </field>
+        </record>
+
+        <record id="sale_item_category_view_tree" model="ir.ui.view">
+            <field name="name">sale.item.category.tree</field>
+            <field name="model">sale.item.category</field>
+            <field name="arch" type="xml">
+                <tree string="Sale Item Category">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_sale_item_category_form" model="ir.ui.view">
+            <field name="name">sale.item.category.form</field>
+            <field name="model">sale.item.category</field>
+            <field name="arch" type="xml">
+                <form string="Sale Item Category">
+                    <sheet>
+                        <group col='2'>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <menuitem id="menu_sale_item_category" name="Sale Item Category" parent="project.menu_project_config" sequence="12" action="action_sale_item_category"/>
+    </data>
+</odoo>

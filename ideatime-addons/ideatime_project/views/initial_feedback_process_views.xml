@@ -1,0 +1,130 @@
+<odoo><data>
+     <record id="action_initial_feedback_process_form" model="ir.actions.act_window" >
+            <field name="name">Initial Feedback Process</field>
+            <field name="res_model">initial.feedback.process</field>
+            <field name="view_mode">tree,form</field>
+              <field name="context">{
+                'default_project_id': active_id,
+            }</field>
+            <field name="domain">[('project_id','=',active_id),('parent_id','=',False)]</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">  Click Create Feedback button in Project Form
+                </p>
+            </field>
+        </record>
+
+    <record id="action_initial_feedback_revised" model="ir.actions.act_window" >
+            <field name="name">Initial Feedback Process</field>
+            <field name="res_model">initial.feedback.process</field>
+            <field name="view_mode">tree,form</field>
+              <field name="context">{}</field>
+            <field name="domain">[('parent_id','=',active_id)]</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">  Click Create Feedback button in Project Form
+                </p>
+            </field>
+        </record>
+
+
+     <record id="initial_feedback_process_form_view" model="ir.ui.view" >
+            <field name="name">initial.feedback.process.form</field>
+            <field name="model">initial.feedback.process</field>
+            <field name="arch" type="xml">
+             <form string="Initial Feedback Process" create="false">
+                <header>
+                    <button name="action_submit" states="draft" type="object" string="Submit" class="btn-primary" />
+                    <button name="action_confirm" states="submit" type="object" string="Confirm" class="btn-primary" />
+                    <button name="action_cancel" states="submit,confirm" type="object" string="Cancel"/>
+                    <button name="action_draft" states="cancel" type="object" string="Set to Draft"/>
+                    <button name="make_revise" string="Make Revise"
+                    type="object" class="btn-primary" states="submit"/>
+
+                    <field name="state" widget="statusbar" statusbar_visible="draft,submit,confirm"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box" groups="base.group_user">
+                        <button class="oe_stat_button" name="%(action_initial_feedback_revised)d" icon="fa-files-o" type="action" attrs="{'invisible': [('child_ids', '=', [])]}">
+
+                            <field name="revise_count" widget="statinfo" string="Revised"/>
+                        </button>
+                        <field name="child_ids" invisible="1"/>
+                    </div>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1"/>
+                        </h1>
+                    </div>
+                    <div>
+                        <group>
+                            <separator string="Project General Information"/>
+
+                            <field name='partner_id' string="Customer"/>
+                            <field name="employee_id" string="IdeaTimePIC"/>
+                        </group>
+
+                        <separator string="Project reative contact information"/>
+                        <field name="reactive_contact_info_ids" nolabel="1">
+                            <tree editable="bottom" string="Measurement Records">
+                                <field name="particular_id"/>
+                                <field name="pic_name"/>
+                                <field name="phone_no"/>
+                                <field name="remark"/>
+                            </tree>
+                        </field>
+                        <group>
+                            <separator string="Basic Info"/>
+
+                            <field name="first_meeting"/>
+                            <field name="to_know_company" string="How to know our company"/>
+                            <field name="customer_interest"/>
+                            <field name="project_type_id" string="What types of services were introduced to customers?"/>
+
+                            <separator string="Project information"/>
+
+                            <field name="industry_type_id" options="{'no_create': True}"/>
+                            <field name="business_group_id" domain="[('left_id','=',industry_type_id)]" options="{'no_create': True}"/>
+                            <field name="business_type_id" domain="[('left_id','=',business_group_id)]" options="{'no_create': True}"/>
+                            <field name="service_gp_id" options="{'no_create': True}"/>
+                            <field name="service_sector_id" domain="[('left_id','=',service_gp_id)]" options="{'no_create': True}"/>
+                            <field name="sale_item_cate_id"/>
+                            <field name="demand"/>
+
+                            <separator string=""/>
+
+                            <field name="project_site"/>
+                            <separator string=""/>
+                            <field name="city" string="City"
+                           options="{'no_create':True, 'no_create_edit':True, 'no_open':True}"/>
+                            <field name="township" string="Township"
+                           options="{'no_create':True, 'no_create_edit':True, 'no_open':True}"/>
+                            <field name="street"/>
+                            <field name="ward"/>
+                            <field name="land_number"/>
+                            <field name="tower_type" string="Building Type"/>
+                            <field name="tower_no" string="Building No"/>
+                            <field name="floor"/>
+                            <field name="site_name"/>
+                        </group>
+                    </div>
+                </sheet>
+              </form>
+        </field>
+    </record>
+
+
+
+
+     <record id="initial_feedback_process_tree_view" model="ir.ui.view">
+            <field name="name">initial.feedback.process.tree</field>
+            <field name="model">initial.feedback.process</field>
+            <field eval="2" name="priority"/>
+            <field name="arch" type="xml">
+                <tree string="Initial Feedback Process" create="false">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+
+</data>
+</odoo>

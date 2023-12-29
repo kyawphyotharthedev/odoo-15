@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+         <record id="group_budget_template_menu" model="res.groups">
+            <field name="name">Budget Template Menu</field>
+        </record>
+         <record id="ideatime_budget.budget_template_menu" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,ref('group_budget_template_menu'))]" />
+        </record>
+
+
+    </data>
+
+
+</odoo>

@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="FilterSectionFr" t-inherit="account_dynamic_reports.FilterSectionFr" t-inherit-mode="extension" owl="1">
+        <xpath
+                expr="//div[hasclass('py-search-journals')]"
+                position="after">
+            <div class="project-type py-search-analytics">
+                <a type="button" class="dropdown-toggle" data-toggle="dropdown">
+                <span class="fa fa-filter"></span>
+                    Project Type:
+                </a>
+                <select class="dropdown-menu py-filters-menu project-type-multiple" name="states[]" multiple="multiple">
+                    <t t-foreach="filter_data.project_types_list" t-as="project_type">
+                        <option t-attf-value="{{project_type[0]}}">
+                            <t t-esc="project_type[1]"/>
+                        </option>
+                    </t>
+                </select>
+            </div>
+            <div class="py-search-projects py-search-analytics">
+				<a type="button" class="dropdown-toggle" data-toggle="dropdown">
+						<span class="fa fa-filter"></span>
+                    Projects:
+				</a>
+                <select class="dropdown-menu py-filters-menu project-multiple" name="states[]" multiple="multiple">
+					<t t-foreach="filter_data.project_list" t-as="projects">
+						<option t-attf-value="{{projects[0]}}"><t t-esc="projects[1]"/></option>
+					</t>
+				</select>
+			</div>
+        </xpath>
+    </t>
+    <t t-name="FilterSection" t-inherit="account_dynamic_reports.FilterSection" t-inherit-mode="extension" owl="1">
+        <xpath
+                expr="//div[hasclass('py-search-analytics')]"
+                position="after">
+            <div class="project-type py-search-analytics">
+                <a type="button" class="dropdown-toggle" data-toggle="dropdown">
+                <span class="fa fa-filter"></span>
+                    Project Type:
+                </a>
+                <select class="dropdown-menu py-filters-menu project-type-multiple" name="states[]" multiple="multiple">
+                    <t t-foreach="filter_data.project_types_list" t-as="project_type">
+                        <option t-attf-value="{{project_type[0]}}">
+                            <t t-esc="project_type[1]"/>
+                        </option>
+                    </t>
+                </select>
+            </div>
+            <div class="py-search-projects py-search-analytics">
+				<a type="button" class="dropdown-toggle" data-toggle="dropdown">
+						<span class="fa fa-filter"></span>
+                    Projects:
+				</a>
+                <select class="dropdown-menu py-filters-menu project-multiple" name="states[]" multiple="multiple">
+					<t t-foreach="filter_data.projects_list" t-as="projects">
+						<option t-attf-value="{{projects[0]}}"><t t-esc="projects[1]"/></option>
+					</t>
+				</select>
+			</div>
+        </xpath>
+    </t>
+    <t t-name="FilterSectionPa" t-inherit="account_dynamic_reports.FilterSectionPa" t-inherit-mode="extension" owl="1">
+        <xpath
+                expr="//div[hasclass('py-search-partner-tags')]"
+                position="after">
+            <div class="project-type py-search-analytics">
+                <a type="button" class="dropdown-toggle" data-toggle="dropdown">
+                <span class="fa fa-filter"></span>
+                    Project Type:
+                </a>
+                <select class="dropdown-menu py-filters-menu project-type-multiple" name="states[]" multiple="multiple">
+                    <t t-foreach="filter_data.project_types_list" t-as="project_type">
+                        <option t-attf-value="{{project_type[0]}}">
+                            <t t-esc="project_type[1]"/>
+                        </option>
+                    </t>
+                </select>
+            </div>
+            <div class="py-search-projects py-search-analytics">
+				<a type="button" class="dropdown-toggle" data-toggle="dropdown">
+						<span class="fa fa-filter"></span>
+                    Projects:
+				</a>
+                <select class="dropdown-menu py-filters-menu project-multiple" name="states[]" multiple="multiple">
+					<t t-foreach="filter_data.projects_list" t-as="projects">
+						<option t-attf-value="{{projects[0]}}"><t t-esc="projects[1]"/></option>
+					</t>
+				</select>
+			</div>
+        </xpath>
+    </t>
+    <t t-name="FilterSectionPl" t-inherit="account_dynamic_reports.FilterSectionPl" t-inherit-mode="extension" owl="1">
+        <xpath
+                expr="//div[hasclass('py-search-partner-tags')]"
+                position="after">
+            <div class="project-type py-search-partner-tags">
+                <a type="button" class="dropdown-toggle" data-toggle="dropdown">
+                <span class="fa fa-filter"></span>
+                    Project Type:
+                </a>
+                <select class="dropdown-menu py-filters-menu project-type-multiple" name="states[]" multiple="multiple">
+                    <t t-foreach="filter_data.project_types_list" t-as="project_type">
+                        <option t-attf-value="{{project_type[0]}}">
+                            <t t-esc="project_type[1]"/>
+                        </option>
+                    </t>
+                </select>
+            </div>
+            <div class="py-search-projects py-search-analytics">
+				<a type="button" class="dropdown-toggle" data-toggle="dropdown">
+						<span class="fa fa-filter"></span>
+                    Projects:
+				</a>
+                <select class="dropdown-menu py-filters-menu project-multiple" name="states[]" multiple="multiple">
+					<t t-foreach="filter_data.projects_list" t-as="projects">
+						<option t-attf-value="{{projects[0]}}"><t t-esc="projects[1]"/></option>
+					</t>
+				</select>
+			</div>
+        </xpath>
+    </t>
+    <t t-name="FilterSectionTb" t-inherit="account_dynamic_reports.FilterSectionTb" t-inherit-mode="extension" owl="1">
+        <xpath
+                expr="//div[hasclass('py-search-analytics')]"
+                position="after">
+            <div class="project-type py-search-analytics">
+                <a type="button" class="dropdown-toggle" data-toggle="dropdown">
+                <span class="fa fa-filter"></span>
+                    Project Type:
+                </a>
+                <select class="dropdown-menu py-filters-menu project-type-multiple" name="states[]" multiple="multiple">
+                    <t t-foreach="filter_data.project_types_list" t-as="project_type">
+                        <option t-attf-value="{{project_type[0]}}">
+                            <t t-esc="project_type[1]"/>
+                        </option>
+                    </t>
+                </select>
+            </div>
+            <div class="py-search-projects py-search-analytics">
+				<a type="button" class="dropdown-toggle" data-toggle="dropdown">
+						<span class="fa fa-filter"></span>
+                    Projects:
+				</a>
+                <select class="dropdown-menu py-filters-menu project-multiple" name="states[]" multiple="multiple">
+					<t t-foreach="filter_data.projects_list" t-as="projects">
+						<option t-attf-value="{{projects[0]}}"><t t-esc="projects[1]"/></option>
+					</t>
+				</select>
+			</div>
+        </xpath>
+    </t>
+</templates>

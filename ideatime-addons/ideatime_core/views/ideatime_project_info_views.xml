@@ -1,0 +1,122 @@
+<odoo>
+    <data>
+    	<record id="action_industry_type" model="ir.actions.act_window">
+            <field name="name">Industry Type</field>
+            <field name="res_model">industry.type</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Create a new record
+              </p>
+            </field>
+        </record>
+
+        <record id="industry_type_view_tree" model="ir.ui.view">
+            <field name="name">industry.type.tree</field>
+            <field name="model">industry.type</field>
+            <field name="arch" type="xml">
+                <tree string="Industry Type">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_industry_type_form" model="ir.ui.view">
+            <field name="name">industry.type.form</field>
+            <field name="model">industry.type</field>
+            <field name="arch" type="xml">
+                <form string="Industry Type">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+
+        <record id="action_business_group" model="ir.actions.act_window">
+            <field name="name">Business Type</field>
+            <field name="res_model">business.group</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Create a new record
+              </p>
+            </field>
+        </record>
+
+        <record id="business_group_view_tree" model="ir.ui.view">
+            <field name="name">business.group.tree</field>
+            <field name="model">business.group</field>
+            <field name="arch" type="xml">
+                <tree string="Business Type">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_business_group_form" model="ir.ui.view">
+            <field name="name">business.group.form</field>
+            <field name="model">business.group</field>
+            <field name="arch" type="xml">
+                <form string="Business Type">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="left_id"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+
+        <record id="action_business_type" model="ir.actions.act_window">
+            <field name="name">Business Category</field>
+            <field name="res_model">business.type</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Create a new record
+              </p>
+            </field>
+        </record>
+
+        <record id="business_type_view_tree" model="ir.ui.view">
+            <field name="name">business.type.tree</field>
+            <field name="model">business.type</field>
+            <field name="arch" type="xml">
+                <tree string="Business Category">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_business_type_form" model="ir.ui.view">
+            <field name="name">business.type.form</field>
+            <field name="model">business.type</field>
+            <field name="arch" type="xml">
+                <form string="Business Category">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="left_id"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+
+        <menuitem id="menu_industry_type" name="Industry Type" parent="project.menu_project_config" sequence="13" action="action_industry_type"/>
+
+        <menuitem id="menu_business_group" name="Business Type" parent="project.menu_project_config" sequence="14" action="action_business_group"/>
+
+        <menuitem id="menu_business_type" name="Business Category" parent="project.menu_project_config" sequence="15" action="action_business_type"/>
+    </data>
+</odoo>

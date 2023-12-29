@@ -1,0 +1,20 @@
+<odoo>
+    <data>
+
+
+
+<record id="ideatime_mrp_production_form_view" model="ir.ui.view">
+            <field name="name">mrp.production.form</field>
+            <field name="model">mrp.production</field>
+            <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
+            <field name="arch" type="xml">
+                <field name="bom_id" position="after">
+                     <field name="project_id" options="{'no_open':False,'no_create':True,'no_create_edit':False}"
+                           domain="[('proj_type_stage_id', '!=', 'Pending')]"/>
+                    <field name="project_name"/>
+                    <field name="analytic_account_id" invisible="0"/>
+                </field>
+            </field>
+</record>
+    </data>
+</odoo>

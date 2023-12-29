@@ -1,0 +1,411 @@
+<odoo>
+    <data>
+        <record id="action_material_sector" model="ir.actions.act_window">
+            <field name="name">Sector</field>
+
+            <field name="res_model">material.sector</field>
+
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new record
+                </p>
+            </field>
+        </record>
+
+        <record id="material_sector_view_tree" model="ir.ui.view">
+            <field name="name">material.sector.tree</field>
+            <field name="model">material.sector</field>
+            <field name="arch" type="xml">
+                <tree string="Sector">
+                    <field name="name"/>
+                    <field name="description"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_material_sector_form" model="ir.ui.view">
+            <field name="name">material.sector.form</field>
+            <field name="model">material.sector</field>
+            <field name="arch" type="xml">
+                <form string="Sector">
+                    <sheet>
+                        <group col='2'>
+                            <field name="name"/>
+                            <field name="left_id" string='Business Channel'/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+
+        <record id="action_material_group" model="ir.actions.act_window">
+            <field name="name">Group</field>
+
+            <field name="res_model">material.group</field>
+
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new record
+                </p>
+            </field>
+        </record>
+
+        <record id="material_group_view_tree" model="ir.ui.view">
+            <field name="name">material.group.tree</field>
+            <field name="model">material.group</field>
+            <field name="arch" type="xml">
+                <tree string="Group">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_material_group_form" model="ir.ui.view">
+            <field name="name">material.group.form</field>
+            <field name="model">material.group</field>
+            <field name="arch" type="xml">
+                <form string="Group">
+                    <sheet>
+                        <group col='2'>
+                            <field name="name"/>
+                            <!--                            <field name="code"/>-->
+                            <field name="seq_id" readonly="1" string='Sector Sequence'/>
+                            <field name="right_ids" widget='many2many_tags' domain="[('left_id','=',False)]"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+        <record id="action_material_unit_particular" model="ir.actions.act_window">
+            <field name="name">Category</field>
+
+            <field name="res_model">material.category</field>
+
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new record
+                </p>
+            </field>
+        </record>
+
+        <record id="material_unit_particular_view_tree" model="ir.ui.view">
+            <field name="name">material.category.tree</field>
+            <field name="model">material.category</field>
+            <field name="arch" type="xml">
+                <tree string="Category">
+                    <field name="name"/>
+                    <field name="description"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_material_unit_particular_form" model="ir.ui.view">
+            <field name="name">material.category.form</field>
+            <field name="model">material.category</field>
+            <field name="arch" type="xml">
+                <form string="Category">
+                    <sheet>
+                        <group col='2'>
+                            <field name="name"/>
+                            <field name="left_id" string='Sector'/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+
+        <record id="action_material_sub_cate_particular" model="ir.actions.act_window">
+            <field name="name">Sub Category</field>
+
+            <field name="res_model">material.sub.category</field>
+
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new record
+                </p>
+            </field>
+        </record>
+
+        <record id="material_sub_cate_particular_view_tree" model="ir.ui.view">
+            <field name="name">material.sub.category.tree</field>
+            <field name="model">material.sub.category</field>
+            <field name="arch" type="xml">
+                <tree string="Sub Category">
+                    <field name="name"/>
+                    <field name="description"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_material_sub_cate_particular_form" model="ir.ui.view">
+            <field name="name">material.sub.category.form</field>
+            <field name="model">material.sub.category</field>
+            <field name="arch" type="xml">
+                <form string="Sub Category">
+                    <sheet>
+                        <group col='2'>
+                            <field name="name"/>
+                            <field name="left_id" string='Category'/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+        <record id="action_material_classification" model="ir.actions.act_window">
+            <field name="name">Classification</field>
+
+            <field name="res_model">material.classification</field>
+
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new record
+                </p>
+            </field>
+        </record>
+
+        <record id="material_classification_view_tree" model="ir.ui.view">
+            <field name="name">material.classification.tree</field>
+            <field name="model">material.classification</field>
+            <field name="arch" type="xml">
+                <tree string="Classification">
+                    <field name="name"/>
+                    <field name="description"/>
+
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_material_classification_form" model="ir.ui.view">
+            <field name="name">material.classification.form</field>
+            <field name="model">material.classification</field>
+            <field name="arch" type="xml">
+                <form string="Classification">
+                    <sheet>
+                        <group col='2'>
+                            <field name="name"/>
+                            <field name="left_id" string='Particular'/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+
+        <record id="action_material_sub_grade" model="ir.actions.act_window">
+            <field name="name">Material Sub Grade</field>
+
+            <field name="res_model">material.sub.grade</field>
+
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new record
+                </p>
+            </field>
+        </record>
+
+        <record id="material_sub_grade_view_tree" model="ir.ui.view">
+            <field name="name">material.sub.grade.tree</field>
+            <field name="model">material.sub.grade</field>
+            <field name="arch" type="xml">
+                <tree string="Material Sub Grade">
+                    <field name="name"/>
+                    <field name="code"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_material_sub_grade_form" model="ir.ui.view">
+            <field name="name">material.sub.grade.form</field>
+            <field name="model">material.sub.grade</field>
+            <field name="arch" type="xml">
+                <form string="Material Sub Grade">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="code"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+
+        <record id="action_material_particular" model="ir.actions.act_window">
+            <field name="name">Particular</field>
+
+            <field name="res_model">material.particular</field>
+
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new record
+                </p>
+            </field>
+        </record>
+
+        <record id="material_particular_view_tree" model="ir.ui.view">
+            <field name="name">material.particular.tree</field>
+            <field name="model">material.particular</field>
+            <field name="arch" type="xml">
+                <tree string="Particular">
+                    <field name="name"/>
+                    <field name="description"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_material_particular_form" model="ir.ui.view">
+            <field name="name">material.particular.form</field>
+            <field name="model">material.particular</field>
+            <field name="arch" type="xml">
+                <form string="Particular">
+                    <sheet>
+                        <group col='2'>
+                            <field name="name"/>
+                            <field name="left_id" string='Sub Category'/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+        <record id="action_material_type" model="ir.actions.act_window">
+            <field name="name">Type</field>
+
+            <field name="res_model">material.type</field>
+
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new record
+                </p>
+            </field>
+        </record>
+
+        <record id="material_type_view_tree" model="ir.ui.view">
+            <field name="name">material.type.tree</field>
+            <field name="model">material.type</field>
+            <field name="arch" type="xml">
+                <tree string="Type">
+                    <field name="name"/>
+                    <field name="description"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_material_type_form" model="ir.ui.view">
+            <field name="name">material.type.form</field>
+            <field name="model">material.type</field>
+            <field name="arch" type="xml">
+                <form string="Type">
+                    <sheet>
+
+                        <group col='2'>
+                            <field name="name"/>
+                            <field name="left_id" string='Classification'/>
+                        </group>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+
+        <record id="action_material_function" model="ir.actions.act_window">
+            <field name="name">Function</field>
+
+            <field name="res_model">material.function</field>
+
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new record
+                </p>
+            </field>
+        </record>
+
+        <record id="material_function_view_tree" model="ir.ui.view">
+            <field name="name">material.function.tree</field>
+            <field name="model">material.function</field>
+            <field name="arch" type="xml">
+                <tree string="Function">
+                    <field name="name"/>
+                    <field name="description"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_material_function_form" model="ir.ui.view">
+            <field name="name">material.function.form</field>
+            <field name="model">material.function</field>
+            <field name="arch" type="xml">
+                <form string="Function">
+                    <sheet>
+                        <group col='2'>
+                            <field name="name"/>
+                            <field name="left_id" string='Type'/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+
+        <record id="action_material_option" model="ir.actions.act_window">
+            <field name="name">Steamline</field>
+
+            <field name="res_model">material.steamline</field>
+
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new record
+                </p>
+            </field>
+        </record>
+
+        <record id="material_option_view_tree" model="ir.ui.view">
+            <field name="name">material.steamline.tree</field>
+            <field name="model">material.steamline</field>
+            <field name="arch" type="xml">
+                <tree string="Steamline">
+                    <field name="name"/>
+                    <field name="description"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_material_option_form" model="ir.ui.view">
+            <field name="name">material.steamline.form</field>
+            <field name="model">material.steamline</field>
+            <field name="arch" type="xml">
+                <form string="Steamline">
+                    <sheet>
+                        <group col='2'>
+
+                            <field name="name"/>
+                            <field name="left_id" string="Function"/>
+                        </group>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+
+    </data>
+</odoo>

@@ -1,0 +1,638 @@
+<odoo>
+    <data>
+        <template id="ideatime_agreement_report_id">
+            <t t-call="web.html_container">
+                <t t-call="ideatime_sale.ideatime_order_agreement_external_layout_so">
+                    <t t-foreach="docs" t-as="doc">
+                        <div class="page">
+                            <style>
+                                table.table table-sm o_main_table th,tr,td
+                                {
+                                border:2px solid gray;
+                                }
+                            </style>
+
+                            <table width="100%">
+                                <thead>
+                                    <tr>
+                                        <td width="25%"/>
+                                        <td width="30%"/>
+                                        <td width="25%"/>
+                                        <td width="30%"/>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+
+                                    <tr height="25mm" style="border:1px solid #40180B;">
+                                        <td height="30mm" colspan="4"
+                                            style="border:1px solid #40180B;background-color:#40180B;text-align:center;color:white;font-size:17px">
+                                            <strong>General information</strong>
+                                        </td>
+                                    </tr>
+
+                                    <tr style="background-color:#073054;border:1px solid #073054;">
+                                        <td colspan="2" style="border:1px solid #073054;font-size:15px;color:white">
+                                            <center>
+                                                <strong>Party A</strong>
+                                            </center>
+                                        </td>
+                                        <td colspan="2" style="font-size:15px;color:White;border:1px solid #073054">
+                                            <center>
+                                                <strong>Party B</strong>
+                                            </center>
+                                        </td>
+                                    </tr>
+
+                                    <tr style="border:1px solid gray;">
+                                        <td style="border:2px solid gra;padding-right:2mm;text-align:right">Client
+                                            name:
+                                        </td>
+                                        <td style="border:2px solid gray;padding-left:2mm">
+                                            <span t-field="doc.partner_id.name"/>
+                                        </td>
+
+                                        <td colspan="2" style="border:2px solid gray;padding-left:2mm">Idea Time
+                                            Advertisting Company
+                                        </td>
+
+                                    </tr>
+
+                                    <tr style="border:2px solid gray">
+                                        <td height="35mm" style="padding-left:8mm;padding-right:2mm;text-align:right">
+                                            Address of corporate:
+                                        </td>
+                                        <td style="border:2px solid gray;padding-left:2mm">
+                                            <span t-field="doc.partner_id.project_site"/>
+                                        </td>
+                                        <td height="35mm"
+                                            style="border:2px solid gray;padding-right:2mm;text-align:right">Address of
+                                            corporate:
+                                        </td>
+                                        <td style="border:2px solid gray;padding-left:2mm">
+                                            <span t-field="doc.company_id.street"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border:2px solid gray;padding-right:2mm;text-align:right">PIC name:
+                                        </td>
+                                        <td style="border:2px solid gray;padding-left:2mm">
+
+                                            <span t-field="doc.project_id.order_agreement_senior_pic.title"/>
+                                            <span t-field="doc.project_id.order_agreement_senior_pic.name"/>
+                                        </td>
+                                        <td style="border:2px solid gray;padding-right:2mm;text-align:right">PIC name:
+                                        </td>
+                                        <td style="border:2px solid gray;padding-left:2mm">
+                                            <span t-field="doc.user_id.partner_id.title"/>
+                                            <span t-field="doc.user_id.name"/>
+                                        </td>
+                                    </tr>
+                                    <tr style="border:2px solid gray;">
+                                        <td style="border:2px solid gray;padding-right:2mm;text-align:right">Phone no:
+                                        </td>
+                                        <td style="border:2px solid gray;padding-left:2mm">
+                                            <t t-foreach="doc.project_id" t-as="pic">
+                                                <span t-field="pic.order_agreement_senior_pic.phone"/>
+                                            </t>
+                                        </td>
+                                        <td style="border:2px solid gray;padding-right:2mm;text-align:right">Phone no:
+                                        </td>
+                                        <td style="border:2px solid gray;padding-left:2mm">
+                                            <span t-field="doc.user_id.partner_id.phone"/>
+                                        </td>
+                                    </tr>
+                                    <tr style="background-color:#073054;border:2px solid #073054;">
+                                        <td colspan="4" style="font-size:15px;color:White;border:2px solid #073054;">
+                                            <strong>Project information</strong>
+                                        </td>
+                                    </tr>
+
+
+                                    <tr style="border:2px solid gray;">
+
+                                        <td style="border:2px solid gray;padding-right:2mm;text-align:right">Service
+                                            group:
+                                        </td>
+                                        <td style="border:2px solid gray;padding-left:2mm" colspan="3">
+                                            <span t-field="doc.project_id.cate_group_id"/>  <!-- <t t-foreach="doc.order_line" t-as="group">    <span t-field="group.product_id.cate_group_id.name"/></t> -->
+                                        </td>
+
+                                    </tr>
+                                    <tr style="border:2px solid gray">
+                                        <td style="border:2px solid gray;padding-right:2mm;text-align:right">Service
+                                            sector:
+                                        </td>
+                                        <td style="border:2px solid gray;padding-left:2mm" colspan="3">
+                                            <span t-field="doc.project_id.cate_sector_id"/>
+                                        </td>
+
+                                    </tr>
+                                    <tr style="border:2px solid gray;">
+                                        <td style="border:2px solid gray;padding-right:2mm;text-align:right">Project
+                                            site:
+                                        </td>
+                                        <td style="padding-left:2mm;border:2px solid gray" colspan="3">
+                                            <span t-field="doc.project_id.project_site"/>
+                                        </td>
+                                    </tr>
+
+
+                                </tbody>
+                            </table>
+
+
+                            <t t-set="display_discount" t-value="any([l.discount for l in doc.order_line])"/>
+
+                            <table class="table table-sm o_main_table" style="border:1px solid gray" width="100%">
+                                <tr style="border:1px solid #40180B">
+
+                                    <td style="background-color:#40180B;border:1px solid #40180B" colspan="7">
+                                        <div style="height:7mm;overflow:hidden;text-align:center;color:white;font-size:17px;">
+                                            <strong>Job order agreement</strong>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr style="border:2px solid gray">
+                                    <td colspan="7" style="border:2px solid gray;">
+                                        <div style="height:5mm;overflow:hidden;font-size:14px">
+                                            <strong>1. Scope of works</strong>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <t t-set="current_subtotal" t-value="0"/>
+                                <tr style="background-color:#FFEDA9;border:2px solid gray;">
+
+                                    <t t-set="colspan" t-value="5"/>
+                                    <td height="2mm" width="3%"
+                                        style="border:2px solid gray;text-align:center;font-size:15px">No
+                                    </td>
+                                    <td height="2mm" width="40%"
+                                        style="border:2px solid gray;text-align:center;font-size:15px">Description
+                                    </td>
+                                    <td height="2mm" style="border:2px solid gray;text-align:center;font-size:15px">
+                                        Sample photo
+                                    </td>
+                                    <td height="2mm" style="border:2px solid gray;text-align:center;font-size:15px">
+                                        Qty
+                                    </td>
+                                    <td height="2mm" style="border:2px solid gray;text-align:center;font-size:15px">
+                                        Unit
+                                    </td>
+                                    <td height="2mm" style="border:2px solid gray;padding-left:2mm;font-size:15px">Unit
+                                        Price
+                                    </td>
+
+                                    <td height="3mm" style="border:2px solid gray;font-size:15px;padding-left:3mm;">
+                                        <t groups="account.group_show_line_subtotals_tax_excluded">Amount</t>
+                                        <t groups="account.group_show_line_subtotals_tax_included">Amount</t>
+                                    </td>
+                                </tr>
+                                <t t-set="i" t-value="0"/>
+                                <t t-set="a" t-value="0"/>
+
+                                <t t-set="current_subtotal" t-value="0"/>
+
+                                <t t-foreach="doc.order_line" t-as="line">
+                                    <t t-set="a" t-value="a+1"/>
+                                    <t t-set="current_subtotal" t-value="current_subtotal + line.price_subtotal"
+                                       groups="account.group_show_line_subtotals_tax_excluded"/>
+                                    <t t-set="current_subtotal" t-value="current_subtotal + line.price_total"
+                                       groups="account.group_show_line_subtotals_tax_included"/>
+
+                                    <tr style="border:2px solid gray" height="0.2mm">
+                                        <t t-if="not line.display_type">
+                                            <td style="text-align:right;border:2px solid gray">
+                                                <span t-esc="i"></span>.
+                                                <span t-esc="a"></span>
+                                            </td>
+                                            <td style="border:2px solid gray ">
+                                                <span>Item name:</span>
+                                                <span t-field="line.product_id.name"/>
+                                                <br/>
+                                                Item code:
+                                                <span t-field="line.product_id.barcode"/>
+                                                <br/>
+                                                Size/Service:
+                                                <span t-field="line.size"/>
+                                                <br/>
+                                                MOQ:
+                                                <br/>
+                                                <t t-foreach="line.product_id.moq_ids" t-as="moq">
+                                                    <span t-field="moq.particular_id"/>
+                                                    <span>-</span>
+                                                    <span t-field="moq.description"/>
+                                                    <br/>
+                                                </t>
+
+
+                                                Warranty period:
+                                                <br/>
+                                                <t t-foreach="line.product_id.warrenty_period_ids" t-as="w">
+                                                    <span t-field="w.particular_id"/>
+                                                    <span>-</span>
+                                                    <span t-field="w.description"/>
+                                                    <br/>
+                                                </t>
+
+                                                <span>Variants:</span>
+                                                <br/>
+                                                <t t-foreach="line.product_id.product_template_attribute_value_ids" t-as="al">
+                                                    <li><span t-field="al.attribute_id.name"/>:
+                                                        <span t-field="al.name"/>
+                                                        <br/>
+                                                    </li>
+                                                </t>
+                                                <span>Remark:</span>
+                                                <span t-field="line.remark"/>
+                                            </td>
+
+                                            <td style="border:2px solid gray;text-align:center ">
+                                                <img t-attf-src="data:image/*;base64,{{line.product_id.image_512}}"/>
+                                                <br/>
+                                                <img t-attf-src="data:image/*;base64,{{line.reference_photo}}"
+                                                     width="120mm" height="100mm" style="max-width:100%; height:auto"/>
+
+                                            </td>
+                                            <td style="text-align:center">
+                                                <span t-field="line.product_uom_qty"/>
+
+                                            </td>
+                                            <td style="border:2px solid gray;text-align:center ">
+                                                <span t-field="line.product_uom.uom_label"
+                                                      groups="uom.group_uom"/>
+                                            </td>
+                                            <td style="text-align:center">
+                                                <span t-field="line.price_unit"/>
+                                            </td>
+
+                                            <td style="border:2px solid gray;text-align:center ">
+
+                                                <span style="text-align:center" t-field="line.price_subtotal"
+                                                      groups="account.group_show_line_subtotals_tax_excluded"/>
+                                                <span style="text-align:center" t-field="line.price_total"
+                                                      groups="account.group_show_line_subtotals_tax_included"/>
+                                            </td>
+
+                                        </t>
+
+
+                                        <t t-if="line.display_type == 'line_section'">
+                                            <t t-set="a" t-value="0"/>
+                                            <t t-set="i" t-value="i+1"/>
+
+                                            <td style="background-color:#C7DFF4;text-align:right;border:2px solid gray">
+                                                <div style="height:5mm;overflow:hidden;">
+                                                    <span t-esc="i"/>
+                                                </div>
+                                            </td>
+                                            <td style="background-color:#C7DFF4;border:2px solid gray;" colspan="6">
+                                                <div style="height:5mm;overflow:hidden;">
+                                                    <!--   <span t-field="line.particular_ids"/> -->
+                                                    <span t-field="line.name"/>
+                                                </div>
+
+                                            </td>
+                                            <t t-set="current_section" t-value="line"/>
+                                            <t t-set="current_subtotal" t-value="0"/>
+                                        </t>
+                                        <t t-if="line.display_type == 'line_note'">
+                                            <td style="2px solid gray" height="2%" colspan="99">
+                                                <span t-field="line.name"/>
+                                            </td>
+                                        </t>
+                                    </tr>
+                                </t>
+                                <tr style="border:2px solid gray " class="border-black o_total">
+                                    <td style="border:2px solid gray" colspan="5" class="text-right">
+                                        <strong>Grand total:</strong>
+                                    </td>
+                                    <td style="border-bottom:2px solid gray;border-right:0px solid white;text-align:left ">
+
+
+                                        <span t-field="doc.pricelist_id.currency_id"/>
+                                    </td>
+                                    <td style="border-bottom:2px solid gray;border-right:2px solid gray;text-align:right ">
+                                        <span t-field="doc.amount_total"/>
+                                    </td>
+                                </tr>
+                                <tr style="border:2px solid gray">
+                                    <td colspan="7" style="border:2px solid gray;">
+                                        <div style="height:5mm;overflow:hidden;font-size:14px">
+                                            <strong>2. Agreement type</strong>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr style="border:2px solid gray">
+                                    <td colspan="7" style="border:2px solid gray">
+
+                                        <t t-if="doc.agreement_period_image">
+                                            <img t-attf-src="data:image/*;base64,{{doc.agreement_period_image}}"/>
+                                        </t>
+                                        <t t-else="">
+                                            <span t-field="doc.agreement_period_note"/>
+                                        </t>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td colspan="7" style="border:2px solid gray;">
+                                        <div style="height:5mm;overflow:hidden;font-size:14px">
+                                            <strong>3. Date of Commemcement</strong>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr style="border:2px solid gray">
+                                    <td colspan="3" style="border-right:0px solid white">
+                                        Start Date:
+                                        <span t-field="doc.commencement_start_date"/>
+                                    </td>
+                                    <td colspan="4" style="border-left:0px solid white">
+                                        End Date:
+                                        <span t-field="doc.commencement_end_date"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="7" style="border:2px solid gray;">
+                                        <div style="height:5mm;overflow:hidden;font-size:14px">
+                                            <strong>4. Currency</strong>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr style="border:2px solid gray">
+                                    <td colspan="7" style="border:2px solid gray">
+
+                                        <t t-if="doc.currency_note_image">
+                                            <img t-attf-src="data:image/*;base64,{{doc.currency_note_image}}"/>
+                                        </t>
+                                        <t t-else="">
+                                            <span t-field="doc.currency_note"/>
+                                        </t>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="7" style="border:2px solid gray;">
+                                        <div style="height:5mm;overflow:hidden;font-size:14px">
+                                            <strong>5. Price and Fees</strong>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr style="border:2px solid gray">
+                                    <td colspan="7" style="border:2px solid gray">
+
+                                        <t t-if="doc.price_fee_note_image">
+                                            <img t-attf-src="data:image/*;base64,{{doc.price_fee_note_image}}"/>
+                                        </t>
+                                        <t t-else="">
+                                            <span t-field="doc.price_fee_note"/>
+                                        </t>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="7" style="border:2px solid gray;">
+                                        <div style="height:5mm;overflow:hidden;font-size:14px">
+                                            <strong>6. Taxation</strong>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr style="border:2px solid gray">
+                                    <td colspan="7" style="border:2px solid gray">
+                                        <t t-if="doc.taxation_note_image">
+                                            <img t-attf-src="data:image/*;base64,{{doc.taxation_note_image}}"/>
+                                        </t>
+                                        <t t-else="">
+                                            <span t-field="doc.taxation_note"/>
+                                        </t>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="7" style="border:2px solid gray;">
+                                        <div style="height:5mm;overflow:hidden;font-size:14px">
+                                            <strong>7. Terms of Payment</strong>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr style="border:2px solid gray">
+                                    <td colspan="7" style="border:2px solid gray">
+                                        <t t-if="doc.payment_note_image">
+                                            <img t-attf-src="data:image/*;base64,{{doc.payment_note_image}}"/>
+                                        </t>
+                                        <t t-else="">
+                                            <span t-field="doc.payment_note"/>
+                                        </t>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td colspan="7" style="border:2px solid gray;">
+                                        <div style="height:5mm;overflow:hidden;font-size:14px">
+                                            <strong>8 Acceptance</strong>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr style="border:2px solid gray">
+                                    <td colspan="7" style="border:2px solid gray">
+                                        <t t-if="doc.acceptance_note_image">
+                                            <img t-attf-src="data:image/*;base64,{{doc.acceptance_note_image}}"/>
+                                        </t>
+                                        <t t-else="">
+                                            <span t-field="doc.acceptance_note"/>
+                                        </t>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="7" style="border:2px solid gray;">
+                                        <div style="height:5mm;overflow:hidden;font-size:14px">
+                                            <strong>9. Obilgation</strong>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr style="border:2px solid gray">
+                                    <td colspan="7" style="border:2px solid gray">
+                                        <t t-if="doc.obligation_note_image">
+                                            <img t-attf-src="data:image/*;base64,{{doc.obligation_note_image}}"/>
+                                        </t>
+                                        <t t-else="">
+                                            <span t-field="doc.obligation_note"/>
+                                        </t>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="7" style="border:2px solid gray;">
+                                        <div style="height:5mm;overflow:hidden;font-size:14px">
+                                            <strong>10. Liability of breach of contract</strong>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr style="border:2px solid gray">
+                                    <td colspan="7" style="border:2px solid gray">
+                                        <t t-if="doc.contract_note_image">
+                                            <img t-attf-src="data:image/*;base64,{{doc.contract_note_image}}"/>
+                                        </t>
+                                        <t t-else="">
+                                            <span t-field="doc.contract_note"/>
+                                        </t>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="7" style="border:2px solid gray;">
+                                        <div style="height:5mm;overflow:hidden;font-size:14px">
+                                            <strong>11. Termination</strong>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr style="border:2px solid gray">
+                                    <td colspan="7" style="border:2px solid gray">
+                                        <t t-if="doc.termination_note_image">
+                                            <img t-attf-src="data:image/*;base64,{{doc.termination_note_image}}"/>
+                                        </t>
+                                        <t t-else="">
+                                            <span t-field="doc.termination_note"/>
+                                        </t>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="7" style="border:2px solid gray;">
+                                        <div style="height:5mm;overflow:hidden;font-size:14px">
+                                            <strong>12. Arbitration</strong>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr style="border:2px solid gray">
+                                    <td colspan="7" style="border:2px solid gray">
+                                        <t t-if="doc.arbitration_note_image">
+                                            <img t-attf-src="data:image/*;base64,{{doc.arbitration_note_image}}"/>
+                                        </t>
+                                        <t t-else="">
+                                            <span t-field="doc.arbitration_note"/>
+                                        </t>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="7" style="border:2px solid gray;">
+                                        <div style="height:5mm;overflow:hidden;font-size:14px">
+                                            <strong>13. Additional Agreement</strong>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr style="border:2px solid gray">
+                                    <td colspan="7" style="border:2px solid gray">
+                                        <span t-field="doc.additional_agreement"/>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <div class="clearfix">
+
+
+                                <div style="height:25mm;padding-top:10mm;background-color:white;overflow:hidden;">
+                                    <hr style="border:4px solid orange"/>
+                                </div>
+
+
+                                <table class="table table-sm" width='100%' style="border:2px solid white">
+                                    <tr style="border:2px solid white">
+                                        <td width="43%" style="border:2px solid white">
+                                            <br/>
+                                            <br/>
+                                            <strong>
+                                                <span style="padding-left:5mm;font-size:18px:color:gray">Party A
+                                                    (Client)
+                                                </span>
+                                            </strong>
+                                            <br/>
+                                            <span style="padding-left:5mm">
+                                                <strong>Official seal:</strong>
+                                            </span>
+                                            <br/>
+                                            <br/>
+                                            <span style="padding-left:5mm">
+                                                <strong>Signature: ___________________________</strong>
+                                            </span>
+                                            <br/>
+                                            <span style="padding-left:5mm">
+                                                <strong>PIC name: ___________________________</strong>
+                                            </span>
+                                            <br/>
+                                            <span style="padding-left:8mm">
+                                                <strong>NRC no: ____________________________</strong>
+                                            </span>
+                                            <br/>
+                                            <span style="padding-left:14mm">
+                                                <strong>Date: ____________________________</strong>
+                                            </span>
+                                            <br/>
+                                        </td>
+                                        <td width="2%" style="border-right:2px solid white;"></td>
+                                        <td width="2%" style="border-right:2px solid gray"></td>
+                                        <td widith="53%" style="border:2px solid white">
+
+                                            <br/>
+                                            <br/>
+                                            <span style="padding-left:25mm">
+                                                <strong>Party B (Idea Time advertising company)</strong>
+                                            </span>
+                                            <br/>
+                                            <span style="padding-left:25mm">
+                                                <strong>Official seal:</strong>
+                                            </span>
+                                            <br/>
+                                            <br/>
+                                            <span style="padding-left:25mm">
+                                                <strong>Signature: _________________________</strong>
+                                            </span>
+                                            <br/>
+                                            <span style="padding-left:25mm">
+                                                <strong>PIC name: _________________________</strong>
+                                                <span style="padding-left:42mm">
+                                                    <strong>ID: _________________________</strong>
+                                                </span>
+                                            </span>
+                                            <br/>
+                                            <span style="padding-left:29.5mm">
+                                                <strong>NRC no: _________________________</strong>
+                                            </span>
+                                            <br/>
+                                            <span style="padding-left:35mm">
+                                                <strong>Date: _________________________</strong>
+                                            </span>
+                                            <br/>
+
+                                        </td>
+
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+        <record id="ideatime_agreement_report" model="ir.actions.report">
+            <field name="name">IdeaTime Order Agreement</field>
+            <field name="model">sale.order</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">ideatime_sale.ideatime_agreement_report_id</field>
+            <field name="report_file">ideatime_sale.ideatime_agreement_report_id</field>
+            <field name="print_report_name">'Order agreement form - %s -%s' %(object.project_id.name or '',
+                object.write_date)
+            </field>
+            <field name="binding_model_id" ref="sale.model_sale_order"/>
+            <field name="binding_type">report</field>
+        </record>
+        <record id="ideatime_agreement_a4" model="report.paperformat">
+            <field name="name">Idea Time Agreement Order Report A4</field>
+            <field name="format">A4</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">55</field>
+            <field name="margin_bottom">15</field>
+            <field name="margin_left">7</field>
+            <field name="margin_right">7</field>
+            <field name="header_spacing">45</field>
+            <field name="report_ids" eval="[(4, ref('ideatime_sale.ideatime_agreement_report'))]"/>
+        </record>
+
+    </data>
+</odoo> 

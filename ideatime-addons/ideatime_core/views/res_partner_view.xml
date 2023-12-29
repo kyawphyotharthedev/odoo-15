@@ -1,0 +1,91 @@
+<odoo>
+    <data>
+
+        <record id="ideatime_view_partner_tree" model="ir.ui.view">
+            <field name="name">res.partner.tree</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='display_name']" position="after">
+                    <field name="industry_type_id"/>
+                    <field name="business_group_id"/>
+                    <field name="business_type_id"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="ideatime_view_partner_address_form" model="ir.ui.view">
+            <field name="name">res.partner.form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="priority" eval="20"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet/group/group/field[@name='category_id']" position="after">
+                    <field name="customer_rank" invisible="1"/>
+                    <field name="supplier_rank" invisible="1"/>
+                    <field name="out_of_mail"
+                           attrs="{'invisible':['|',('customer_rank', '>', 0),('supplier_rank','>',0)]}"
+                           string="Outlook Mail"/>
+                    <field name="custom_id"
+                           attrs="{'invisible':['|',('customer_rank', '>', 0),('supplier_rank','>',0)]}"/>
+                </xpath>
+                <div class="o_address_format" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </div>
+                <div class="o_address_format" position="after">
+                    <field name="ideatime_address_id" widget="section_and_note_one2many" invisible="1">
+                        <tree editable="bottom">
+                            
+                            <field name="street"/>
+                            <field name="city" string="City"
+                                   options="{'no_create':True, 'no_create_edit':True, 'no_open':True}"/>
+                            <field name="state_id"/>
+                            <field name="country_id"/>
+                            <field name="mobile" widget="phone"/>
+                            <field name="email"/>
+                            <field name="website" widget="url" placeholder="e.g. www.odoo.com"/>
+                        </tree>
+                    </field>
+
+                </div>
+                <field name="vat" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </field>
+                <span name="address_name" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </span>
+                <span name="address_name" position="after">
+					<field name="shop"/>
+                    <field name="industry_type_id"/>
+                    <field name="business_group_id"/>
+                    <field name="business_type_id"/>
+                    <field name="service_channel_id" invisible="1"/>
+                    <field name="project_site" string="Address"/>
+                    <separator string=""/>
+                    <field name="country_id"/>
+
+                    <field name="ideatime_region" placeholder="Region" string="Region"
+                           options="{'no_create':True, 'no_create_edit':True, 'no_open':True}"
+                    />
+                    <field name="ideatime_city" placeholder="City" string="City"
+                           options="{'no_create':True, 'no_create_edit':True, 'no_open':True}"
+                    />
+                    <field name="ideatime_township" placeholder="Township" string="Township"
+                           options="{'no_create':True, 'no_create_edit':True, 'no_open':True}"
+                    />
+
+                    <field name="street"/>
+                    <field name="ward"/>
+                    <field name="land_number"/>
+                    <field name="tower_type" string="Building Type"/>
+                    <field name="tower_no" string="Building No"/>
+                    <field name="floor"/>
+                    <field name="site_name"/>
+                    <field name="marketing" string="How to know our company"/>
+                </span>
+            </field>
+        </record>
+
+
+    </data>
+</odoo>

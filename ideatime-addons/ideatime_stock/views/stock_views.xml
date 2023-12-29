@@ -1,0 +1,131 @@
+<odoo>
+    <data>
+
+
+        <record id="ideatime_view_picking_internal_search" model="ir.ui.view">
+            <field name="name">stock.picking.internal.search</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_internal_search"/>
+            <field name="arch" type="xml">
+                <search string="Picking Lists">
+                    <field name="project_id" string="Project Code"/>
+                </search>
+            </field>
+        </record>
+
+        <!-- inventory move line cbm calc form -->
+        <record id="view_inventory_move_line_cbm_calc" model="ir.ui.view">
+            <field name="name">inventory.move.line.form</field>
+            <field name="model">stock.move</field>
+            <field eval="20" name="priority"/>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <group>
+                            <field name='state' invisible='1'/>
+                            <field name='Pcs' attrs="{'readonly': [('state', 'in', ('done','cancel','sale'))]}"/>
+                            <field name='length' attrs="{'readonly': [('state', 'in', ('done','cancel','sale'))]}"/>
+                            <field name='width' attrs="{'readonly': [('state', 'in', ('done','cancel','sale'))]}"/>
+                            <field name='height' attrs="{'readonly': [('state', 'in', ('done','cancel','sale'))]}"/>
+                        </group>
+                        <group>
+                            <field name='pcs_uom'
+                                   attrs="{'readonly': [('state', 'in', ('done','cancel','sale'))]}"/>
+                            <field name='length_uom'
+                                   attrs="{'readonly': [('state', 'in', ('done','cancel','sale'))]}"/>
+                            <field name='width_uom'
+                                   attrs="{'readonly': [('state', 'in', ('done','cancel','sale'))]}"/>
+                            <field name='height_uom'
+                                   attrs="{'readonly': [('state', 'in', ('done','cancel','sale'))]}"/>
+                        </group>
+                        <group>
+                            <field name='volume_weight'
+                                   attrs="{'readonly': [('state', 'in', ('done','cancel','sale'))]}" string="Result"/>
+                            <field name="product_uom_qty" invisible="1"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="save" type="object" string="Save" class="oe_highlight"/>
+                        <button string="Discard" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="ideatime_view_picking_form" model="ir.ui.view">
+            <field name="name">ideatime.stock.picking.form</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field eval="12" name="priority"/>
+            <field name="arch" type="xml">
+
+                <button name="action_confirm" position="replace">
+                    <button name="action_confirm" attrs="{'invisible': [('show_mark_as_todo', '=', False)]}"
+                            string="Mark as Todo" type="object" class="oe_highlight"
+                            groups="ideatime_core.group_mark_as_to_do"/>
+                </button>
+                <button name="button_validate" position="replace">
+
+                    <button name="button_validate"
+                            attrs="{'invisible': ['|', ('state', 'in', ('draft','waiting','confirmed')), ('show_validate', '=', False)]}"
+                            string="Validate" type="object" class="oe_highlight"
+                            groups="ideatime_core.group_validate"/>
+                </button>
+
+                <button name="do_print_picking" position="replace">
+                    <button name="do_print_picking_issue" string="Print Issue" groups="stock.group_stock_user"
+                            type="object"
+                            attrs="{'invisible': ['|', '|', '|', ('picking_type_code', '=', 'incoming'), ('is_locked', '=', False), '&amp;', ('state', 'not in', ('draft','assigned', 'partially_available','done')), ('move_type', '!=', 'one'), '&amp;', ('state', 'not in', ('draft','assigned', 'partially_available', 'confirmed')), ('move_type', '=', 'one')]}"/>
+                </button>
+
+                <button name="button_validate" position="after">
+
+                    <button name="do_print_picking_receive" string="Print Receive" groups="stock.group_stock_user"
+                            type="object"
+                            attrs="{'invisible': ['|', '|', '|', ('picking_type_code', '!=', 'incoming'), ('is_locked', '=', False), '&amp;', ('state', 'not in', ('draft','assigned', 'partially_available','done')), ('move_type', '!=', 'one'), '&amp;', ('state', 'not in', ('draft','assigned', 'partially_available', 'confirmed')), ('move_type', '=', 'one')]}"/>
+                </button>
+
+                <xpath expr="//field[@name='origin']" position="after">
+                    <field name="project_id" options="{'no_open':False,'no_create':True,'no_create_edit':False}"
+                           domain="[('proj_type_stage_id', '!=', 'Pending')]"/>
+                    <field name="project_name"/>
+                    <field name="analytic_account_id" invisible="0"/>
+                </xpath>
+                <field name="move_ids_without_package" position="attributes">
+                    <attribute name="widget">configure_section_and_note_one2many</attribute>
+                </field>
+                <xpath expr="//field[@name='move_ids_without_package']/tree" position="inside">
+                    <control>
+                        <create name="add_line_control" string="Add a line"/>
+                        <create string="Configure a product" context="{'open_product_configurator': True}"
+                                groups="product.group_product_variant"/>
+                    </control>
+                </xpath>
+                <xpath expr="//field[@name='move_ids_without_package']/tree/field[@name='product_id']" position="after">
+                    <field name="barcode"/>
+                    <field name="is_indirect_material"/>
+                </xpath>
+                <xpath expr="//field[@name='move_ids_without_package']/tree/field[@name='product_uom']" position="after">
+                    <button name="action_show_details" string="Register lots, packs, location" type="object"
+                            icon="fa-list" attrs="{'invisible': [('show_details_visible', '=', False)]}"
+                            options='{"warn": true}'/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="ideatime_stock_picking_tree_edit" model="ir.ui.view">
+            <field name="name">ideatime.stock.picking.tree.edit</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.vpicktree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="before">
+                    <field name="project_id" string="Project Code"/>
+
+                    <field name="partner_id" string="Client Name"/>
+                    <field name="project_site_id"/>
+                    <field name="project_name"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

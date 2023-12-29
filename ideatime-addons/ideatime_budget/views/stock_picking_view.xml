@@ -1,0 +1,16 @@
+<odoo>
+    <data>
+        <record id="ideatime_inherit_view_picking_form" model="ir.ui.view">
+            <field name="name">ideatime.stock.picking.form</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="ideatime_stock.ideatime_view_picking_form"/>
+            <field eval="12" name="priority"/>
+            <field name="arch" type="xml">
+                <field name="project_name" position="after">
+                   <field name="budget_id" domain="[('project_id','=',project_id)]"/>
+            </field>
+        </field>
+    </record>
+
+    </data>
+</odoo>

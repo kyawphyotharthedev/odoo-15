@@ -1,0 +1,360 @@
+<odoo>
+    <data>
+        <template id="pro_purchase_inform_external_layout_standard">
+
+            <div class="header">
+                <t t-foreach="docs" t-as="doc">
+
+
+                    <img src='/ideatime_core/static/src/img/beten_header.jpg'
+                         style="max-height: 27mm;max-width:221.5mm"/>
+                    <h6/>
+
+
+                    <table width="100%">
+                        <tr height="3mm" style="border:2px solid gray">
+                            <td style="font-family: Arial;font-size:18px;padding-left:14mm;border:2px solid gray"
+                                width="28%">
+                                <span>
+                                    <strong>Document name:</strong>
+                                </span>
+                            </td>
+                            <td width="73%" style="text-align:center;border:2px solid gray;font-size:20px;color:gray">
+                                <strong>Procurement purchase inform form</strong>
+                            </td>
+                        </tr>
+
+                        <tr height="3mm" style="border:2px solid gray">
+                            <td style="font-family: Arial;font-size:18px;color:bold;padding-left:24mm;border:2px solid gray"
+                                width="28%">
+                                <span>
+                                    <strong>Project code:</strong>
+                                </span>
+                            </td>
+                            <td width="73%" style="text-align:center;border:2px solid gray;color:gray">
+                                <strong>
+                                    <span t-field="doc.project_id"/>
+                                </strong>
+                            </td>
+                        </tr>
+
+                        <tr height="3mm" style="border:2px solid gray">
+                            <td style="font-family: Arial;font-size:18px;padding-left:21mm;border:2px solid gray"
+                                width="28%">
+                                <span>
+                                    <strong>Project name:</strong>
+                                </span>
+                            </td>
+                            <td width="73%" style="text-align:center;border:2px solid gray;color:gray;font-size:18px">
+                                <div style="overflow:hidden;height:8mm">
+                                    <strong>
+                                        <t t-if="doc.project_id.site_name">(<span t-field="doc.project_id.site_name"/>)
+                                        </t>
+                                        <span t-field="doc.partner_id.name"/>_
+                                        <t t-if="doc.project_id.cate_sector_id">
+                                            <span t-field="doc.project_id.cate_sector_id"/>
+                                        </t>
+                                        <t t-if="doc.project_id.manual_project_name">
+                                            <span t-field="doc.project_id.manual_project_name"/>
+                                        </t>
+                                    </strong>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </t>
+
+            </div>
+
+
+            <div class="article o_report_layout_standard" t-att-data-oe-model="o and o._name"
+                 t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
+                <t t-call="web.address_layout"/>
+                <t t-raw="0"/>
+            </div>
+
+            <div class="footer o_standard_footer">
+
+                <img src='/ideatime_core/static/src/img/Header format for Idea Time Advertising Company down.jpg'
+                     style="max-height: 46mm;max-width:221.5mm"/>
+                <div style="text-align:right;">
+                    Page<span class="page"/>/
+                    <span class="topage"/>
+                </div>
+
+            </div>
+        </template>
+        <template id="pro_purchase_inform_external_layout_so">
+
+            <t t-if="not o" t-set="o" t-value="doc"/>
+
+
+            <t t-call="ideatime_budget.pro_purchase_inform_external_layout_standard">
+                <t t-raw="0"/>
+
+            </t>
+
+        </template>
+
+        <template id="report_budget_procurement_purchase_form">
+            <t t-call="web.html_container">
+                <t t-call="ideatime_budget.pro_purchase_inform_external_layout_so">
+                    <t t-foreach="docs" t-as="doc">
+                        <div class="page">
+                            <style>
+
+                                <!--       table.table1 tr,td{
+                                    border:2px solid gray;
+
+
+
+                                    } -->
+                                table.table table-sm o_main_table th,tr,td
+                                {
+                                border:2px solid gray;
+
+
+                                }
+                            </style>
+
+                            <table width="100%">
+                                <thead>
+                                    <tr>
+                                        <td width="20%"/>
+                                        <td width="30%"/>
+                                        <td width="20%"/>
+                                        <td width="30%"/>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+
+                                    <tr height="25mm" style="border:1px solid #40180B;">
+                                        <td height="30mm" colspan="4"
+                                            style="border:1px solid #40180B;background-color:#40180B;text-align:center;color:white;font-size:17px">
+                                            <strong>Budget Submitter</strong>
+                                        </td>
+                                    </tr>
+
+
+                                    <tr>
+                                        <td style="border:2px solid gray;padding-right:2mm;text-align:right">PIC name:
+                                        </td>
+                                        <td style="border:2px solid gray;padding-left:2mm">
+                                            <span t-field="doc.user_id"/>
+                                        </td>
+                                        <td style="border:2px solid gray;padding-right:2mm;text-align:right">Position:
+                                        </td>
+                                        <td style="border:2px solid gray;padding-left:2mm">
+                                            <span t-field="doc.user_id.partner_id.function"/>
+                                        </td>
+                                    </tr>
+                                    <tr style="border:2px solid gray;">
+                                        <td style="border:2px solid gray;padding-right:2mm;text-align:right">ID:</td>
+                                        <td style="border:2px solid gray;padding-left:2mm">
+                                            <span t-field="doc.user_id.partner_id.custom_id"/>
+                                        </td>
+                                        <td style="border:2px solid gray;padding-right:2mm;text-align:right">Phone no:
+                                        </td>
+                                        <td style="border:2px solid gray;padding-left:2mm">
+                                            <span t-field="doc.user_id.partner_id.phone"/>
+                                        </td>
+                                    </tr>
+                                    <tr style="border:2px solid gray;">
+                                        <td style="border:2px solid gray;padding-right:2mm;text-align:right">
+                                            Department:
+                                        </td>
+                                        <td style="border:2px solid gray;padding-left:2mm"></td>
+                                        <td style="border:2px solid gray;padding-right:2mm;text-align:right">Reference
+                                            code:
+                                        </td>
+                                        <td style="border:2px solid gray;padding-left:2mm">
+                                            <span t-field="doc.name"/>
+                                        </td>
+
+
+                                    </tr>
+                                    <tr style="border:2px solid gray;">
+                                        <td style="border:2px solid gray;padding-right:2mm;text-align:right">Office
+                                            location:
+                                        </td>
+                                        <td colspan="3"
+                                            style="border:2px solid gray;padding-left:2mm"><!--  <span t-field="doc.user_id.partner_id.office_location"/> --></td>
+
+
+                                    </tr>
+                                    <tr style="border:2px solid gray;">
+                                        <td style="border:2px solid gray;padding-right:2mm;text-align:right">
+                                            Particular:
+                                        </td>
+                                        <td colspan="3" style="border:2px solid gray;padding-left:2mm">
+                                            <span t-field="doc.particular"/>
+                                        </td>
+
+                                    </tr>
+                                    <tr style="border:2px solid gray;">
+                                        <td style="border:2px solid gray;padding-right:2mm;text-align:right">
+                                            Description:
+                                        </td>
+                                        <td colspan="3" style="border:2px solid gray;padding-left:2mm">
+                                            <span t-field="doc.description"/>
+                                        </td>
+
+                                    </tr>
+
+                                </tbody>
+                            </table>
+
+
+                            <table class="table table-sm o_main_table" style="border:1px solid gray" width="100%">
+
+                                <thead>
+                                    <tr style="border:1px solid #40180B">
+
+                                        <th style="background-color:#40180B;border:1px solid #40180B" colspan="6">
+                                            <div style="height:7mm;overflow:hidden;text-align:center;color:white;font-size:17px;">
+                                                <strong>Procurement purchase inform form</strong>
+                                            </div>
+                                        </th>
+                                    </tr>
+
+                                    <tr style="border:2px solid gray;background-color:#FFEDA9">
+
+                                        <t t-set="colspan" t-value="5"/>
+                                        <th style="border:2px solid gray;text-align:center">No</th>
+                                        <th width="40%" style="border:2px solid gray;text-align:center">Description</th>
+                                        <th style="border:2px solid gray;text-align:center">Sample photo</th>
+                                        <th style="border:2px solid gray;text-align:center">QTY</th>
+                                        <th style="border:2px solid gray;text-align:center">Unit</th>
+                                        <!--  <th style="border:2px solid gray;text-align:center" width="30%">Remark</th> -->
+
+
+                                    </tr>
+                                </thead>
+
+
+                                <tbody>
+                                    <t t-set="a" t-value="0"/>
+
+                                    <t t-foreach="doc.approval_budget_line_id" t-as="line">
+
+                                        <t t-if="line.order_line_parta_cost_ids">
+                                            <!--   <tr t-foreach="line.order_line_parta_cost_ids.sorted(key=lambda r: r.product_id.type,reverse=True)" t-as="direct"> -->
+
+                                            <t t-foreach="line.order_line_parta_cost_ids.sorted(key=lambda r: r.product_id.type,reverse=True)"
+                                               t-as="direct">
+                                                <t t-if="direct.usage_type == 'proc'">
+                                                    <t t-set="a" t-value="a+1"/>
+
+                                                    <tr style=" border:2px solid gray;">
+
+                                                        <td style="border:2px solid gray;text-align:right">
+                                                            <span t-esc="a"></span>
+
+                                                        </td>
+                                                        <td style=" border:2px solid gray;">
+                                                            <span>Item name:</span>
+                                                            <span t-field="direct.product_id.name"/>
+                                                            <br/>
+                                                            Item code:
+                                                            <span t-field="direct.product_id.barcode"/>
+                                                            <br/>
+
+                                                            <span>Variants:</span>
+                                                            <br/>
+                                                            <t t-foreach="direct.product_id.product_template_attribute_value_ids"
+                                                               t-as="al">
+                                                                <div style="text-align:left">
+                                                                    <li><span t-field="al.attribute_id.name"/>:
+                                                                        <span t-field="al.name"/>
+                                                                        <br/>
+                                                                    </li>
+                                                                </div>
+                                                            </t>
+                                                            [
+                                                            <t t-if="direct.width_uom">W
+                                                                <span t-esc="'%.2f'% direct.width"/>
+                                                                <span t-field="direct.width_uom"/>
+                                                            </t>
+                                                            <t t-if="direct.height_uom">* H
+                                                                <span t-esc="'%.2f'% direct.height"/>
+                                                                <span t-field="direct.height_uom"/>
+                                                            </t>
+                                                            <t t-if="direct.length_uom">* L
+                                                                <span t-esc="'%.2f'% line.length"/>
+                                                                <span t-field="direct.length_uom"/>
+                                                            </t>
+                                                            ]
+                                                            <t t-if="direct.pcs_uom">* Unit
+                                                                <span t-esc="'%.2f'% direct.Pcs"/>
+                                                                <span t-field="direct.pcs_uom"/>
+                                                            </t>
+                                                            <br/>
+
+
+                                                        </td>
+
+
+                                                        <td style=" border:2px solid gray;text-align:center">
+                                                            <img t-attf-src="data:image/*;base64,{{direct.product_id.image_512}}"/>
+                                                        </td>
+                                                        <td style=" border:2px solid gray;text-align:center">
+                                                            <span t-field="direct.qty"/>
+                                                        </td>
+                                                        <td style=" border:2px solid gray;text-align:center">
+                                                            <span t-field="direct.product_uom"/>
+                                                        </td>
+                                                        <!--   <td></td> -->
+
+                                                    </tr>
+                                                </t>
+                                            </t>
+                                        </t>
+
+                                    </t>
+                                </tbody>
+
+                            </table>
+
+                            <div class="clearfix">
+
+
+                                <div style="height:25mm;padding-top:10mm;background-color:white;overflow:hidden;">
+                                    <hr style="border:4px solid orange"/>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+        <record id="action_report_budget_pro_purchase" model="ir.actions.report">
+            <field name="name">Procurement Purchase Inform Form</field>
+            <field name="model">budget.approval</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">ideatime_budget.report_budget_procurement_purchase_form</field>
+            <field name="report_file">ideatime_budget.report_budget_procurement_purchase_form</field>
+            <field name="print_report_name">'Procurement Purchase Form - %s - %s' % (object.project_id.name or '',
+                object.name)
+            </field>
+            <field name="binding_model_id" ref="ideatime_budget.model_budget_approval"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <record id="bugdet_pro_purhase_a4" model="report.paperformat">
+            <field name="name">Pro Purchase Form Report A4</field>
+            <field name="format">A4</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">45</field>
+            <field name="margin_bottom">15</field>
+            <field name="margin_left">7</field>
+            <field name="margin_right">7</field>
+            <field name="header_spacing">40</field>
+            <!--  <field name="dpi">90</field> -->
+            <field name="report_ids" eval="[(4, ref('ideatime_budget.action_report_budget_pro_purchase'))]"/>
+        </record>
+    </data>
+</odoo>

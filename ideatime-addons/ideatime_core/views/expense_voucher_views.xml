@@ -1,0 +1,88 @@
+<odoo>
+    <data>
+    	<record id="action_idea_expense_voucher" model="ir.actions.act_window">
+            <field name="name">Expense</field>
+            <field name="res_model">expense.voucher</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Create a new record
+              </p>
+            </field>
+        </record>
+
+        <record id="idea_expense_voucher_tree" model="ir.ui.view">
+            <field name="name">expense.voucher.tree</field>
+            <field name="model">expense.voucher</field>
+            <field name="arch" type="xml">
+                <tree string="Expense">
+                    <field name="name"/>
+                    <field name="project_ids" widget='many2many_tags'/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="idea_expense_voucher_form" model="ir.ui.view">
+            <field name="name">expense.voucher.form</field>
+            <field name="model">expense.voucher</field>
+            <field name="arch" type="xml">
+                <form string="Expense">
+                    <header>
+                        <field name="state" widget="statusbar" clickable='True'/>
+                    </header>
+                    <sheet>
+
+
+                         <div class="oe_title">
+                            <label class="oe_edit_only" for="name" string="Voucher No"/>
+                            <h1><field name="name" readonly='1'/></h1>
+                        </div>
+                        <group>
+                            <group>
+<!--                                <field name="option_id" options="{'no_create': True}" attrs="{'readonly': [('state', 'in', ('approve','confirm','cancel'))]}"/>-->
+                                <field name="valid_date"/>
+                            </group>
+                            <group>
+                                <field name="project_ids" widget='many2many_tags' options="{'no_create': True}" attrs="{'readonly': [('state', 'in', ('approve','confirm','cancel'))]}"/>
+                                <field name="date" attrs="{'readonly': [('state', 'in', ('approve','confirm','cancel'))]}"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Expense Lines" name="expense_lines">
+                                <field name="voucher_line_ids" mode="tree,form" attrs="{'readonly': [('state', 'in', ('approve','confirm','cancel'))]}">
+                                    <tree string="Expense Lines" editable="bottom">
+                                        <field name="sequence" widget="handle" />
+                                        <field name="product_id" string="Item Name(Company)" domain="[('is_material','=',False)]"/>
+                                        <field name="supplier_item_name"/>
+                                        <field name="description"/>
+                                        <field name="size_service"/>
+                                        <field name="qty"/>
+                                        <field name="uom_id"/>
+                                        <field name="price_unit"/>
+                                        <field name="price_subtotal"/>
+                                    </tree>
+                                </field>
+                                <group class="oe_subtotal_footer oe_right" colspan="2" name="expense_total">
+                                    <div class="oe_subtotal_footer_separator oe_inline o_td_label">
+                                        <label for="amount_total"/>
+                                    </div>
+                                    <field name="amount_total" nolabel="1" class="oe_subtotal_footer_separator" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <menuitem id="menu_idea_project_master_data" name="Master Data"
+                parent="project.menu_main_pm" sequence="10"/>
+        <menuitem id="menu_idea_expense_voucher" name="Expense Voucher"
+                parent="menu_idea_project_master_data"
+                action="action_idea_expense_voucher" sequence="1"/>
+        <menuitem id="menu_idea_project_product"
+            action="action_ideatime_material_product"
+            parent="menu_idea_project_master_data" sequence="2"/>
+    </data>
+</odoo>

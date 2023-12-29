@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="po_detail_report_wizard_view" model="ir.ui.view">
+        <field name="name">Purchase History Detail Report</field>
+        <field name="model">purchase.detail.report</field>
+        <field name="arch" type="xml">
+            <form>
+                <group col="4">
+                    <field name="date_from"/>
+                    <field name="date_to"/>
+                </group>
+                <group>
+                    <field name="currency_id" widget="many2many_tags"/>
+                </group>
+
+                <footer>
+                    <button name="print_report" type="object" default_focus="1" string="Print" class="oe_highlight"
+                            icon="fa-download"/>
+                    <button string="Cancel" class="oe_link" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="wizard_po_detail_report" model="ir.actions.act_window">
+        <field name="name">Purchase History Detail Report</field>
+        <field name="res_model">purchase.detail.report</field>
+        <field name="view_mode">form</field>
+        <field name="context">{}</field>
+        <field name="view_id" ref="po_detail_report_wizard_view"/>
+        <field name="target">new</field>
+    </record>
+    <record id="po_detail_report_xlsx_action" model="ir.actions.report">
+        <field name="name">Purchase History Detail Xlsx Report</field>
+        <field name="model">purchase.detail.report</field>
+        <field name="report_type">xlsx</field>
+        <field name="report_name">ideatime_purchase.po_detail_report_xlsx</field>
+        <field name="report_file">ideatime_purchase.po_detail_report_xlsx</field>
+    </record>
+
+    <menuitem id="menu_po_history_detail_report"
+              action="wizard_po_detail_report"
+              name="Purchase History Detail Report"
+              parent="purchase.menu_purchase_root"
+              sequence="120"/>
+
+
+</odoo>
+

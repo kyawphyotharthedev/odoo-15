@@ -1,0 +1,185 @@
+<odoo>
+    <data>
+        <record id="ideatime_view_purchase_order_filter" model="ir.ui.view">
+            <field name="name">request.quotation.select</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.view_purchase_order_filter"/>
+            <field name="arch" type="xml">
+                <search string="Search Purchase Order">
+                    <field name="project_id" string="Project Code"/>
+                </search>
+            </field>
+        </record>
+        <record id="ideatime_purchase_order_tree" model="ir.ui.view">
+            <field name="name">purchase.order.tree</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_tree"/>
+            <field name="arch" type="xml">
+                <field name="name" position="before">
+                    <field name="project_id" string="Project Code"/>
+                    <field name="project_client_id" string="Client Name"/>
+                    <field name="project_site_id"/>
+                    <field name="project_name"/>
+                </field>
+            </field>
+        </record>
+        <record id="view_purchase_order_line_cbm_calc" model="ir.ui.view">
+            <field name="name">sale.order.line.form</field>
+            <field name="model">purchase.order.line</field>
+            <field eval="20" name="priority"/>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <group>
+                            <field name='state' invisible='1'/>
+                            <field name='Pcs'
+                                   attrs="{'readonly': [('state', 'in', ('purchase', 'to approve','done', 'cancel'))]}"/>
+                            <field name='length'
+                                   attrs="{'readonly': [('state', 'in', ('purchase', 'to approve','done', 'cancel'))]}"/>
+                            <field name='width'
+                                   attrs="{'readonly': [('state', 'in', ('purchase', 'to approve','done', 'cancel'))]}"/>
+                            <field name='height'
+                                   attrs="{'readonly': [('state', 'in', ('purchase', 'to approve','done', 'cancel'))]}"/>
+                        </group>
+
+                        <group>
+                            <field name='pcs_uom'
+                                   attrs="{'readonly': [('state', 'in', ('purchase', 'to approve','done', 'cancel'))]}"/>
+                            <field name='length_uom'
+                                   attrs="{'readonly': [('state', 'in', ('purchase', 'to approve','done', 'cancel'))]}"/>
+                            <field name='width_uom'
+                                   attrs="{'readonly': [('state', 'in', ('purchase', 'to approve','done', 'cancel'))]}"/>
+                            <field name='height_uom'
+                                   attrs="{'readonly': [('state', 'in', ('purchase', 'to approve','done', 'cancel'))]}"/>
+                        </group>
+                        <group>
+                            <field name='volume_weight'
+                                   attrs="{'readonly': [('state', 'in', ('purchase', 'to approve','done', 'cancel'))]}"
+                                   string="Result"/>
+                            <field name="product_uom_qty" invisible="1"/>
+                        </group>
+                    </group>
+
+                    <footer>
+                        <button name="save" type="object" string="Save" class="oe_highlight"/>
+                        <button string="Discard" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+        <record id="ideatime_view_purchase_order_form" model="ir.ui.view">
+            <field name="name">purchase.order.form</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_form"/>
+            <field name="arch" type="xml">
+                <field name="date_order" position="after">
+                    <field name="project_id" options="{'no_open':False,'no_create':True,'no_create_edit':False}"
+                           domain="[('proj_type_stage_id', '!=', 'Pending')]"
+                           attrs="{'readonly': [('state', 'in', ('purchase', 'to approve','done', 'cancel'))]}"/>
+                    <field name="project_name"/>
+                    <field name="budget_id" options="{'no_open':False,'no_create':True,'no_create_edit':False}"
+                           domain="[('project_id', '=', project_id),('state', 'in', ['submit', 'project_check', 'finance_check'])]"/>
+                    <field name="batch_id" options="{'no_open':False,'no_create':True,'no_create_edit':False}"/>
+
+                </field>
+                <xpath expr="//control/create[1]" position="after">
+                    <create string="Configure a product" context="{'open_product_configurator': True}"
+                            groups="product.group_product_variant"/>
+                </xpath>
+                <field name="order_line" position="attributes">
+                    <attribute name="widget">configure_section_and_note_one2many</attribute>
+                </field>
+                <xpath expr="//field[@name='order_line']/tree/field[@name='product_id']" position="after">
+                    <field name="barcode"/>
+                </xpath>
+                <xpath expr="//field[@name='order_line']/tree/field[@name='product_qty']" position="before">
+                    <button name="calculate_cbm" type="object" icon="fa-calculator"
+                            attrs="{'readonly': [('state', 'in', ('purchase', 'to approve','done', 'cancel'))]}"/>
+
+                </xpath>
+                <xpath expr="//field[@name='order_line']/tree/field[@name='price_subtotal']" position="after">
+                    <field name="remark"/>
+                </xpath>
+                <xpath expr="//page[@name='purchase_delivery_invoice']" position="after">
+                    <page string="Order Agreemnet Information" name="order_agreement_information">
+                        <group>
+                            <group>
+                                <field name="agreement_period_id" string="Agreement type template"/>
+                                <field name="agreement_period_note" string="Agreement type"/>
+                            </group>
+                            <group>
+                                <field name="commencement_date" invisible="1"/>
+                                <field name="commencement_start_date"/>
+                                <field name="commencement_end_date"/>
+                            </group>
+                            <group>
+
+                                <field name="currency_template_id"/>
+                                <field name="currency_note" string="Currency"/>
+                                <!-- <field name="price_fee_id"/> -->
+                            </group>
+                            <group>
+
+                                <field name="price_fee_id" string="Price and Fees Template"/>
+                                <field name="price_fee_note" string="Price and Fees"/>
+
+                            </group>
+                            <group>
+
+                                <field name="taxation_template_id"/>
+                                <field name="taxation_note" string="Taxation"/>
+
+                            </group>
+                            <group>
+
+                                <field name="payment_template_id"/>
+                                <field name="payment_note" string="Term of Payment"/>
+
+                            </group>
+                            <group>
+
+                                <field name="acceptance_template_id"/>
+                                <field name="acceptance_note" string="Acceptance"/>
+
+                            </group>
+                            <group>
+
+                                <field name="obligation_template_id" string="Obilgation Template"/>
+                                <field name="obligation_note" string="Obilgation"/>
+
+                            </group>
+                            <group>
+
+                                <field name="contract_template_id" string="Liability of breach of contract template"/>
+                                <field name="contract_note" string="Liability of breach of contract"/>
+
+                            </group>
+                            <group>
+
+                                <field name="termination_template_id"/>
+                                <field name="termination_note" string="Termination"/>
+
+                            </group>
+                            <group>
+
+                                <field name="arbitration_template_id"/>
+                                <field name="arbitration_note" string="Arbitration"/>
+
+                            </group>
+                        </group>
+                    </page>
+
+                </xpath>
+            </field>
+        </record>
+
+        <menuitem name="Products" id="purchase.menu_procurement_partner_contact_form"
+                  action="purchase.product_normal_action_puchased"
+                  parent="purchase.menu_purchase_products" sequence="20"
+                  groups="ideatime_core.invisible_purchase_product"/>
+        <menuitem name="Product Variants" id="purchase.product_product_menu" action="purchase.product_product_action"
+                  parent="purchase.menu_purchase_products" sequence="21"
+                  groups="ideatime_core.invisible_purchase_product_variants"/>
+
+    </data>
+</odoo>

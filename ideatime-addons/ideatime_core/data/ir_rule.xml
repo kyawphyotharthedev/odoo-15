@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="ideatime_project_type_allowed_users" model="ir.rule">
+        <field name="name">Project Type</field>
+        <field name="model_id" ref="model_project_type"/>
+        <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+        <field name="domain_force">[('allowed_user_ids', 'in', [user.id])]</field>
+    </record>
+    <record id="deatime_project_type_system_user" model="ir.rule">
+        <field name="name">All Project Type</field>
+        <field name="model_id" ref="model_project_type"/>
+        <field name="domain_force">[(1,'=',1)]</field>
+        <field name="groups" eval="[(4, ref('base.group_system'))]"/>
+    </record>
+</odoo>

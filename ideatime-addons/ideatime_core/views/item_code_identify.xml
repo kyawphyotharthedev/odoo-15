@@ -1,0 +1,375 @@
+<odoo>
+    <data>
+        <record id="action_gp1_service_gp" model="ir.actions.act_window">
+            <field name="name">Business Channel</field>
+
+            <field name="res_model">service.category.group</field>
+
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new record
+                </p>
+            </field>
+        </record>
+
+        <record id="service_cate_gp_view_tree" model="ir.ui.view">
+            <field name="name">service.category.group.tree</field>
+            <field name="model">service.category.group</field>
+            <field name="arch" type="xml">
+                <tree string="Business Channel">
+                    <field name="name"/>
+                    <field name="code"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_service_cate_gp_form" model="ir.ui.view">
+            <field name="name">service.category.group.form</field>
+            <field name="model">service.category.group</field>
+            <field name="arch" type="xml">
+                <form string="Business Channel">
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button class="oe_stat_button" type="object" name="toggle_active" icon="fa-archive">
+                                <field name="active" widget="boolean_button" options='{"terminology": "archive"}'/>
+                            </button>
+                        </div>
+                        <group col='2'>
+                            <field name="name"/>
+                            <field name="code"/>
+                            <field name="seq_id" readonly="1" string='Sector Sequence'/>
+                            <field name="right_ids" widget='many2many_tags' domain="[('left_id','=',False)]"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
+
+
+        <record id="action_gp1_service_sec" model="ir.actions.act_window">
+            <field name="name">Service Sector</field>
+
+            <field name="res_model">service.category.sector</field>
+
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new record
+                </p>
+            </field>
+        </record>
+
+        <record id="service_cate_sec_view_tree" model="ir.ui.view">
+            <field name="name">service.category.sector.tree</field>
+            <field name="model">service.category.sector</field>
+            <field name="arch" type="xml">
+                <tree string="Service Sector">
+                    <field name="name"/>
+                    <field name="description"/>
+                    <field name="code"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_service_cate_sec_form" model="ir.ui.view">
+            <field name="name">service.category.sector.form</field>
+            <field name="model">service.category.sector</field>
+            <field name="arch" type="xml">
+                <form string="Service Sector">
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button class="oe_stat_button" type="object" name="toggle_active" icon="fa-archive">
+                                <field name="active" widget="boolean_button" options='{"terminology": "archive"}'/>
+                            </button>
+                        </div>
+                        <group col='2'>
+                            <field name="name"/>
+                            <field name="left_id" string='Business Channel'/>
+                            <field name="code" readonly="1"/>
+                            <field name="seq_id" readonly="1"/>
+                            <field name="right_ids" widget='many2many_tags' domain="[('left_id','=',False)]"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
+
+
+        <record id="action_gp2_service_line" model="ir.actions.act_window">
+            <field name="name">Service Line</field>
+
+            <field name="res_model">service.category.line</field>
+
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new record
+                </p>
+            </field>
+        </record>
+
+        <record id="service_cate_line_view_tree" model="ir.ui.view">
+            <field name="name">service.category.line.tree</field>
+            <field name="model">service.category.line</field>
+            <field name="arch" type="xml">
+                <tree string="Service Line">
+                    <field name="name"/>
+                    <field name="description"/>
+                    <field name="code"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_service_cate_line_form" model="ir.ui.view">
+            <field name="name">service.category.line.form</field>
+            <field name="model">service.category.line</field>
+            <field name="arch" type="xml">
+                <form string="Service Line">
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button class="oe_stat_button" type="object" name="toggle_active" icon="fa-archive">
+                                <field name="active" widget="boolean_button" options='{"terminology": "archive"}'/>
+                            </button>
+                        </div>
+                        <group col='2'>
+                            <field name="name"/>
+                            <field name="left_id" string='Service Sector'/>
+                            <field name="code" readonly="1"/>
+                            <field name="seq_id" readonly="1"/>
+                            <field name="right_ids" widget='many2many_tags' domain="[('left_id','=',False)]"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
+
+
+        <record id="action_gp3_service_particular" model="ir.actions.act_window">
+            <field name="name">Particular</field>
+
+            <field name="res_model">service.category.particular</field>
+
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new record
+                </p>
+            </field>
+        </record>
+
+        <record id="service_cate_particular_view_tree" model="ir.ui.view">
+            <field name="name">service.category.particular.tree</field>
+            <field name="model">service.category.particular</field>
+            <field name="arch" type="xml">
+                <tree string="Particular">
+                    <field name="name"/>
+                    <field name="description"/>
+                    <field name="code"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_service_cate_particular_form" model="ir.ui.view">
+            <field name="name">service.category.particular.form</field>
+            <field name="model">service.category.particular</field>
+            <field name="arch" type="xml">
+                <form string="Particular">
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button class="oe_stat_button" type="object" name="toggle_active" icon="fa-archive">
+                                <field name="active" widget="boolean_button" options='{"terminology": "archive"}'/>
+                            </button>
+                        </div>
+                        <group col='2'>
+                            <field name="name"/>
+                            <field name="left_id" string='Service Line'/>
+                            <!--                            <field name="code" readonly="1"/>-->
+                            <!--                            <field name="seq_id" readonly="1"/>-->
+                            <!--                            <field name="right_ids" widget='many2many_tags' domain="[('left_id','=',False)]"/>-->
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
+
+
+        <record id="action_gp4_service_function" model="ir.actions.act_window">
+            <field name="name">Function</field>
+
+            <field name="res_model">service.category.function</field>
+
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new record
+                </p>
+            </field>
+        </record>
+
+        <record id="service_cate_function_view_tree" model="ir.ui.view">
+            <field name="name">service.category.function.tree</field>
+            <field name="model">service.category.function</field>
+            <field name="arch" type="xml">
+                <tree string="Function">
+                    <field name="name"/>
+                    <field name="description"/>
+                    <field name="code"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_service_cate_function_form" model="ir.ui.view">
+            <field name="name">service.category.function.form</field>
+            <field name="model">service.category.function</field>
+            <field name="arch" type="xml">
+                <form string="Function">
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button class="oe_stat_button" type="object" name="toggle_active" icon="fa-archive">
+                                <field name="active" widget="boolean_button" options='{"terminology": "archive"}'/>
+                            </button>
+                        </div>
+                        <group col='2'>
+                            <field name="name"/>
+                            <field name="left_id" string='Particular'/>
+                            <field name="code" readonly="1"/>
+                            <field name="seq_id" readonly="1"/>
+                            <field name="right_ids" widget='many2many_tags' domain="[('left_id','=',False)]"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
+
+
+        <record id="action_gp5_service_option" model="ir.actions.act_window">
+            <field name="name">Service Option</field>
+
+            <field name="res_model">service.category.option</field>
+
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new record
+                </p>
+            </field>
+        </record>
+
+        <record id="service_cate_option_view_tree" model="ir.ui.view">
+            <field name="name">service.category.option.tree</field>
+            <field name="model">service.category.option</field>
+            <field name="arch" type="xml">
+                <tree string="Option">
+                    <field name="name"/>
+                    <field name="description"/>
+                    <field name="code"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_service_cate_option_form" model="ir.ui.view">
+            <field name="name">service.category.option.form</field>
+            <field name="model">service.category.option</field>
+            <field name="arch" type="xml">
+                <form string="Option">
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button class="oe_stat_button" type="object" name="toggle_active" icon="fa-archive">
+                                <field name="active" widget="boolean_button" options='{"terminology": "archive"}'/>
+                            </button>
+                        </div>
+                        <group col='2'>
+                            <field name="name"/>
+                            <field name="left_id" string='Function'/>
+                            <field name="code" readonly="1"/>
+                            <field name="seq_id" readonly="1"/>
+                            <field name="is_innovative"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
+
+
+        <record id="action_item_spec_particular" model="ir.actions.act_window">
+            <field name="name">Item Spec Particular</field>
+
+            <field name="res_model">item.spec.particular</field>
+
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new record
+                </p>
+            </field>
+        </record>
+
+        <record id="itemspec_particular_view_tree" model="ir.ui.view">
+            <field name="name">item.spec.particular.tree</field>
+            <field name="model">item.spec.particular</field>
+            <field name="arch" type="xml">
+                <tree string="Item Specification Particular">
+                    <field name="sequence" widget="handle"/>
+                    <field name="name"/>
+
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_item_spec_particular_form" model="ir.ui.view">
+            <field name="name">item.spec.particular.form</field>
+            <field name="model">item.spec.particular</field>
+            <field name="arch" type="xml">
+                <form string="Item Specification Particular">
+                    <sheet>
+                        <group col='2'>
+                            <field name="name"/>
+
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
+
+
+        <menuitem id="menu_sale_item_identify" name="Sale Item Identify" parent="project.menu_project_config"
+                  sequence="9"/>
+
+        <menuitem id="menu_gp1_service_gp" name="Business Channel"
+                  parent="menu_sale_item_identify"
+                  action="action_gp1_service_gp" sequence="1"/>
+        <menuitem id="menu_gp1_service_sec" name="Service Sector"
+                  parent="menu_sale_item_identify"
+                  action="action_gp1_service_sec" sequence="2"/>
+
+        <menuitem id="menu_gp2_service_line" name="Service Line"
+                  parent="menu_sale_item_identify"
+                  action="action_gp2_service_line" sequence="3"/>
+
+        <menuitem id="menu_gp3_service_particular" name="Particular"
+                  parent="menu_sale_item_identify"
+                  action="action_gp3_service_particular" sequence="4"/>
+
+        <menuitem id="menu_gp4_service_function" name="Function"
+                  parent="menu_sale_item_identify"
+                  action="action_gp4_service_function" sequence="5"/>
+
+        <menuitem id="menu_gp5_service_option" name="Option"
+                  parent="menu_sale_item_identify"
+                  action="action_gp5_service_option" sequence="6"/>
+
+    </data>
+</odoo>

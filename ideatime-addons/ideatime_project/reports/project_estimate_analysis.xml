@@ -1,0 +1,11 @@
+<odoo>
+    <record id="project_project_analysis_report" model="ir.actions.report">
+        <field name="name">Project Cost Estimate Analysis</field>
+        <field name="model">project.project</field>
+        <field name="report_type">xlsx</field>
+        <field name="report_name">ideatime_project.p_p_analysis_report_id</field>
+        <field name="report_file">ideatime_project.p_p_analysis_report_id</field>
+        <field name="binding_model_id" ref="project.model_project_project"/>
+        <field name="binding_type">report</field>
+    </record>
+</odoo>

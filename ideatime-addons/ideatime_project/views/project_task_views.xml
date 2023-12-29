@@ -1,0 +1,112 @@
+<odoo>
+    <record id="ideatime_view_task_tree2" model="ir.ui.view">
+        <field name="name">project.task.tree</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_tree2"/>
+        <field eval="2" name="priority"/>
+        <field name="arch" type="xml">
+            <field name="name" position="replace">
+                <field name="name" string="Task Name"/>
+            </field>
+            <field name="date_deadline" position="before">
+                <field name="parent_id"/>
+                <field name="checklist_progress" widget="percentpie"/>
+
+            </field>
+            <field name="stage_id" position="after">
+                <field name="priority" widget="priority"/>
+            </field>
+
+
+        </field>
+    </record>
+
+
+    <record id="project_task_form_view" model="ir.ui.view">
+        <field name="name">project.task.form</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_form2"/>
+        <field name="priority" eval="20"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('oe_button_box')]" position="inside">
+                <button class="oe_stat_button" icon="fa-files-o"
+                        name="attachment_tree_view" type="object">
+                    <field name="doc_count" string="Documents" widget="statinfo"/>
+                </button>
+                <button name="%(ideatime_core.action_project_task_meeting_calendar_event)d" type="action" class="oe_stat_button"
+                        icon="fa-calendar" context="{'search_default_task_id': active_id}">
+                    <field name="meeting_count" string="Meetings" widget="statinfo"/>
+                </button>
+            </xpath>
+            <xpath expr="//form" position="attributes">
+                <attribute name="delete">0</attribute>
+            </xpath>
+
+            <xpath expr="//div[hasclass('oe_title')]" position="replace">
+                <h3 class="d-flex flex-row justify-content-between">
+                    <field name="name" class="o_task_name text-truncate" placeholder="Task Title..."/>
+                </h3>
+                <field name="priority" widget="priority" class="mr-3"/>
+                <field name="kanban_state" widget="state_selection" class="ml-auto"/>
+            </xpath>
+
+            <field name="user_ids" position="after">
+                <field name="checklist_progress" widget="percentpie"
+                       attrs="{'invisible' : [('parent_id', '!=', False)]}"/>
+            </field>
+
+            <field name="tag_ids" position="after">
+                <field name="action_step_id" domain="[('project_id','=',project_id)]"
+                       options="{'no_open':True,'no_create':True,'no_create_edit':True}"/>
+            </field>
+        </field>
+    </record>
+    <record id="project_task_view" model="ir.ui.view">
+        <field name="name">project.task.form.view</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_form2"/>
+        <field name="arch" type="xml">
+            <page name="description_page" position="before">
+                <page name="action" string="Action">
+                    <label for="action_steps"
+                           string="Action Steps (What needs to be done? (If need with Documentation))"/>
+                    <field name="action_steps"/>
+
+
+                    <label for="responsible_person"
+                           string="Responsible Person (ID) (Who should take action to complete this step?)"/>
+                    <field name="responsible_person"/>
+                    <group>
+
+                        <label for="task_department_id" string="Department (Which department?)"/>
+                        <field name="task_department_id" widget="many2many_tags" nolabel="1"/>
+                    </group>
+
+
+                    <label for="resposnsible_team" string="Resposnsible team"/>
+                    <field name="resposnsible_team"/>
+
+                    <label for="partner" string="Partner"/>
+                    <field name="partner"/>
+
+
+                    <label for="deadline" string="Schedule (When should this step be completed? (With Gantt Chart))"/>
+                    <field name="deadline"/>
+
+                    <label for="necessary_resources"
+                           string="Necessary Resources (What do you need in order to complete this step?)"/>
+                    <field name="necessary_resources"/>
+
+                    <label for="potential_challenges"
+                           string="Potential Challenges (Are there any potential challenges that may impede completion? How will you overcome them?)"/>
+                    <field name="potential_challenges"/>
+
+                    <label for="action_plans"
+                           string="Action Plans Solution of the process (If need with Documentation)"/>
+                    <field name="action_plans"/>
+
+                </page>
+            </page>
+        </field>
+    </record>
+</odoo>

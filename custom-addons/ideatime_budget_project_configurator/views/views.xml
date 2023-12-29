@@ -1,0 +1,17 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="view_order_form_inherit">
+            <field name="name">budget.approval.inherit</field>
+            <field name="model">budget.approval</field>
+            <field name="inherit_id" ref="ideatime_budget.ideatime_customization_budget_inherit_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='currency_id']" position="after">
+                    <field name="company_id"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
+
+
+

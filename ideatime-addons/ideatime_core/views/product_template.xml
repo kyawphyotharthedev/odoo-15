@@ -1,0 +1,712 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="ideatime_product_template_tree_view" model="ir.ui.view">
+        <field name="name">product.template.tree</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_tree_view"/>
+        <field eval="7" name="priority"/>
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="image_128" widget="image" string="Photo"/>
+                <field name="display_type"/>
+            </field>
+            <xpath expr='//tree' position='attributes'>
+                <attribute name="delete">false</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="ideatime_product_product_tree_view" model="ir.ui.view">
+        <field name="name">product.product.tree</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_product_tree_view"/>
+        <field eval="7" name="priority"/>
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="image_128" widget="image" string="Photo"/>
+                <field name="display_type"/>
+            </field>
+            <xpath expr='//tree' position='attributes'>
+                <attribute name="delete">false</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="product_product_form_delete_action" model="ir.ui.view">
+        <field name="name">product.product.form.delete.action</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_normal_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr='//form' position='attributes'>
+                <attribute name="delete">false</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="ideatime_product_template_only_form_view_inherit" model="ir.ui.view">
+        <field name="name">product.template.form.inherit</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view"/>
+        <field name="arch" type="xml">
+
+
+            <field name='barcode' position='after'>
+                <separator string=""/>
+                <field name='product_intro'/>
+                <field name='product_spec'/>
+            </field>
+            <xpath expr="//field[@name='attribute_line_ids']/tree" position="after">
+                <form>
+                    <group>
+                        <field name="attribute_id"/>
+                    </group>
+                    <group>
+                        <field name="value_ids" widget="many2many" options="{'no_create_edit': True}"
+                               domain="[('attribute_id', '=', attribute_id)]"
+                               context="{'default_attribute_id': attribute_id}"/>
+                    </group>
+                </form>
+            </xpath>
+            <xpath expr="//field[@name='attribute_line_ids']/tree" position="attributes">
+                <attribute name="editable"/>
+            </xpath>
+            <xpath expr='//form' position='attributes'>
+                <attribute name="delete">false</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="idea_product_template_form" model="ir.ui.view">
+        <field name="name">product.template.form.inherit</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="arch" type="xml">
+
+<!--            <field name="detailed_type" position="attributes">-->
+<!--                <attribute name="invisible">1</attribute>-->
+<!--            </field>-->
+
+            <field name='uom_po_id' position='after'>
+            <field name="cost_type_id" options="{'no_open':False,'no_create':True,'no_create_edit':False}" attrs="{'required':[('is_sale_item','==',False)]}" widget="many2many_tags" />
+           </field>
+
+            <notebook position="after">
+                <field name="image_1920" widget="image" class="oe_image_custom" style="width: 600px;"/>
+            </notebook>
+            <xpath expr="//div[@name='options']" position="inside">
+                <span class="d-inline-block">
+                    <div name="is_material" groups="ideatime_core.group_purchase_item_permission">
+                        <div>
+                            <field name="is_material"/>
+                            <label for="is_material" string="Purchase Item"/>
+                        </div>
+                    </div>
+                </span>
+                <span class="d-inline-block">
+                    <div name="is_sale_item" groups="ideatime_core.group_sale_item_permission">
+                        <div>
+                            <field name="is_sale_item"/>
+                            <label for="is_sale_item" string="Sale Item"/>
+                        </div>
+                    </div>
+                </span>
+                <span class="d-inline-block">
+                    <div name="is_service_item">
+                        <div>
+                            <field name="is_service_item"/>
+                            <label for="is_service_item" string="Other"/>
+                        </div>
+                    </div>
+                </span>
+                <span class="d-inline-block">
+                    <div name="is_manual_item" invisible="1">
+                        <div>
+                            <field name="is_manual_item"/>
+                            <label for="is_manual_item" string="Manual Item"/>
+                        </div>
+                    </div>
+                </span>
+            </xpath>
+            <notebook position='inside'>
+                <page string="Sale Item Identify" name="sale_item_identify"
+                      attrs="{'invisible':[('is_sale_item','=',False)]}">
+                    <group>
+                        <group>
+                            <separator string="Classification Group"/>
+                            <field name='cate_group_id'/>
+                            <field name='cate_sector_id' domain="[('left_id','=',cate_group_id)]"
+                                   context="{'default_left_id': cate_group_id}"/>
+
+                            <field name='sale_item_categ_id'/>
+
+                            <field name='cate_line_id' domain="[('left_id','=',cate_sector_id)]"
+                                   context="{'default_left_id': cate_sector_id}"/>
+
+                            <field name='cate_particular_id' domain="[('left_id','=',cate_line_id)]"
+                                   context="{'default_left_id': cate_line_id}"/>
+
+                            <field name='cate_function_id' domain="[('left_id','=',cate_particular_id)]"
+                                   context="{'default_left_id': cate_particular_id}"/>
+
+                            <field name='cate_option_id' domain="[('left_id','=',cate_function_id)]"
+                                   context="{'default_left_id': cate_function_id}"/>
+                            <field name="display_type"/>
+                        </group>
+                        <group>
+                            <separator string=""/>
+                            <field name="customer_name" attrs="{'invisible': [('is_innovative', '=', False)]}"/>
+                            <field name="is_innovative" invisible='1'/>
+
+                        </group>
+                    </group>
+                </page>
+                <page string="Material Item Identify" name="material_item_identify"
+                      attrs="{'invisible':[('is_material','=',False)]}">
+                    <group>
+                        <group>
+                            <field name="material_group_id"/>
+                            <field name="material_sector_id"/>
+
+                            <field name="material_category_id"/>
+                            <field name="material_sub_category_id"/>
+                            <field name="material_particular_id"/>
+
+                            <field name="material_classification_id"/>
+
+                            <field name="material_type_id"/>
+                            <field name="material_function_id"/>
+                            <field name="material_steamline_id"/>
+                            <field name="display_type"/>
+                        </group>
+                    </group>
+                </page>
+                <page string="Description" name="sale_item_identify">
+                    <field name="attribute_ids" groups="base.group_no_one"/>
+                    <group>
+                        <group>
+                            <field name="particular_temp_id"/>
+                        </group>
+                    </group>
+                    <separator string="Item Specification"/>
+                    <field name="item_spec_ids" widget="section_and_note_one2many" mode="tree,kanban">
+                        <tree editable="bottom">
+                            <control>
+                                <create string="Add a line"/>
+                                <create string="Add a section"
+                                        context="{'default_display_type': 'line_title_section'}"/>
+                            </control>
+                            <field name="sequence" widget="handle"/>
+                            <field name="display_type" invisible="1"/>
+
+                            <field name='particular_id'/>
+                            <field name='name' widget='section_and_note_text'
+                                   attrs="{'invisible': [('display_type', '!=', 'line_section')]}" invisible="1"/>
+                            <field name="item_spec_part_title_id" widget='particular_section_and_note_many2one'
+                                   nolabel="1" attrs="{
+                                            'required': [('display_type', '=', 'line_title_section')],
+                                        }" invisible="0"/>
+
+
+                            <field name="description"/>
+                            <field name='product_attr_id' options="{'no_create': True}"
+                                   domain="[('id', 'in', parent.attribute_ids)]" invisible="1"/>
+                            <field name='product_attr_val_id' widget="many2many_tags" options="{'no_create': True}"
+                                   invisible="1"/>
+                            <field name="product_ids" widget="many2many_tags"
+                                   domain="[('id', 'in', parent.product_variant_ids)]" options="{'no_create': True}"
+                                   invisible="1"/>
+                        </tree>
+                    </field>
+
+                    <separator string="Item Sample Photo"/>
+                    <field name="item_sample_photo_line_ids" class="o_website_sale_image_list"
+                           context="{ 'default_product_tmpl_id': active_id}" nolabel="1">
+                        <kanban string="Item Sample Photo" class="o_attachments_previews">
+                            <field name="id"/>
+                            <field name="file_name"/>
+                            <field name="sample_photo" filename="file_name"/>
+                            <templates>
+                                <t t-name="kanban-box">
+                                    <div class="o_attachment oe_kanban_global_click o_website_sale_image_card">
+                                        <div class="o_attachment_wrap">
+                                            <div class="o_image_box">
+                                                <t t-set="background_image"
+                                                   t-value="kanban_image('item.sample.photo.line', 'sample_photo', record.id.raw_value)"/>
+                                                <div class="o_kanban_image_fill_left d-none d-md-block"
+                                                     t-attf-style="background-image:url('#{background_image}')">
+                                                    <img class="o_kanban_image_inner_pic" t-if="record.id.raw_value"
+                                                         t-att-alt="record.id.value"
+                                                         t-att-src="kanban_image('item.sample.photo.line', 'sample_photo', record.id.raw_value)"/>
+                                                </div>
+                                                <div t-attf-class="o_image_overlay"
+                                                     t-att-title="record.file_name.value"/>
+                                                <div class="o_website_sale_image_card_title"
+                                                     t-att-title="record.file_name.value">
+                                                    <field name="file_name"/>
+                                                </div>
+                                            </div>
+
+                                            <t t-set="size" t-value="[record.sample_photo.value][0]"/>
+                                            <t t-set="size_status" t-value="'normal'"
+                                               t-if="size.indexOf('Bytes') !== -1 or ( size.indexOf('Kb') !== -1 and size[2]=='.')"/>
+                                            <t t-set="size_status" t-value="'warning'"
+                                               t-elif="( size.indexOf('Kb') !== -1 and size[3]=='.')"/>
+                                            <t t-set="size_status" t-value="'danger'" t-else=""/>
+                                            <t t-set="message" t-value="'Acceptable file size'"
+                                               t-if="size_status == 'normal'"></t>
+                                            <t t-set="message"
+                                               t-value="'Huge file size. The image should be optimized/reduced.'"
+                                               t-elif="size_status == 'warning'"></t>
+                                            <t t-set="message"
+                                               t-value="'Optimization required! Reduce the image size or increase your compression settings.'"
+                                               t-else=""></t>
+
+                                            <span t-attf-class="o_website_sale_image_card_size badge badge-#{size_status}"
+                                                  t-att-title="message">
+                                                <t t-esc="record.sample_photo.value"/>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </t>
+                            </templates>
+                        </kanban>
+                        <form>
+                            <form string="Item Sample Photo">
+                                <group>
+                                    <group>
+                                        <field name="sample_photo" filename="file_name"/>
+                                    </group>
+                                    <group>
+                                        <field name="file_name" invisible="1"/>
+                                    </group>
+                                </group>
+                            </form>
+                        </form>
+                    </field>
+                    <separator string="Material Sample Photo"/>
+                    <field name="material_sample_photo_line_ids" class="o_website_sale_image_list"
+                           context="{ 'default_product_tmpl_id': active_id}" nolabel="1">
+                        <kanban string="Item Sample Photo" class="o_attachments_previews">
+                            <field name="id"/>
+                            <field name="file_name"/>
+                            <field name="sample_photo" filename="file_name"/>
+                            <templates>
+                                <t t-name="kanban-box">
+                                    <div class="o_attachment oe_kanban_global_click o_website_sale_image_card">
+                                        <div class="o_attachment_wrap">
+                                            <div class="o_image_box">
+                                                <div class="o_attachment_image"
+                                                     t-attf-style="background-image:url({{kanban_image('material.sample.photo.line', 'sample_photo', record.id.raw_value)}});"/>
+                                                <div t-attf-class="o_image_overlay"
+                                                     t-att-title="record.file_name.value"/>
+                                                <div class="o_website_sale_image_card_title"
+                                                     t-att-title="record.file_name.value">
+                                                    <field name="file_name"/>
+                                                </div>
+                                            </div>
+
+                                            <t t-set="size" t-value="[record.sample_photo.value][0]"/>
+                                            <t t-set="size_status" t-value="'normal'"
+                                               t-if="size.indexOf('Bytes') !== -1 or ( size.indexOf('Kb') !== -1 and size[2]=='.')"/>
+                                            <t t-set="size_status" t-value="'warning'"
+                                               t-elif="( size.indexOf('Kb') !== -1 and size[3]=='.')"/>
+                                            <t t-set="size_status" t-value="'danger'" t-else=""/>
+                                            <t t-set="message" t-value="'Acceptable file size'"
+                                               t-if="size_status == 'normal'"></t>
+                                            <t t-set="message"
+                                               t-value="'Huge file size. The image should be optimized/reduced.'"
+                                               t-elif="size_status == 'warning'"></t>
+                                            <t t-set="message"
+                                               t-value="'Optimization required! Reduce the image size or increase your compression settings.'"
+                                               t-else=""></t>
+
+                                            <span t-attf-class="o_website_sale_image_card_size badge badge-#{size_status}"
+                                                  t-att-title="message">
+                                                <t t-esc="record.sample_photo.value"/>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </t>
+                            </templates>
+                        </kanban>
+                        <form>
+                            <form string="Item Sample Photo">
+                                <group>
+                                    <group>
+                                        <field name="sample_photo" filename="file_name"/>
+                                    </group>
+                                    <group>
+                                        <field name="file_name" invisible="1"/>
+                                    </group>
+                                </group>
+                            </form>
+                        </form>
+                    </field>
+                    <separator string="Production Process, Installation and Service sample photo"/>
+                    <field name="process_install_sample_photo_line_ids" class="o_website_sale_image_list"
+                           context="{ 'default_product_tmpl_id': active_id}" nolabel="1">
+                        <kanban string="Item Sample Photo" class="o_attachments_previews">
+                            <field name="id"/>
+                            <field name="file_name"/>
+                            <field name="sample_photo" filename="file_name"/>
+                            <templates>
+                                <t t-name="kanban-box">
+                                    <div class="o_attachment oe_kanban_global_click o_website_sale_image_card">
+                                        <div class="o_attachment_wrap">
+                                            <div class="o_image_box">
+                                                <div class="o_attachment_image"
+                                                     t-attf-style="background-image:url({{kanban_image('process_install.sample.photo.line', 'sample_photo', record.id.raw_value)}});"/>
+                                                <div t-attf-class="o_image_overlay"
+                                                     t-att-title="record.file_name.value"/>
+                                                <div class="o_website_sale_image_card_title"
+                                                     t-att-title="record.file_name.value">
+                                                    <field name="file_name"/>
+                                                </div>
+                                            </div>
+
+                                            <t t-set="size" t-value="[record.sample_photo.value][0]"/>
+                                            <t t-set="size_status" t-value="'normal'"
+                                               t-if="size.indexOf('Bytes') !== -1 or ( size.indexOf('Kb') !== -1 and size[2]=='.')"/>
+                                            <t t-set="size_status" t-value="'warning'"
+                                               t-elif="( size.indexOf('Kb') !== -1 and size[3]=='.')"/>
+                                            <t t-set="size_status" t-value="'danger'" t-else=""/>
+                                            <t t-set="message" t-value="'Acceptable file size'"
+                                               t-if="size_status == 'normal'"></t>
+                                            <t t-set="message"
+                                               t-value="'Huge file size. The image should be optimized/reduced.'"
+                                               t-elif="size_status == 'warning'"></t>
+                                            <t t-set="message"
+                                               t-value="'Optimization required! Reduce the image size or increase your compression settings.'"
+                                               t-else=""></t>
+
+                                            <span t-attf-class="o_website_sale_image_card_size badge badge-#{size_status}"
+                                                  t-att-title="message">
+                                                <t t-esc="record.sample_photo.value"/>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </t>
+                            </templates>
+                        </kanban>
+                        <form>
+                            <form string="Item Sample Photo">
+                                <group>
+                                    <group>
+                                        <field name="sample_photo" filename="file_name"/>
+                                    </group>
+                                    <group>
+                                        <field name="file_name" invisible="1"/>
+                                    </group>
+                                </group>
+                            </form>
+                        </form>
+                    </field>
+                    <separator string="Item introduction" invisible="1"/>
+                    <field name="product_variant_ids" invisible="1"/>
+                    <field name="item_intro_ids" mode="tree,form" invisible="1">
+
+                        <tree editable="bottom">
+
+                            <field name='particular_id'/>
+                            <field name="description"/>
+                            <field name='product_attr_id' options="{'no_create': True}"
+                                   domain="[('id', 'in', parent.attribute_ids)]" invisible="1"/>
+                            <field name='product_attr_val_id' widget="many2many_tags" options="{'no_create': True}"
+                                   invisible="1"/>
+                            <field name="product_ids" widget="many2many_tags"
+                                   domain="[('id', 'in', parent.product_variant_ids)]" options="{'no_create': True}"/>
+                        </tree>
+                    </field>
+                    <group invisible="1">
+                        <group>
+                            <field name='calculation_method'/>
+                        </group>
+                        <group>
+                            <field name='unit'/>
+                            <field name='usage'/>
+                        </group>
+                    </group>
+                    <separator string="MOQ" invisible="1"/>
+                    <field name="moq_ids" mode="tree,form" invisible="1">
+                        <tree editable="bottom">
+
+                            <field name='particular_id'/>
+                            <field name="description"/>
+                            <field name='product_attr_id' options="{'no_create': True}"
+                                   domain="[('id', 'in', parent.attribute_ids)]" invisible="1"/>
+                            <field name='product_attr_val_id' widget="many2many_tags" options="{'no_create': True}"
+                                   invisible="1"/>
+                            <field name="product_ids" widget="many2many_tags"
+                                   domain="[('id', 'in', parent.product_variant_ids)]" options="{'no_create': True}"/>
+                        </tree>
+                    </field>
+                    <separator string="Product environment and quality standard" invisible="1"/>
+                    <field name="product_env_qty_std_ids" mode="tree,form" invisible="1">
+                        <tree editable="bottom">
+
+                            <field name='particular_id'/>
+                            <field name="description"/>
+                            <field name='product_attr_id' options="{'no_create': True}"
+                                   domain="[('id', 'in', parent.attribute_ids)]" invisible="1"/>
+                            <field name='product_attr_val_id' widget="many2many_tags" options="{'no_create': True}"
+                                   invisible="1"/>
+                            <field name="product_ids" widget="many2many_tags"
+                                   domain="[('id', 'in', parent.product_variant_ids)]" options="{'no_create': True}"/>
+                        </tree>
+                    </field>
+                    <separator string="Other supplementary information" invisible="1"/>
+                    <field name="other_supplement_info_ids" mode="tree,form" invisible="1">
+                        <tree editable="bottom">
+                            <field name='particular_id'/>
+                            <field name="description"/>
+                            <field name='product_attr_id' options="{'no_create': True}"
+                                   domain="[('id', 'in', parent.attribute_ids)]" invisible="1"/>
+                            <field name='product_attr_val_id' widget="many2many_tags" options="{'no_create': True}"
+                                   invisible="1"/>
+                            <field name="product_ids" widget="many2many_tags"
+                                   domain="[('id', 'in', parent.product_variant_ids)]" options="{'no_create': True}"/>
+                        </tree>
+                    </field>
+
+                    <separator string="Quality" invisible="1"/>
+                    <field name="item_quality_ids" mode="tree,form" invisible="1">
+                        <tree editable="bottom">
+
+                            <field name='particular_id'/>
+                            <field name="description"/>
+                            <field name='product_attr_id' options="{'no_create': True}"
+                                   domain="[('id', 'in', parent.attribute_ids)]" invisible="1"/>
+                            <field name='product_attr_val_id' widget="many2many_tags" options="{'no_create': True}"
+                                   invisible="1"/>
+                            <field name="product_ids" widget="many2many_tags"
+                                   domain="[('id', 'in', parent.product_variant_ids)]" options="{'no_create': True}"/>
+                        </tree>
+                    </field>
+                    <separator string="Warranty period" invisible="1"/>
+                    <field name="warrenty_period_ids" mode="tree,form" invisible="1">
+                        <tree editable="bottom">
+
+                            <field name='particular_id'/>
+                            <field name="description"/>
+                            <field name='product_attr_id' options="{'no_create': True}"
+                                   domain="[('id', 'in', parent.attribute_ids)]" invisible="1"/>
+                            <field name='product_attr_val_id' widget="many2many_tags" options="{'no_create': True}"
+                                   invisible="1"/>
+                            <field name="product_ids" widget="many2many_tags"
+                                   domain="[('id', 'in', parent.product_variant_ids)]" options="{'no_create': True}"/>
+                        </tree>
+                    </field>
+                    <separator string="Warranty factor" invisible="1"/>
+                    <field name="warrenty_factor_ids" mode="tree,form" invisible="1">
+                        <tree editable="bottom">
+
+                            <field name='particular_id'/>
+                            <field name="description"/>
+                            <field name='product_attr_id' options="{'no_create': True}"
+                                   domain="[('id', 'in', parent.attribute_ids)]" invisible="1"/>
+                            <field name='product_attr_val_id' widget="many2many_tags" options="{'no_create': True}"
+                                   invisible="1"/>
+                            <field name="product_ids" widget="many2many_tags"
+                                   domain="[('id', 'in', parent.product_variant_ids)]" options="{'no_create': True}"/>
+
+                        </tree>
+                    </field>
+                    <separator string="Main material and specification" invisible="1"/>
+                    <field name="main_material_spec_ids" mode="tree,form" invisible="1">
+                        <tree editable="bottom">
+
+                            <field name='particular_id'/>
+                            <field name="description"/>
+                            <field name='product_attr_id' options="{'no_create': True}"
+                                   domain="[('id', 'in', parent.attribute_ids)]" invisible="1"/>
+                            <field name='product_attr_val_id' widget="many2many_tags" options="{'no_create': True}"
+                                   invisible="1"/>
+                            <field name="product_ids" widget="many2many_tags"
+                                   domain="[('id', 'in', parent.product_variant_ids)]" options="{'no_create': True}"/>
+                        </tree>
+                    </field>
+                    <separator string="Supporting material and specification" invisible="1"/>
+                    <field name="support_material_spec_ids" mode="tree,form" invisible="1">
+                        <tree editable="bottom">
+
+                            <field name='particular_id'/>
+                            <field name="description"/>
+                            <field name='product_attr_id' options="{'no_create': True}"
+                                   domain="[('id', 'in', parent.attribute_ids)]" invisible="1"/>
+                            <field name='product_attr_val_id' widget="many2many_tags" options="{'no_create': True}"
+                                   invisible="1"/>
+                            <field name="product_ids" widget="many2many_tags"
+                                   domain="[('id', 'in', parent.product_variant_ids)]" options="{'no_create': True}"/>
+                        </tree>
+                    </field>
+                    <separator string="Production craft and installation description" invisible="1"/>
+                    <field name="production_craft_install_ids" mode="tree,form" invisible="1">
+                        <tree editable="bottom">
+
+                            <field name='particular_id'/>
+                            <field name="description"/>
+                            <field name='product_attr_id' options="{'no_create': True}"
+                                   domain="[('id', 'in', parent.attribute_ids)]" invisible="1"/>
+                            <field name='product_attr_val_id' widget="many2many_tags" options="{'no_create': True}"
+                                   invisible="1"/>
+                            <field name="product_ids" widget="many2many_tags"
+                                   domain="[('id', 'in', parent.product_variant_ids)]" options="{'no_create': True}"/>
+                        </tree>
+                    </field>
+                    <separator string="Production process" invisible="1"/>
+                    <field name="production_process_ids" mode="tree,form" invisible="1">
+                        <tree editable="bottom">
+                            <field name="particular_id"/>
+                            <field name="description"/>
+                            <field name='sample_photo' filename="file_name" widget="download_link"/>
+                            <field name="file_name" invisible="1"/>
+                            <field name='product_attr_id' options="{'no_create': True}"
+                                   domain="[('id', 'in', parent.attribute_ids)]" invisible="1"/>
+                            <field name='product_attr_val_id' widget="many2many_tags" options="{'no_create': True}"
+                                   invisible="1"/>
+                            <field name="product_ids" widget="many2many_tags"
+                                   domain="[('id', 'in', parent.product_variant_ids)]" options="{'no_create': True}"/>
+                        </tree>
+                    </field>
+                    <separator string="Installation process" invisible="1"/>
+                    <field name="install_process_ids" mode="tree,form" invisible="1">
+                        <tree editable="bottom">
+                            <field name="particular_id"/>
+                            <field name="description"/>
+                            <field name='sample_photo' filename="file_name" widget="download_link"/>
+                            <field name="file_name" invisible="1"/>
+                            <field name='product_attr_id' options="{'no_create': True}"
+                                   domain="[('id', 'in', parent.attribute_ids)]" invisible="1"/>
+                            <field name='product_attr_val_id' widget="many2many_tags" options="{'no_create': True}"
+                                   invisible="1"/>
+                            <field name="product_ids" widget="many2many_tags"
+                                   domain="[('id', 'in', parent.product_variant_ids)]" options="{'no_create': True}"/>
+                        </tree>
+                    </field>
+                    <separator string="Material QC process" invisible="1"/>
+                    <field name="material_qc_process_ids" mode="tree,form" invisible="1">
+                        <tree editable="bottom">
+                            <field name="particular_id"/>
+                            <field name="standard_type"/>
+                            <field name='standard_sample_photo' filename="standard_file_name" widget="download_link"/>
+                            <field name="standard_file_name" invisible="1"/>
+                            <field name="prohibited_type"/>
+                            <field name='prohibited_sample_photo' filename="standard_file_name" widget="download_link"/>
+                            <field name="prohibited_file_name" invisible="1"/>
+                            <field name='product_attr_id' options="{'no_create': True}"
+                                   domain="[('id', 'in', parent.attribute_ids)]" invisible="1"/>
+                            <field name='product_attr_val_id' widget="many2many_tags" options="{'no_create': True}"
+                                   invisible="1"/>
+                            <field name="product_ids" widget="many2many_tags"
+                                   domain="[('id', 'in', parent.product_variant_ids)]" options="{'no_create': True}"/>
+                        </tree>
+                    </field>
+                    <separator string="Production QC process" invisible="1"/>
+                    <field name="production_qc_process_ids" mode="tree,form" invisible="1">
+                        <tree editable="bottom">
+                            <field name="particular_id"/>
+                            <field name="standard_type"/>
+                            <field name='standard_sample_photo' filename="standard_file_name" widget="download_link"/>
+                            <field name="standard_file_name" invisible="1"/>
+                            <field name="prohibited_type"/>
+                            <field name='prohibited_sample_photo' filename="standard_file_name" widget="download_link"/>
+                            <field name="prohibited_file_name" invisible="1"/>
+                            <field name='product_attr_id' options="{'no_create': True}"
+                                   domain="[('id', 'in', parent.attribute_ids)]" invisible="1"/>
+                            <field name='product_attr_val_id' widget="many2many_tags" options="{'no_create': True}"
+                                   invisible="1"/>
+                            <field name="product_ids" widget="many2many_tags"
+                                   domain="[('id', 'in', parent.product_variant_ids)]" options="{'no_create': True}"/>
+                        </tree>
+                    </field>
+                    <separator string="Installation QC process" invisible="1"/>
+                    <field name="install_qc_process_ids" mode="tree,form" invisible="1">
+                        <tree editable="bottom">
+                            <field name="particular_id"/>
+                            <field name="standard_type"/>
+                            <field name='standard_sample_photo' filename="standard_file_name" widget="download_link"/>
+                            <field name="standard_file_name" invisible="1"/>
+                            <field name="prohibited_type"/>
+                            <field name='prohibited_sample_photo' filename="standard_file_name" widget="download_link"/>
+                            <field name="prohibited_file_name" invisible="1"/>
+                            <field name='product_attr_id' options="{'no_create': True}"
+                                   domain="[('id', 'in', parent.attribute_ids)]" invisible="1"/>
+                            <field name='product_attr_val_id' widget="many2many_tags" options="{'no_create': True}"
+                                   invisible="1"/>
+                            <field name="product_ids" widget="many2many_tags"
+                                   domain="[('id', 'in', parent.product_variant_ids)]" options="{'no_create': True}"/>
+                        </tree>
+                    </field>
+                    <separator string="Service QC process" invisible="1"/>
+                    <field name="service_qc_process_ids" mode="tree,form" invisible="1">
+                        <tree editable="bottom">
+                            <field name="particular_id"/>
+                            <field name="standard_type"/>
+                            <field name='standard_sample_photo' filename="standard_file_name" widget="download_link"/>
+                            <field name="standard_file_name" invisible="1"/>
+                            <field name="prohibited_type"/>
+                            <field name='prohibited_sample_photo' filename="standard_file_name" widget="download_link"/>
+                            <field name="prohibited_file_name" invisible="1"/>
+                            <field name='product_attr_id' options="{'no_create': True}"
+                                   domain="[('id', 'in', parent.attribute_ids)]" invisible="1"/>
+                            <field name='product_attr_val_id' widget="many2many_tags" options="{'no_create': True}"
+                                   invisible="1"/>
+                            <field name="product_ids" widget="many2many_tags"
+                                   domain="[('id', 'in', parent.product_variant_ids)]" options="{'no_create': True}"/>
+                        </tree>
+                    </field>
+
+
+                    <separator string="BEP Sale Target Qty" invisible="1"/>
+                    <field name="bep_sale_target_ids" mode="tree" invisible="1">
+
+                        <tree editable="bottom">
+
+                            <field name="year"/>
+                            <field name="target_qty"/>
+                            <field name="target_amount"/>
+                            <field name='bep_file' filename="file_name" widget="download_link"/>
+                            <field name="bep_file_name" invisible="1"/>
+                        </tree>
+                    </field>
+
+
+                </page>
+            </notebook>
+        </field>
+    </record>
+    <record id="action_ideatime_material_product" model="ir.actions.act_window">
+        <field name="name">Product</field>
+        <field name="res_model">product.template</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{'default_is_sale_item':1, 'search_default_is_sale_item':1}</field>
+        <field name="filter" eval="True"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new maunfacturer in your address book
+            </p>
+            <p>
+                Odoo helps you easily track all activities related to a manufacturer.
+            </p>
+        </field>
+    </record>
+    <record id="ideatime_product_search" model="ir.ui.view">
+        <field name="name">product.template.search</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_search_view"/>
+        <field name="arch" type="xml">
+            <filter name='consumable' position='after'>
+                <filter string="Sale Item" name="is_sale_item" domain="[('is_sale_item','=',True)]"/>
+            </filter>
+        </field>
+    </record>
+    <record id="accounting_product_tree_delete_action" model="ir.ui.view">
+            <field name="name">accounting.product.delete.action</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="account.product_template_view_tree"/>
+            <field name="arch" type="xml">
+                <tree position='attributes'>
+                    <attribute name="delete">false</attribute>
+                </tree>
+            </field>
+        </record>
+
+</odoo>

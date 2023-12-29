@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <record id="ideatime_sale_item_search" model="ir.ui.view">
+            <field name="name">ideatime.sale.item.search</field>
+            <field name="model">product.template</field>
+            <field name="arch" type="xml">
+                <search string="Search Items">
+                    <field name="name"/>
+                    <field name="barcode"/>
+                    <field name="default_code"/>
+                    <filter string="Material Sector" name="material_sector_id" domain="[]"
+                            context="{'group_by' : 'material_sector_id'}"/>
+                    <filter string="Sector" name="cate_sector_id" domain="[]"
+                            context="{'group_by' : 'cate_sector_id'}"/>
+                    <filter string="Category" name="material_category_id" domain="[]"
+                            context="{'group_by' : 'material_category_id'}"/>
+                </search>
+            </field>
+
+        </record>
+
+        <!--        Material item product action group-->
+        <record id="material_item_product_action" model="ir.actions.act_window">
+            <field name="name">Product</field>
+            <field name="res_model">product.template</field>
+
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="domain">[('is_material', '=', True),('is_return_product', '=', False)]</field>
+            <field name="context">{'search_default_group_material_category_id': 1,'search_default_material_category_id':
+                1}
+            </field>
+        </record>
+        <!--        Material item product variants action group-->
+        <record id="material_item_product_variants_action" model="ir.actions.act_window">
+            <field name="name">Product Variants</field>
+            <field name="res_model">product.product</field>
+
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="domain">[('is_material', '=', True),('is_return_product', '=', False)]</field>
+            <field name="context">{'search_default_material_category_id': 1}</field>
+        </record>
+
+        <record id="material_item_service_sector_action" model="ir.actions.act_window">
+            <field name="name">Service Sector</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">service.category.sector</field>
+
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new record
+                </p>
+            </field>
+        </record>
+
+        <record id="material_item_service_group_action" model="ir.actions.act_window">
+            <field name="name">Business Channel</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">service.category.group</field>
+
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new record
+                </p>
+            </field>
+        </record>
+
+        <!--        Sale item product action group-->
+        <record id="sale_item_product_action" model="ir.actions.act_window">
+            <field name="name">Products</field>
+            <field name="res_model">product.template</field>
+
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="domain">[('is_sale_item', '=', True),('is_return_product', '=', False)]</field>
+            <field name="context">{'search_default_group_cate_sector_id': 1,'search_default_cate_sector_id': 1}</field>
+        </record>
+        <!--        Sale item product variants action group-->
+        <record id="sale_item_product_variants_action" model="ir.actions.act_window">
+            <field name="name">Product Variants</field>
+            <field name="res_model">product.product</field>
+
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="domain">[('is_sale_item', '=', True),('is_return_product', '=', False)]</field>
+            <field name="context">{'search_default_cate_sector_id': 1}</field>
+        </record>
+        <!--        Service item product  action group-->
+        <record id="service_item_product_action" model="ir.actions.act_window">
+            <field name="name">Other Products</field>
+            <field name="res_model">product.template</field>
+
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="domain">[('is_service_item', '=', True),('is_return_product', '=', False)]</field>
+        </record>
+        <!--        Service item product variants action group-->
+        <record id="service_item_product_variants_action" model="ir.actions.act_window">
+            <field name="name">Other Product Variants</field>
+            <field name="res_model">product.product</field>
+
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="domain">[('is_service_item', '=', True),('is_return_product', '=', False)]</field>
+        </record>
+
+        <record id="manual_item_product_action" model="ir.actions.act_window">
+            <field name="name">Manual Products</field>
+            <field name="res_model">product.template</field>
+
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="domain">[('is_manual_item', '=', True)]</field>
+        </record>
+        <!--        Service item product variants action group-->
+        <record id="manual_item_product_variants_action" model="ir.actions.act_window">
+            <field name="name">Manual Product Variants</field>
+            <field name="res_model">product.product</field>
+
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="domain">[('is_manual_item', '=', True)]</field>
+        </record>
+        <record id="sale_item_service_sector_action" model="ir.actions.act_window">
+            <field name="name">Service Sector</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">service.category.sector</field>
+
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new record
+                </p>
+            </field>
+        </record>
+
+        <record id="sale_item_service_group_action" model="ir.actions.act_window">
+            <field name="name">Business Channel</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">service.category.group</field>
+
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new record
+                </p>
+            </field>
+        </record>
+
+
+        <record id="action_spec_particular_template" model="ir.actions.act_window">
+            <field name="name">Item Spec Particular Temp</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">item.spec.particular.template</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new record
+                </p>
+            </field>
+        </record>
+
+        <record id="itemspec_particular_temp_view_tree" model="ir.ui.view">
+            <field name="name">item.spec.particular.template.tree</field>
+            <field name="model">item.spec.particular.template</field>
+            <field name="arch" type="xml">
+                <tree string="Item Specification Particular">
+                    <field name="sequence" widget="handle"/>
+                    <field name="name"/>
+
+
+                </tree>
+            </field>
+        </record>
+
+        <record id="itemspec_particular_temp_view_form" model="ir.ui.view">
+            <field name="name">item.spec.particular.template.form</field>
+            <field name="model">item.spec.particular.template</field>
+            <field name="arch" type="xml">
+                <form string="Item Specification Particular Template">
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name"/>
+                            </h1>
+                        </div>
+
+                        <field name="particular_template_line" widget="item_specification_particular_one2many"
+                               mode="tree,kanban">
+                            <tree editable="bottom">
+                                <control>
+                                    <create string="Add a line"/>
+                                    <create string="Add a section"
+                                            context="{'default_display_type': 'line_title_section'}"/>
+                                    <!--  <create string="Add a note" context="{'default_display_type': 'line_note'}"/> -->
+                                </control>
+                                <field name="sequence" widget="handle"/>
+                                <field name="display_type" invisible="1"/>
+
+                                <field name='particular_id'/>
+                                <field name="name" invisible="1"/>
+                                <field name="item_spec_part_title_id" widget='particular_section_and_note_many2one'
+                                       nolabel="1" attrs="{
+                                            'required': [('display_type', '=', 'line_title_section')],
+                                        }" invisible="0"/>
+                            </tree>
+                        </field>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <!--   ==================================================================================================== -->
+        <record id="action_itemspec_title" model="ir.actions.act_window">
+            <field name="name">Item Specification Title</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">item.spec.particular.title</field>
+
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new record
+                </p>
+            </field>
+        </record>
+
+        <record id="itemspec_title_view_tree" model="ir.ui.view">
+            <field name="name">item.spec.particular.title.tree</field>
+            <field name="model">item.spec.particular.title</field>
+            <field name="arch" type="xml">
+                <tree string="Item Specification Particular">
+                    <field name="sequence" widget="handle"/>
+                    <field name="name"/>
+
+
+                </tree>
+            </field>
+        </record>
+
+        <record id="itemspec_title_view_form" model="ir.ui.view">
+            <field name="name">item.spec.particular.title.form</field>
+            <field name="model">item.spec.particular.title</field>
+            <field name="arch" type="xml">
+                <form string="Item Specification Title">
+                    <sheet>
+                        <group>
+
+                            <field name="name"/>
+                        </group>
+
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!--        Main menu root-->
+        <menuitem id="item_root" name="Item" sequence="31"/>
+
+        <!--        Material Item Menu-->
+        <menuitem id="item_material_item" name="Purchase Item"
+                  parent="item_root"/>
+
+        <menuitem id="item_material_item_product" name="Product"
+                  parent="item_material_item"
+                  action="ideatime_core.material_item_product_action"/>
+        <menuitem id="item_material_item_product_variants" name="Product Variants"
+                  parent="item_material_item"
+                  action="ideatime_core.material_item_product_variants_action"/>
+
+        <!--        Material item Config Menu-->
+        <menuitem id="item_material_item_config" name="Purchase Item Config"
+                  parent="item_root"/>
+
+        <menuitem id="menu_material_item_group" name="Group"
+                  parent="item_material_item_config"
+                  action="ideatime_core.action_material_group" sequence="1"/>
+
+        <menuitem id="menu_material_item_sector" name="Sector"
+                  parent="item_material_item_config"
+                  action="ideatime_core.action_material_sector" sequence="2"/>
+
+        <menuitem id="menu_material_item_category" name="Category"
+                  parent="item_material_item_config"
+                  action="ideatime_core.action_material_unit_particular" sequence="3"/>
+
+        <menuitem id="menu_material_item_sub_category" name="Sub Category"
+                  parent="item_material_item_config"
+                  action="ideatime_core.action_material_sub_cate_particular" sequence="4"/>
+
+        <menuitem id="menu_material_item_particular" name="Particular"
+                  parent="item_material_item_config"
+                  action="ideatime_core.action_material_particular" sequence="5"/>
+
+        <menuitem id="menu_material_item_classification" name="Classification"
+                  parent="item_material_item_config"
+                  action="ideatime_core.action_material_classification" sequence="6"/>
+
+        <!--        <menuitem id="menu_material_item_sub_grade" name="Sub Grade"-->
+        <!--                parent="item_material_item_config"-->
+        <!--                action="ideatime_core.action_material_sub_grade" sequence="7"/>-->
+
+        <menuitem id="menu_material_item_type" name="Type"
+                  parent="item_material_item_config"
+                  action="ideatime_core.action_material_type" sequence="10"/>
+        <menuitem id="menu_material_item_function" name="Function"
+                  parent="item_material_item_config"
+                  action="ideatime_core.action_material_function" sequence="11"/>
+        <menuitem id="menu_material_item_steamline" name="Steamline"
+                  parent="item_material_item_config"
+                  action="ideatime_core.action_material_option" sequence="12"/>
+
+        <!--        Sale Item Menu-->
+        <menuitem id="item_sale_item" name="Sale Item"
+                  parent="item_root"/>
+
+        <menuitem id="item_sale_item_product" name="Product"
+                  parent="item_sale_item"
+                  action="ideatime_core.sale_item_product_action"/>
+        <menuitem id="item" name="Product Variants"
+                  parent="item_sale_item"
+                  action="ideatime_core.sale_item_product_variants_action"/>
+
+        <!--        Sale Item Config Menu-->
+        <menuitem id="item_sale_item_config" name="Sale Item Config"
+                  parent="item_root"/>
+
+        <menuitem id="item_sale_item_config_g1" name="Group 1"
+                  parent="item_sale_item_config"/>
+        <menuitem id="item_sale_item_config_g1_service_group" name="Business Channel"
+                  parent="item_sale_item_config_g1"
+                  action="ideatime_core.action_gp1_service_gp"/>
+        <menuitem id="menu_itemspec_particular" name="Item Specification Particular" parent="item_sale_item_config"
+                  action="ideatime_core.action_item_spec_particular" sequence="10"/>
+        <menuitem id="menu_itemspec_title" name="Item Specification Title" parent="item_sale_item_config"
+                  action="ideatime_core.action_itemspec_title" sequence="10"/>
+        <menuitem id="menu_itemspec_particular_temp" name="Item Specification Particular Template"
+                  parent="item_sale_item_config" action="ideatime_core.action_spec_particular_template"
+                  sequence="10"/>
+        <menuitem id="item_sale_item_config_g1_service_sector" name="Service Sector"
+                  parent="item_sale_item_config_g1"
+                  action="ideatime_core.action_gp1_service_sec"/>
+
+        <menuitem id="item_sale_item_config_g2" name="Group 2"
+                  parent="item_sale_item_config"/>
+        <menuitem id="item_sale_item_config_service_line" name="Service Line"
+                  parent="item_sale_item_config_g2"
+                  action="ideatime_core.action_gp2_service_line"/>
+
+        <menuitem id="item_sale_item_config_g3" name="Group 3"
+                  parent="item_sale_item_config"/>
+        <menuitem id="item_sale_item_config_particular" name="Particular"
+                  parent="item_sale_item_config_g3"
+                  action="ideatime_core.action_gp3_service_particular"/>
+
+        <menuitem id="item_sale_item_config_g4" name="Group 4"
+                  parent="item_sale_item_config"/>
+        <menuitem id="item_sale_item_config_function" name="Function"
+                  parent="item_sale_item_config_g4"
+                  action="ideatime_core.action_gp4_service_function"/>
+
+        <menuitem id="item_sale_item_config_g5" name="Group 5"
+                  parent="item_sale_item_config"/>
+        <menuitem id="item_sale_item_config_option" name="Option"
+                  parent="item_sale_item_config_g5"
+                  action="ideatime_core.action_gp5_service_option"/>
+
+        <!--         Service Item Menu -->
+        <menuitem id="menu_service_item" name="Other"
+                  parent="item_root"/>
+        <menuitem id="service_item_product" name="Product"
+                  parent="menu_service_item"
+                  action="ideatime_core.service_item_product_action"/>
+        <menuitem id="service_item_product_variant" name="Product Variants"
+                  parent="menu_service_item"
+                  action="ideatime_core.service_item_product_variants_action"/>
+
+<!--        <menuitem id="menu_manual_item" name="Manual Item"-->
+<!--                  parent="item_root" sequence='20' groups="ideatime_core.group_manual_item_permission"/>-->
+<!--        <menuitem id="manual_item_product" name="Product"-->
+<!--                  parent="menu_manual_item"-->
+<!--                  action="ideatime_core.manual_item_product_action"/>-->
+<!--        <menuitem id="manual_item_product_variant" name="Product Variants"-->
+<!--                  parent="menu_manual_item"-->
+<!--                  action="ideatime_core.manual_item_product_variants_action"/>-->
+
+
+        <!--        Configuration Menu-->
+        <menuitem id="item_configuration" name="Configuration"
+                  parent="item_root"/>
+
+        <menuitem id="item_configuration_units_of_measure" name="Units of Measure"
+                  parent="item_configuration"
+                  action="uom.product_uom_form_action"/>
+        <menuitem id="item_configuration_units_of_measure_categories" name="Units of Measure Categories"
+                  parent="item_configuration"
+                  action="uom.product_uom_categ_form_action"/>
+        <menuitem id="item_configuration_attributes" name="Attributes"
+                  parent="item_configuration"
+                  action="product.attribute_action"/>
+        <menuitem id="item_reporting_menu" name="Reporting"
+                  parent="item_root"/>
+
+    </data>
+</odoo>

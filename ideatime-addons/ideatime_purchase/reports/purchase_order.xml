@@ -1,0 +1,670 @@
+<odoo>
+    <data>
+        <template id="purchase_order_external_layout_standard">
+
+            <div class="header">
+                <t t-foreach="docs" t-as="doc">
+
+
+                    <img src='/ideatime_core/static/src/img/ideatime_header.jpg'
+                         style="max-height: 27mm;max-width:221.5mm"/>
+                    <h6/>
+
+
+                    <table width="100%">
+                        <tr height="3mm" style="border:2px solid gray">
+                            <td style="font-family: Arial;font-size:18px;padding-left:14mm;border:2px solid gray"
+                                width="28%">
+                                <span>
+                                    <strong>Document name:</strong>
+                                </span>
+                            </td>
+                            <td width="73%" style="text-align:center;border:2px solid gray;font-size:20px;color:gray">
+                                <strong>Purchase order form</strong>
+                            </td>
+                        </tr>
+
+                        <tr height="3mm" style="border:2px solid gray">
+                            <td style="font-family: Arial;font-size:18px;color:bold;padding-left:24mm;border:2px solid gray"
+                                width="28%">
+                                <span>
+                                    <strong>Project code:</strong>
+                                </span>
+                            </td>
+                            <td width="73%" style="text-align:center;border:2px solid gray;color:gray">
+                                <strong>
+                                    <span t-field="doc.project_id.name"/>
+                                </strong>
+                            </td>
+                        </tr>
+
+                        <tr height="3mm" style="border:2px solid gray">
+                            <td style="font-family: Arial;font-size:18px;padding-left:21mm;border:2px solid gray"
+                                width="28%">
+                                <span>
+                                    <strong>Project name:</strong>
+                                </span>
+                            </td>
+                            <td width="73%" style="text-align:center;border:2px solid gray;color:gray;font-size:18px">
+                                <div style="overflow:hidden;height:8mm">
+                                    <strong>
+                                        <span t-field="doc.project_name"/>
+                                    </strong>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </t>
+
+            </div>
+
+
+            <div class="article o_report_layout_standard" t-att-data-oe-model="o and o._name"
+                 t-att-data-oe-id="o and o.id"
+                 t-att-data-oe-lang="o and o.env.context.get('lang')">
+                <t t-call="web.address_layout"/>
+                <t t-raw="0"/>
+            </div>
+
+            <div class="footer o_standard_footer">
+
+                <img src='/ideatime_core/static/src/img/Header format for Idea Time Advertising Company down.jpg'
+                     style="max-height: 46mm;max-width:221.5mm"/>
+                <div style="text-align:right;">
+                    Page<span class="page"/>/
+                    <span class="topage"/>
+                </div>
+
+
+            </div>
+        </template>
+
+        <template id="purchase_order_external_layout_so">
+
+            <t t-if="not o" t-set="o" t-value="doc"/>
+
+
+            <t t-call="ideatime_purchase.purchase_order_external_layout_standard">
+                <t t-raw="0"/>
+
+            </t>
+        </template>
+
+        <template id="report_purchaseorder">
+            <t t-call="web.html_container">
+                <t t-call="ideatime_purchase.purchase_order_external_layout_so">
+                    <t t-foreach="docs" t-as="doc">
+                        <div class="page">
+                            <style>
+                                table.table table-sm o_main_table th,tr,td
+                                {
+                                border:2px solid gray;
+
+
+                                }
+                            </style>
+
+                            <table width="100%">
+                                <thead>
+                                    <tr>
+                                        <td width="25%"/>
+                                        <td width="30%"/>
+                                        <td width="25%"/>
+                                        <td width="30%"/>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+
+                                    <tr height="25mm" style="border:1px solid #40180B;">
+                                        <td height="30mm" colspan="4"
+                                            style="border:1px solid #40180B;background-color:#40180B;text-align:center;color:white;font-size:17px">
+                                            <strong>General information</strong>
+                                        </td>
+                                    </tr>
+
+                                    <tr style="background-color:#073054;border:1px solid #073054;">
+                                        <td colspan="2" style="border:1px solid #073054;font-size:15px;color:white">
+                                            <center>
+                                                <strong>Supplier</strong>
+                                            </center>
+                                        </td>
+                                        <td colspan="2" style="font-size:15px;color:White;border:1px solid #073054">
+                                            <center>
+                                                <strong>Procurement department</strong>
+                                            </center>
+                                        </td>
+                                    </tr>
+
+                                    <tr style="border:1px solid gray;">
+                                        <td style="border:2px solid gray;padding-right:2mm;text-align:right">Supplier
+                                            name:
+                                        </td>
+                                        <td style="border:2px solid gray;padding-left:2mm">
+                                            <span t-field="doc.partner_id.name"/>
+                                        </td>
+
+                                        <td style="border:2px solid gray;padding-right:2mm;text-align:right">PIC name:
+                                        </td>
+                                        <td style="border:2px solid gray;padding-left:2mm">
+                                            <span t-field="doc.user_id.name"/>
+                                        </td>
+
+                                    </tr>
+
+                                    <tr style="border:2px solid gray">
+                                        <td height="35mm"
+                                            style=";padding-right:2mm;text-align:right;border:1px solid gray;">Address:
+                                        </td>
+                                        <td style="border:2px solid gray;padding-left:2mm">
+                                            <span t-field="doc.partner_id.street"/>
+                                        </td>
+                                        <td height="35mm"
+                                            style="border:2px solid gray;padding-right:2mm;text-align:right">ID:
+                                        </td>
+                                        <td style="border:2px solid gray;padding-left:2mm">
+                                            <span t-field="doc.user_id.custom_id"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border:2px solid gray;padding-right:2mm;text-align:right">Email:</td>
+                                        <td style="border:2px solid gray;padding-left:2mm">
+                                            <span t-field="doc.company_id.email"/>
+                                        </td>
+                                        <td style="border:2px solid gray;padding-right:2mm;text-align:right">Email:</td>
+                                        <td style="border:2px solid gray;padding-left:2mm">
+                                            <span t-field="doc.user_id.out_of_mail"/>
+                                        </td>
+                                    </tr>
+                                    <tr style="border:2px solid gray;">
+                                        <td style="border:2px solid gray;padding-right:2mm;text-align:right">Phone no:
+                                        </td>
+                                        <td style="border:2px solid gray;padding-left:2mm">
+                                            <span t-field="doc.partner_id.phone"/>
+                                        </td>
+                                        <td style="border:2px solid gray;padding-right:2mm;text-align:right">Phone no:
+                                        </td>
+                                        <td style="border:2px solid gray;padding-left:2mm">
+                                            <span t-field="doc.user_id.partner_id.phone"/>
+                                        </td>
+                                    </tr>
+                                    <tr style="background-color:#073054;border:2px solid #073054;">
+                                        <td colspan="4" style="font-size:15px;color:White;border:2px solid #073054;">
+                                            <strong>Project information</strong>
+                                        </td>
+                                    </tr>
+
+
+                                    <tr style="border:2px solid gray;">
+
+                                        <td style="border:2px solid gray;padding-right:2mm;text-align:right">Order
+                                            date:
+                                        </td>
+                                        <td style="border:2px solid gray;padding-left:2mm">
+                                            <span t-field="doc.date_order"
+                                                  t-field-options="{&quot;format&quot;: &quot;dd.MM.yyyy&quot;}"/>
+                                        </td>
+                                        <td style="border:2px solid gray;padding-right:2mm;text-align:right">PO Received
+                                            date:
+                                        </td>
+                                        <td style="border:2px solid gray;padding-left:2mm"></td>
+
+                                    </tr>
+                                    <tr style="border:2px solid gray">
+                                        <td style="border:2px solid gray;padding-right:2mm;text-align:right">PO no:</td>
+                                        <td style="border:2px solid gray;padding-left:2mm">
+                                            <span t-field="doc.name"/>
+                                        </td>
+                                        <td style="border:2px solid gray;padding-right:2mm;text-align:right">PO
+                                            Effective date:
+                                        </td>
+                                        <td style="border:2px solid gray;padding-left:2mm">
+                                            <span t-field="doc.date_planned" widget="date"/>
+                                        </td>
+
+
+                                    </tr>
+                                    <tr style="border:2px solid gray;">
+                                        <td style="border:2px solid gray;padding-right:2mm;text-align:right">Order
+                                            status:
+                                        </td>
+                                        <td style="padding-left:2mm;border:2px solid gray">
+                                            <p t-if="doc.state == 'draft'">Request for
+                                                Quotation <!-- <span t-field="o.name"/> --></p>
+                                            <p t-if="doc.state in ['sent', 'to approve']">Purchase Order</p>
+                                            <p t-if="doc.state in ['purchase', 'done']">Purchase Order Confirmation</p>
+                                            <p t-if="doc.state == 'cancel'">Cancelled Purchase Order</p>
+                                        </td>
+                                        <td style="border:2px solid gray;padding-right:2mm;text-align:right">Delivery
+                                            location:
+                                        </td>
+                                        <td style="border:2px solid gray;padding-left:2mm"></td>
+                                    </tr>
+
+
+                                </tbody>
+                            </table>
+
+
+                            <table class="table table-sm o_main_table" style="border:1px solid gray" width="100%">
+                                <tr style="border:1px solid #40180B">
+
+                                    <td style="background-color:#40180B;border:1px solid #40180B" colspan="6">
+                                        <div style="height:7mm;overflow:hidden;text-align:center;color:white;font-size:17px;">
+                                            <strong>Order agreement</strong>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr style="border:2px solid gray">
+                                    <td colspan="7" style="border:2px solid gray;">
+                                        <div style="height:5mm;overflow:hidden;font-size:14px">
+                                            <strong>1. Scope of works</strong>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr style="border:2px solid gray;background-color:#FFEDA9">
+
+                                    <t t-set="colspan" t-value="5"/>
+                                    <td style="border:2px solid gray;text-align:center">No</td>
+                                    <td style="border:2px solid gray;text-align:center">Description</td>
+                                    <td style="border:2px solid gray;text-align:center">Qty</td>
+                                    <td style="border:2px solid gray;text-align:center">Unit</td>
+                                    <td style="border:2px solid gray;text-align:center">Unit Price</td>
+                                    <td style="border:2px solid gray;text-align:center">Amount</td>
+
+                                </tr>
+                                <t t-set="i" t-value="1"/>
+                                <t t-set="a" t-value="0"/>
+
+
+                                <t t-foreach="doc.order_line" t-as="line">
+                                    <t t-set="a" t-value="a+1"/>
+
+
+                                    <tr style=" border:2px solid gray;">
+
+                                        <td style="border:2px solid gray;text-align:right">
+                                            <span t-esc="i"></span>.
+                                            <span t-esc="a"></span>
+
+                                        </td>
+
+                                        <td style=" border:2px solid gray;">
+                                            <span>Item name:</span>
+                                            <span t-field="line.product_id.name"/>
+                                            <br/>
+                                            Item code:
+                                            <span t-field="line.product_id.barcode"/>
+                                            <br/>
+
+                                            <span>Variants:</span>
+                                            <br/>
+                                            <t t-foreach="line.product_id.product_template_attribute_value_ids" t-as="al">
+                                                <div style="text-align:left"><!-- <ul style="height:10px;padding-left:5mm;text-align:left"> -->
+                                                    <li><span t-field="al.attribute_id.name"/>:
+                                                        <span t-field="al.name"/>
+                                                        <br/>
+                                                    </li>
+                                                    <!--  </ul> -->
+                                                </div>
+                                            </t>
+                                            [
+                                            <t t-if="line.width_uom">W
+                                                <span t-esc="'%.2f'% line.width"/>
+                                                <span t-field="line.width_uom"/>
+                                            </t>
+                                            <t t-if="line.height_uom">* H
+                                                <span t-esc="'%.2f'% line.height"/>
+                                                <span t-field="line.height_uom"/>
+                                            </t>
+                                            <t t-if="line.length_uom">* L
+                                                <span t-esc="'%.2f'% line.length"/>
+                                                <span t-field="line.length_uom"/>
+                                            </t>
+                                            ]
+                                            <t t-if="line.pcs_uom">* Unit
+                                                <span t-esc="'%.2f'% line.Pcs"/>
+                                                <span t-field="line.pcs_uom"/>
+                                            </t>
+                                            <br/>
+                                            <!--  Variants:<br/>
+
+                                          <t t-foreach="line.product_id.attribute_line_ids" t-as="l"><span t-field="l.attribute_id.name"/><span> - </span><t t-foreach="l.value_ids" t-as="value"><span t-field="value.name"/><span>, </span></t><br/></t> -->
+
+
+                                        </td>
+
+                                        <td style=" border:2px solid gray;text-align:center">
+                                            <span t-field="line.product_qty"/>
+
+                                        </td>
+
+                                        <td style=" border:2px solid gray;">
+                                            <span t-field="line.product_uom"/>
+                                        </td>
+
+                                        <td style=" border:2px solid gray;text-align:center">
+                                            <span t-esc="round(line.price_unit)"/>
+                                        </td>
+                                        <td style="border:2px solid gray;text-align:center">
+                                            <span t-esc="round(line.price_subtotal)"/>
+                                        </td>
+
+                                    </tr>
+                                </t>
+
+                                <tr>
+                                    <td style="border:2px solid gray " height="2%" colspan="4" class="text-right">
+                                        <strong>Total amount:</strong>
+                                    </td>
+                                    <td style="border-bottom:2px solid gray;border-right:0px solid white;text-align:left "
+                                        height="2%">
+                                        <span t-field="doc.currency_id"/>
+                                    </td>
+                                    <td style="border-bottom:2px solid gray;border-right:2px solid gray;text-align:right ">
+                                        <span t-esc="round(doc.amount_untaxed)"/>
+
+                                    </td>
+                                </tr>
+                                <tr style="border:2px solid gray ">
+
+                                    <td style="border:2px solid gray" colspan="4" class="text-right">
+                                        <strong>Commercial tax 5%</strong>
+                                    </td>
+                                    <td style="border-bottom:2px solid gray;border-right:0px solid white;text-align:left "
+                                        height="2%">
+                                        <span t-field="doc.currency_id"/>
+                                    </td>
+                                    <td style="border-bottom:2px solid gray;border-right:2px solid gray;text-align:right ">
+                                        <span t-esc="round(doc.amount_tax)"/>
+                                    </td>
+
+                                </tr>
+
+                                <tr style="border:2px solid gray " class="border-black o_total">
+                                    <td style="border:2px solid gray" colspan="4" class="text-right">
+                                        <strong>Grand total:</strong>
+                                    </td>
+                                    <td style="border-bottom:2px solid gray;border-right:0px solid white;text-align:left ">
+
+
+                                        <span t-field="doc.currency_id"/>
+                                    </td>
+                                    <td style="border-bottom:2px solid gray;border-right:2px solid gray;text-align:right ">
+                                        <span t-esc="round(doc.amount_total)"/>
+                                    </td>
+                                </tr>
+
+
+                                <tr style="border:2px solid gray">
+                                    <td colspan="6" style="border:2px solid gray;">
+                                        <div style="height:5mm;overflow:hidden;font-size:14px">
+                                            <strong>2. Agreement type</strong>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr style="border:2px solid gray">
+                                    <td colspan="6" style="border:2px solid gray">
+                                        <span t-field="doc.agreement_period_note"/>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td colspan="6" style="border:2px solid gray;">
+                                        <div style="height:5mm;overflow:hidden;font-size:14px">
+                                            <strong>3. Date of Commemcement</strong>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr style="border:2px solid gray">
+                                    <td colspan="3" style="border-right:0px solid white">
+                                        Start Date:
+                                        <span t-field="doc.commencement_start_date"/>
+                                    </td>
+                                    <td colspan="3" style="border-left:0px solid white;border-right:2px solid gray">
+                                        End Date:
+                                        <span t-field="doc.commencement_end_date"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="6" style="border:2px solid gray;">
+                                        <div style="height:5mm;overflow:hidden;font-size:14px">
+                                            <strong>4. Currency</strong>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr style="border:2px solid gray">
+                                    <td colspan="6" style="border:2px solid gray">
+                                        <span t-field="doc.currency_note"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="6" style="border:2px solid gray;">
+                                        <div style="height:5mm;overflow:hidden;font-size:14px">
+                                            <strong>5. Price and Fees</strong>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr style="border:2px solid gray">
+                                    <td colspan="6" style="border:2px solid gray">
+                                        <span t-field="doc.price_fee_note"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="6" style="border:2px solid gray;">
+                                        <div style="height:5mm;overflow:hidden;font-size:14px">
+                                            <strong>6. Taxation</strong>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr style="border:2px solid gray">
+                                    <td colspan="6" style="border:2px solid gray">
+                                        <span t-field="doc.taxation_note"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="6" style="border:2px solid gray;">
+                                        <div style="height:5mm;overflow:hidden;font-size:14px">
+                                            <strong>7. Terms of Payment</strong>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr style="border:2px solid gray">
+                                    <td colspan="6" style="border:2px solid gray">
+                                        <span t-field="doc.payment_note"/>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td colspan="6" style="border:2px solid gray;">
+                                        <div style="height:5mm;overflow:hidden;font-size:14px">
+                                            <strong>8 Acceptance</strong>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr style="border:2px solid gray">
+                                    <td colspan="6" style="border:2px solid gray">
+                                        <span t-field="doc.acceptance_note"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="6" style="border:2px solid gray;">
+                                        <div style="height:5mm;overflow:hidden;font-size:14px">
+                                            <strong>9. Obilgation</strong>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr style="border:2px solid gray">
+                                    <td colspan="6" style="border:2px solid gray">
+                                        <span t-field="doc.obligation_note"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="6" style="border:2px solid gray;">
+                                        <div style="height:5mm;overflow:hidden;font-size:14px">
+                                            <strong>10. Liability of breach of contract</strong>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr style="border:2px solid gray">
+                                    <td colspan="6" style="border:2px solid gray">
+                                        <span t-field="doc.contract_note"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="6" style="border:2px solid gray;">
+                                        <div style="height:5mm;overflow:hidden;font-size:14px">
+                                            <strong>11. Termination</strong>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr style="border:2px solid gray">
+                                    <td colspan="6" style="border:2px solid gray">
+                                        <span t-field="doc.termination_note"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="6" style="border:2px solid gray;">
+                                        <div style="height:5mm;overflow:hidden;font-size:14px">
+                                            <strong>12. Arbitration</strong>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr style="border:2px solid gray">
+                                    <td colspan="6" style="border:2px solid gray">
+                                        <span t-field="doc.arbitration_note"/>
+                                    </td>
+                                </tr>
+                            </table>
+
+
+                            <div class="clearfix">
+
+
+                                <div style="height:25mm;padding-top:10mm;background-color:white;overflow:hidden;">
+                                    <hr style="border:4px solid orange"/>
+                                </div>
+
+
+                                <table class="table table-sm" width='100%' style="border:2px solid white">
+                                    <tr style="border:2px solid white">
+                                        <td style="border:2px solid white">
+                                            <br/>
+                                            <br/>
+                                            <strong>
+                                                <span style="padding-left:5mm;font-size:18px:color:gray">Supplier</span>
+                                            </strong>
+                                            <br/>
+                                            <br/>
+
+                                            <span style="padding-left:5mm">
+                                                <strong>Signature: ___________________________</strong>
+                                            </span>
+                                            <br/>
+                                            <span style="padding-left:5mm">
+                                                <strong>PIC name: ___________________________</strong>
+                                            </span>
+                                            <br/>
+                                            <span style="padding-left:8mm">
+                                                <strong>NRC no: ____________________________</strong>
+                                            </span>
+                                            <br/>
+                                            <span style="padding-left:5mm">
+                                                <strong>Phone no: ____________________________</strong>
+                                            </span>
+                                            <br/>
+                                            <span style="padding-left:14mm">
+                                                <strong>Date: ____________________________</strong>
+                                            </span>
+                                            <br/>
+                                            <span style="padding-left:7mm">
+                                                <strong>Remark: ____________________________</strong>
+                                            </span>
+                                            <br/>
+                                            <span style="padding-left:27mm">
+                                                <strong>____________________________</strong>
+                                            </span>
+                                        </td>
+                                        <td width="20mm" style="border-right:2px solid white"></td>
+                                        <td width="20mm" style="border-right:2px solid gray"></td>
+                                        <td style="border:2px solid white">
+
+                                            <br/>
+                                            <br/>
+                                            <span style="padding-left:25mm">
+                                                <strong>Procurement manager</strong>
+                                            </span>
+                                            <br/>
+                                            <br/>
+                                            <span style="padding-left:25mm">
+                                                <strong>Signature: _________________________</strong>
+                                            </span>
+                                            <br/>
+                                            <span style="padding-left:25mm">
+                                                <strong>PIC name: _________________________</strong>
+                                            </span>
+                                            <br/>
+                                            <span style="padding-left:40mm">
+                                                <strong>ID: __________________________</strong>
+                                            </span>
+                                            <br/>
+                                            <span style="padding-left:25mm">
+                                                <strong>Phone no: _________________________</strong>
+                                            </span>
+                                            <br/>
+                                            <span style="padding-left:35mm">
+                                                <strong>Date: _________________________</strong>
+                                            </span>
+                                            <br/>
+
+                                            <span style="padding-left:27mm">
+                                                <strong>Remark: _________________________</strong>
+                                            </span>
+                                            <br/>
+                                            <span style="padding-left:47mm">
+                                                <strong>_________________________</strong>
+                                            </span>
+
+                                        </td>
+
+                                    </tr>
+                                </table>
+
+
+                            </div>
+
+
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+        <record id="purchase.action_report_purchase_order" model="ir.actions.report">
+            <field name="name">Purchase Order</field>
+            <field name="model">purchase.order</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">ideatime_purchase.report_purchaseorder</field>
+            <field name="report_file">ideatime_purchase.report_purchaseorder</field>
+            <field name="print_report_name">(object.state in ('draft', 'sent') and 'Purchase Order - %s' % (object.name)
+                or
+                'Purchase Order - %s' % (object.name))
+            </field>
+            <field name="binding_model_id" ref="purchase.model_purchase_order"/>
+            <field name="binding_type">report</field>
+        </record>
+        <record id="purchase_order_a4" model="report.paperformat">
+            <field name="name">Purchase Order Report A4</field>
+            <field name="format">A4</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">45</field>
+            <field name="margin_bottom">15</field>
+            <field name="margin_left">7</field>
+            <field name="margin_right">7</field>
+            <field name="header_spacing">36</field>
+            <field name="report_ids" eval="[(4, ref('purchase.action_report_purchase_order'))]"/>
+        </record>
+
+    </data>
+</odoo>

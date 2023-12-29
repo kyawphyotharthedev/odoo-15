@@ -1,0 +1,142 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <record model="ir.module.category" id="module_category_ideatime">
+            <field name="name">Idea Time</field>
+            <field name="description"></field>
+            <field name="sequence">99</field>
+        </record>
+
+        <record id="group_ideatime_user" model="res.groups">
+            <field name="name">User</field>
+            <field name="category_id" ref="module_category_ideatime"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+            <field name="comment">this user will have access to read</field>
+        </record>
+
+        <record id="group_ideatime_manager" model="res.groups">
+            <field name="name">Manager</field>
+            <field name="category_id" ref="module_category_ideatime"/>
+            <field name="implied_ids" eval="[(4, ref('group_ideatime_user'))]"/>
+            <field name="comment">this user will have access to create</field>
+        </record>
+
+
+        <record id="group_mark_as_to_do" model="res.groups">
+            <field name="name">Inventory Mark as To Do</field>
+        </record>
+
+
+        <record id="group_validate" model="res.groups">
+            <field name="name">Inventory Validate</field>
+        </record>
+        <record id="ideatime_group_create_deliver" model="res.groups">
+            <field name="name">Create Delivery</field>
+        </record>
+<!--        <record id="ideatime_project_implement_approve" model="res.groups">-->
+<!--            <field name="name">Project Implement Approve</field>-->
+<!--        </record>-->
+        <record id="ideatime_order_agreement" model="res.groups">
+            <field name="name">Order Agreement</field>
+        </record>
+
+        <record model="res.groups" id="invisible_purchase_product">
+            <field name="name">Invisible Purchase Product</field>
+        </record>
+
+        <record model="res.groups" id="invisible_purchase_product_variants">
+            <field name="name">Invisible Purchase Product Variants</field>
+        </record>
+                <record model="ir.ui.menu" id="purchase.product_product_menu">
+                    <field name="groups_id" eval="[(6,0,[ref('invisible_purchase_product_variants')])]"/>
+                </record>
+
+        <record id="group_service_sector_classification_user" model="res.groups">
+            <field name="name">Product Limit By Service Sector</field>
+        </record>
+
+        <record id="ideatime_rule_sale_item" model="ir.rule">
+            <field name="name">Sale Item Product By User</field>
+            <field ref="product.model_product_template" name="model_id"/>
+            <field name="domain_force">['|',('is_sale_item','=',False),('cate_sector_id','in',[c.id for c in
+                user.service_sector_ids])]
+            </field>
+            <field name="groups" eval="[(4, ref('group_service_sector_classification_user'))]"/>
+        </record>
+
+
+        <record id='group_budget_project_check' model='res.groups'>
+            <field name="name">Budget Project Check</field>
+        </record>
+        <record id='group_budget_finance_check' model='res.groups'>
+            <field name="name">Budget Finance Check</field>
+        </record>
+        <record id='group_budget_approve' model='res.groups'>
+            <field name="name">Budget Approve</field>
+        </record>
+        <record id='group_budget_close' model='res.groups'>
+            <field name="name">Budget Close</field>
+        </record>
+        <record id='group_budget_cancel' model='res.groups'>
+            <field name="name">Budget Cancel</field>
+        </record>
+        <record id='group_budget_finance_cancel' model='res.groups'>
+            <field name="name">Budget Finance Cancel</field>
+        </record>
+        <record id='group_budget_set_to_finance_check' model='res.groups'>
+            <field name="name">Budget Set To Finance Checking</field>
+        </record>
+        <!-- ==========================Project Expense Clinet============= -->
+
+
+<!--        <record id='group_pec_project_check' model='res.groups'>-->
+<!--            <field name="name">Project Expense Client Project Check</field>-->
+<!--        </record>-->
+<!--        <record id='group_pec_finance_check' model='res.groups'>-->
+<!--            <field name="name">Project Expense Client Finance Check</field>-->
+<!--        </record>-->
+<!--        <record id='group_pec_approve' model='res.groups'>-->
+<!--            <field name="name">Project Expense Client Approve</field>-->
+<!--        </record>-->
+        <!-- ===========================================Exp Sub  -->
+
+<!--        <record id='group_exp_sub_project_check' model='res.groups'>-->
+<!--            <field name="name">Expense Sub Project Check</field>-->
+<!--        </record>-->
+<!--        <record id='group_exp_sub_finance_check' model='res.groups'>-->
+<!--            <field name="name">Expense Sub Finance Check</field>-->
+<!--        </record>-->
+<!--        <record id='group_exp_sub_approve' model='res.groups'>-->
+<!--            <field name="name">Expense Sub Approve</field>-->
+<!--        </record>-->
+<!--        <record id='group_exp_sub_finance_check' model='res.groups'>-->
+<!--            <field name="name">Expense Sub Finance Check</field>-->
+<!--        </record>-->
+
+        <!-- To show and hide for Customer Region, City, Township menu -->
+        <record id='group_customer_address' model='res.groups'>
+            <field name="name">Customer Address</field>
+        </record>
+        <!-- To show and hide for Project Budget Applicable Plan page -->
+        <record id='group_project_budget_applicable_plan' model='res.groups'>
+            <field name="name">Project Budget Applicable Plan</field>
+        </record>
+        <record id='group_purchase_item_permission' model='res.groups'>
+            <field name="name">Purchase Item</field>
+        </record>
+        <record id='group_sale_item_permission' model='res.groups'>
+            <field name="name">Sale Item</field>
+        </record>
+<!--        <record id='group_manual_item_permission' model='res.groups'>-->
+<!--            <field name="name">Manual Item Menu</field>-->
+<!--        </record>-->
+        <record id='group_invoice_report' model='res.groups'>
+            <field name="name">Invoice Report</field>
+        </record>
+        <record id='group_all_project_user' model='res.groups'>
+            <field name="name">Project User Menu</field>
+        </record>
+
+
+    </data>
+</odoo>

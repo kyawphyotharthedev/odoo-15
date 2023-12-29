@@ -1,0 +1,12 @@
+<odoo>
+    <record id="account_payment_register_form_inherit" model="ir.ui.view">
+        <field name="name">ideatime.payment.register.form.inherit</field>
+        <field name="model">account.payment.register</field>
+        <field name="inherit_id" ref="account.view_account_payment_register_form"/>
+        <field name="arch" type="xml">
+            <field name="communication" position="after">
+                <field name="project_id" string="Project"/>
+            </field>
+        </field>
+    </record>
+</odoo>

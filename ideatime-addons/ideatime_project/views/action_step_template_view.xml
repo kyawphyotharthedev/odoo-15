@@ -1,0 +1,70 @@
+<odoo>
+    <data>
+    	<record id="action_actionstep_template" model="ir.actions.act_window">
+            <field name="name">Action Step Template</field>
+            <field name="res_model">actionstep.template</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Create a new record
+              </p>
+            </field>
+        </record>
+
+        <record id="action_step_template_view_tree" model="ir.ui.view">
+            <field name="name">action.step.template.tree</field>
+            <field name="model">actionstep.template</field>
+            <field name="arch" type="xml">
+                <tree string="Action Step Template">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_action_step_template_form" model="ir.ui.view">
+            <field name="name">action.step.template.form</field>
+            <field name="model">actionstep.template</field>
+            <field name="arch" type="xml">
+                <form string="Action Step Template">
+                    <sheet>
+                        <group>
+                            <group>
+                         <div class="oe_title">
+                        <label for="name" class="oe_edit_only"/>
+                        <h1>
+                            <field name="name" string="Name"/>
+                        </h1>
+                    </div></group></group>
+                       <group>
+                         <field name="actionstep_line_id" nolabel="1">
+                        <tree string="Action Step Template Line" editable="bottom">
+                          <field name="name"/>
+                       <!--    <field name="deadline"/> -->
+                          <field name="actionstep_task_id" widget="many2many_tags"/>
+
+                        </tree>
+                    </field>
+                </group>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+            <record id="action_actionstep_task" model="ir.actions.act_window">
+            <field name="name">Action Step Task</field>
+            <field name="res_model">actionstep.task.line</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Create a new record
+              </p>
+            </field>
+        </record>
+
+
+
+
+        <menuitem id="menu_actionstep_template" name="Action Step Template" parent="project.menu_project_config" sequence="30" action="action_actionstep_template"/>
+        <menuitem id="menu_actionstep_task" name="Action Step Tasks" parent="project.menu_project_config" sequence="31" action="action_actionstep_task"/>
+    </data>
+</odoo>

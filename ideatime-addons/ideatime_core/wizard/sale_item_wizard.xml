@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="sale_item_report_wizard_view" model="ir.ui.view">
+            <field name="name">Sale Item Report</field>
+            <field name="model">saleitem.report</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <group>
+                            <field name="is_sale_item"/>
+                            <field name="product_variant"/>
+                            <field name="cate_sector_id"/>
+                        </group>
+                    </group>
+
+                    <footer>
+                        <button name="print_pdf_report" icon="fa-download" type="object"
+                                default_focus="1" string="Print" class="oe_highlight"/>
+                        <button name="print_report" icon="fa-download" type="object"
+                                default_focus="1" string="Print XLS" class="oe_highlight"/>
+                        <button string="Cancel" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+        <record id="saleitem_report_xlsx_action" model="ir.actions.report">
+            <field name="name">Sale Item Xlsx Report</field>
+            <field name="model">saleitem.report</field>
+            <field name="report_type">xlsx</field>
+            <field name="report_name">ideatime_core.saleitem_report_xlsx</field>
+            <field name="report_file">ideatime_core.saleitem_report_xlsx</field>
+        </record>
+        <record id="action_sale_item_report" model="ir.actions.report">
+            <field name="name">Sale Item Report</field>
+            <field name="model">saleitem.report</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">ideatime_core.sale_item_report_template</field>
+            <field name="report_file">ideatime_core.sale_item_report_template</field>
+        </record>
+
+        <record id="sale_item_report_a4" model="report.paperformat">
+            <field name="name">Sale Item Report A4</field>
+            <field name="format">A4</field>
+            <field name="orientation">Landscape</field>
+            <field name="margin_top">48</field>
+            <field name="margin_bottom">15</field>
+            <field name="margin_left">5</field>
+            <field name="margin_right">5</field>
+            <field name="header_spacing">43</field>
+            <field name="report_ids" eval="[(4, ref('ideatime_core.action_sale_item_report'))]"/>
+        </record>
+
+        <record id="wizard_sale_item_report_id" model="ir.actions.act_window">
+            <field name="name">Sale Item Report</field>
+            <field name="res_model">saleitem.report</field>
+            <field name="view_mode">form</field>
+            <field name="context">{}</field>
+            <field name="view_id" ref="sale_item_report_wizard_view"/>
+            <field name="target">new</field>
+        </record>
+
+        <!-- Reporting menu -->
+
+
+        <menuitem id="menu_sale_item_report"
+                  name="Sale Item Report"
+                  action="wizard_sale_item_report_id"
+                  parent="item_reporting_menu"
+                  sequence="60"/>
+    </data>
+</odoo>
+
+

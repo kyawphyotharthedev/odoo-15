@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="ideatime_product_configurator_view_form" model="ir.ui.view">
+        <field name="name">ideatime.product.configurator.view.form</field>
+        <field name="model">ideatime.product.configurator</field>
+        <field name="arch" type="xml">
+            <form js_class="ideatime_product_configurator_form">
+                <group>
+                    <field name='product_type'/>
+                    <field name='cost_type_id' options="{'no_create': True}"  class="oe_product_configurator_cost_type_id"
+                           attrs="{'invisible': [('product_type', '==', 'saleitem')]}"/>
+                    <field name='cate_group_id' options="{'no_create': True}"
+                           attrs="{'invisible': [('product_type', '!=', 'saleitem')]}"
+                           placeholder="(Must have to fill.....)"/>
+                    <field name='cate_sector_id' options="{'no_create': True}" domain="[('left_id','=',cate_group_id)]"
+                           attrs="{'invisible': [('product_type', '!=', 'saleitem')]}"/>
+                    <field name='cate_line_id' options="{'no_create': True}" domain="[('left_id','=',cate_sector_id)]"
+                           attrs="{'invisible': [('product_type', '!=', 'saleitem')]}"/>
+                    <field name='cate_particular_id' options="{'no_create': True}"
+                           domain="[('left_id','=',cate_line_id)]"
+                           attrs="{'invisible': [('product_type', '!=', 'saleitem')]}"/>
+                    <field name='cate_function_id' options="{'no_create': True}"
+                           domain="[('left_id','=',cate_particular_id)]"
+                           attrs="{'invisible': [('product_type', '!=', 'saleitem')]}"/>
+                    <field name='cate_option_id' options="{'no_create': True}"
+                           domain="[('left_id','=',cate_function_id)]"
+                           attrs="{'invisible': [('product_type', '!=', 'saleitem')]}"/>
+
+                    <field name="group_id" attrs="{'invisible': [('product_type', '!=', 'material')]}"/>
+                    <field name="sector_id" options="{'no_create': True}" domain="[('left_id','=',group_id)]"
+                           attrs="{'invisible': [('product_type', '!=', 'material')]}"/>
+                    <field name="categ_id" options="{'no_create': True}" domain="[('left_id','=',sector_id)]"
+                           attrs="{'invisible': [('product_type', '!=', 'material')]}"/>
+                    <field name="subcateg_id" options="{'no_create': True}" domain="[('left_id','=',categ_id)]"
+                           attrs="{'invisible': [('product_type', '!=', 'material')]}"/>
+                    <field name="particular_id" options="{'no_create': True}" domain="[('left_id','=',subcateg_id)]"
+                           attrs="{'invisible': [('product_type', '!=', 'material')]}"/>
+                    <field name="classification_id" options="{'no_create': True}"
+                           domain="[('left_id','=',particular_id)]"
+                           attrs="{'invisible': [('product_type', '!=', 'material')]}"/>
+                    <field name="type_id" options="{'no_create': True}" domain="[('left_id','=',classification_id)]"
+                           attrs="{'invisible': [('product_type', '!=', 'material')]}"/>
+                    <field name="function_id" options="{'no_create': True}" domain="[('left_id','=',type_id)]"
+                           attrs="{'invisible': [('product_type', '!=', 'material')]}"/>
+                    <field name="streamline_id" options="{'no_create': True}" domain="[('left_id','=',function_id)]"
+                           attrs="{'invisible': [('product_type', '!=', 'material')]}"/>
+
+                    <field name='selectable_product_ids' invisible="1"/>
+                    <field name="product_template_id" class="oe_product_configurator_product_template_id"
+                           options="{'no_create': True}" domain="[('id','in',selectable_product_ids)]"
+                           string="Item Name"/>
+                </group>
+                <footer>
+                    <button string="Add" class="btn-primary o_sale_product_configurator_add disabled" special="add"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

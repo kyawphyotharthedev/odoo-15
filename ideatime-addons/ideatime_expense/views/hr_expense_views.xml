@@ -1,0 +1,38 @@
+<odoo>
+    <data>
+
+    <record id="hr_expense_view_form_inherit_ideatime_expense" model="ir.ui.view">
+            <field name="name">hr.expense.view.form.inherit.ideatime.expense</field>
+            <field name="model">hr.expense</field>
+            <field name="inherit_id" ref="hr_expense.hr_expense_view_form"/>
+            <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+
+<!--                    <div class="oe_button_box" name="button_box">-->
+                         <button name="%(action_budget_expense_overview_report)d" type="action" class="oe_stat_button" icon="fa-history" >
+                                <div class="o_field_widget o_stat_info">
+                                    <span class="o_stat_text">Budget<br/>Overview</span>
+                                </div>
+                            </button>
+<!--                    </div>-->
+
+                </xpath>
+             <xpath expr="//field[@name='tax_ids']" position="after">
+                 <field name="project_id" options="{'no_open':False,'no_create':True,'no_create_edit':False}"
+                                       domain="[('proj_type_stage_id', '!=', 'Pending')]"/>
+
+                                <field name="budget_id" options="{'no_open':False,'no_create':True,'no_create_edit':False}"
+                                       domain="[('project_id', '=', project_id)]"/>
+                                <field name="batch_id" options="{'no_open':False,'no_create':True,'no_create_edit':False}"/>
+             </xpath>
+                <field name="product_id" posistion="replace">
+                    <field name="product_id" required="1" attrs="{'readonly': [('sheet_is_editable', '=', False)]}" />
+                </field>
+
+            </field>
+        </record>
+
+
+
+</data>
+</odoo>

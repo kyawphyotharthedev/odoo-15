@@ -1,0 +1,265 @@
+<odoo>
+    <data>
+        <record id="education_inherit" model="ir.ui.view">
+            <field name="name">education.inherit</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='category_ids']" position="after">
+                    <group>
+                        <group>
+                            <field name="employee_id" placeholder="Enter employee ID"/>
+                        </group>
+                    </group>
+                </xpath>
+                <xpath expr="//page[@name='personal_information']" position="after">
+                    <!-- Personal Information page -->
+                    <page string="Personal Information">
+                        <group string="Part 1. Personal Data">
+                            <group>
+                                <field name="department_id"/>
+                                <field name="join_date"/>
+                                <field name="current_position"/>
+                                <field name="father_name"/>
+                                <field name="birthday"/>
+                                <field name="place_of_birth" groups="hr.group_hr_user"/>
+                            </group>
+                            <group>
+                                <field name="gender"/>
+                                <field name="country_id" options='{"no_open": True, "no_create": True}'/>
+                                <field name="identification_id" groups="hr.group_hr_user"/>
+                                <field name="religion"/>
+                                <field name="contact_number"/>
+                                <label for="street" string="Home Address"/>
+                                <div class="o_address_format">
+                                    <div>
+                                        <b>Home Address:</b>
+                                    </div>
+                                    <field name="street" placeholder="Street..." class="o_address_street"/>
+                                    <field name="street2" placeholder="Street 2..." class="o_address_street"/>
+                                    <field name="city" placeholder="City" class="o_address_city"/>
+                                    <field name="state_id" class="o_address_state" placeholder="State"
+                                           options='{"no_open": True}'
+                                           context="{'country_id': country_id, 'zip': zip}"/>
+                                    <field name="zip" placeholder="ZIP" class="o_address_zip"/>
+                                    <field name="country_id" placeholder="Country" class="o_address_country"
+                                           options='{"no_open": True, "no_create": True}'/>
+                                </div>
+
+                            </group>
+                        </group>
+
+                        <form string="Education">
+                            <h2>Part 2. Education</h2>
+                            <field name="education_lines">
+                                <tree editable="bottom">
+                                    <field name="time_from"/>
+                                    <field name="time_to"/>
+                                    <field name="name_of_scu"/>
+                                    <field name="location_of_scu"/>
+                                    <field name="major"/>
+                                    <field name="academic_dd"/>
+                                </tree>
+                            </field>
+                        </form>
+
+                        <form string="Training">
+                            <h2>Part 3. Training</h2>
+                            <field name="training_lines">
+                                <tree editable="bottom">
+                                    <field name="time_from"/>
+                                    <field name="time_to"/>
+                                    <field name="training_institution"/>
+                                    <field name="training_place"/>
+                                    <field name="training_course"/>
+                                    <field name="certificate"/>
+                                </tree>
+                            </field>
+                        </form>
+
+                        <from string="Work Experience">
+                            <h2>Part 4. Work Experience</h2>
+                            <field name="work_experience_lines">
+                                <tree editable="bottom">
+                                    <field name="time_from"/>
+                                    <field name="time_to"/>
+                                    <field name="name_of_company"/>
+                                    <field name="position"/>
+                                    <field name="main_responsibilities"/>
+                                    <field name="reason_for_registration"/>
+                                </tree>
+                            </field>
+                        </from>
+
+                        <form string="Personality/Characters/Hobbies/Self Assessment">
+                            <h2>Part 5. Personality/Characters/Hobbies/Self Assessment</h2>
+                            <field name="pchs_assessment_lines">
+                                <tree editable="bottom">
+                                    <field name="personality_characters"/>
+                                    <field name="hobbies"/>
+                                    <field name="self_assessment"/>
+                                </tree>
+                            </field>
+                        </form>
+
+                        <form string="Family Data">
+                            <h2>Part 6. Family Data</h2>
+                            <field name="family_data_lines">
+                                <tree editable="bottom">
+                                    <field name="marital_status"/>
+                                    <field name="spouse_name"/>
+                                    <field name="spouse_nrc_no"/>
+                                    <field name="spouse_occupation"/>
+                                    <field name="general_information_of_children"/>
+                                    <field name="emergency_contact"/>
+                                </tree>
+                            </field>
+                        </form>
+
+                        <form string="Basic Office Software/Hardware Skill">
+                            <h2>Part 7.Basic Office Software/Hardware Skill</h2>
+                            <field name="bosh_skill_lines">
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                    <field name="knowledge"/>
+                                    <field name="skill"/>
+                                </tree>
+                            </field>
+                        </form>
+                    </page>
+
+                    <!-- Performance Record page -->
+                    <page string="Performance Record">
+                        <form string="Languages ( 4 Skills )">
+                            <h2>Part 8. Languages ( 4 Skills )</h2>
+                            <field name="language_4skills_lines">
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                    <field name="speaking"/>
+                                    <field name="reading"/>
+                                    <field name="writing"/>
+                                </tree>
+                            </field>
+                        </form>
+
+                        <form string="Speciality Skill Assessment">
+                            <h2>Part 7.Speciality Skill Assessment</h2>
+                            <field name="speciality_skill_assessment_lines">
+                                <tree editable="bottom">
+                                    <field name="business_skill"/>
+                                    <field name="knowledge"/>
+                                    <field name="skill"/>
+                                </tree>
+                            </field>
+                            <div>
+                                <b>Level 0 :Has Basic Knowledge and needs other's guidance at Work
+                                    <br/>
+                                    Level 1: Has Specilalized knowledge which is applied in practice and is able to
+                                    fullfill tasks independently.
+                                    <br/>
+                                    Level 2: Knows how to conduct independent opeation and is able to properly guide
+                                    others at work.
+                                    <br/>
+                                    Level 3 : Has profound and extensive specialized knowledge and is able to provide
+                                    proper expert guidance and give correct expert opinions.
+                                    <br/>
+                                </b>
+                            </div>
+                        </form>
+
+                        <form string="Employee History">
+                            <h2>Part 8.Employee History</h2>
+                            <field name="employee_history_lines">
+                                <tree editable="bottom">
+                                    <field name="time_from"/>
+                                    <field name="time_to"/>
+                                    <field name="position"/>
+                                    <field name="location"/>
+                                    <field name="main_responsibility"/>
+                                </tree>
+                            </field>
+                        </form>
+
+                        <form string="APPRAISAL RECORD">
+                            <h2>Part 9.APPRAISAL RECORD</h2>
+                            <field name="appraisal_record_lines">
+                                <tree editable="bottom">
+                                    <field name="time_from"/>
+                                    <field name="time_to"/>
+                                    <field name="appraisal_result"/>
+                                    <field name="supervisor_remark"/>
+                                </tree>
+                            </field>
+                        </form>
+
+                        <form string="PERFORMANCE MANAGEMENT RECORD">
+                            <h2>Part 10.PERFORMANCE MANAGEMENT RECORD</h2>
+                            <field name="performance_management_record_lines">
+                                <tree editable="bottom">
+                                    <field name="time_from"/>
+                                    <field name="time_to"/>
+                                    <field name="position_responsibilities"/>
+                                    <field name="extra_contribution"/>
+                                    <field name="detail_work_achievements"/>
+                                </tree>
+                            </field>
+                        </form>
+
+                        <form string="EMPLOYEES SELF-ASSESSMENT RECORD ( Result Base )">
+                            <h2>Part 11.EMPLOYEES SELF-ASSESSMENT RECORD ( Result Base )</h2>
+                            <field name="employee_self_assessment_management_record_lines">
+                                <tree editable="bottom">
+                                    <field name="time_from"/>
+                                    <field name="time_to"/>
+                                    <field name="position_responsibilities"/>
+                                    <field name="extra_contribution"/>
+                                    <field name="self_improvement_plan"/>
+                                </tree>
+                            </field>
+                        </form>
+
+                        <form string="EMPLOYEES VIOLATION RECORD">
+                            <h2>Part 12.EMPLOYEES VIOLATION RECORD</h2>
+                            <field name="employee_violation_record_lines">
+                                <tree editable="bottom">
+                                    <field name="time_from"/>
+                                    <field name="time_to"/>
+                                    <field name="case_detail"/>
+                                    <field name="penalties"/>
+                                    <field name="follow_up_result"/>
+                                </tree>
+                            </field>
+                        </form>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+
+        <record id="action_basic_office_skill" model="ir.actions.act_window">
+            <field name="name">Basic Office Skill</field>
+            <field name="res_model">office.skill</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+        </record>
+
+        <menuitem
+                id="menu_view_basic_office_skill"
+                action="action_basic_office_skill"
+                parent="hr.menu_human_resources_configuration"
+                sequence="2"/>
+
+        <record id="action_language_skill" model="ir.actions.act_window">
+            <field name="name">Language Skill</field>
+            <field name="res_model">language.skill</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+        </record>
+
+        <menuitem
+                id="menu_view_language_skill"
+                action="action_language_skill"
+                parent="hr.menu_human_resources_configuration"
+                sequence="2"/>
+    </data>
+</odoo>

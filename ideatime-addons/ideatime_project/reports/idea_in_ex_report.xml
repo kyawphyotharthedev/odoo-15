@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="report_idea_in_exp">
+        <div class="container o_mrp_bom_report_page">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1>Income &amp; Expense</h1>
+                        <h3><span t-esc="data['name']"/></h3>
+                    </div>
+                </div>
+            <t t-set="currency" t-value="data['currency']"/>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="mt16">
+                            <table width="100%" class="o_mrp_bom_expandable">
+                                <thead>
+                                    <tr>
+                                        <th>Reference</th>
+                                        <th class="text-center">Qty</th>
+                                        <th class="text-center">Uom</th>
+                                        <th class="text-center">Unit Price</th>
+                                        <th></th>
+                                        <th class="text-right">Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <b>Income</b>
+                                        </td>
+                                        <td/>
+                                        <td/>
+                                        <td/>
+                                        <td/>
+                                    </tr>
+                                    <t t-foreach="data['inv_list']" t-as="inv">
+                                        <tr t-att-data-res-id="inv['invoice'].id">
+
+                                                <td>
+                                                      <span t-att-style="space_td"/>
+                                                      <span class="o_mrp_bom_unfoldable fa fa-fw fa-caret-right" t-att-data-function="'get_inv_line'" role="img" aria-label="Unfold" title="Unfold"/>
+                                                      <a href="#" t-att-data-res-id="inv['invoice'].id" t-att-data-model="'account.invoice'" class="o_mrp_bom_action"><t t-esc="inv['invoice'].number"/></a>
+                                              </td>
+                                              <td/>
+                                              <td/>
+                                              <td/>
+                                              <td/>
+                                              <td class="text-right"><t t-esc="inv['invoice'].amount_total"/></td>
+                                        </tr>
+                                    </t>
+                                    <tr>
+                                        <td>
+                                            <b>Expense</b>
+                                        </td>
+                                        <td/>
+                                        <td/>
+                                        <td/>
+                                        <td/>
+                                    </tr>
+                                    <t t-foreach="data['exp_list']" t-as="exp">
+                                        <tr t-att-data-res-id="exp['expense'].id">
+
+                                                <td>
+                                                      <span t-att-style="space_td"/>
+                                                      <span class="o_mrp_bom_unfoldable fa fa-fw fa-caret-right" t-att-data-function="'get_exp_line'" role="img" aria-label="Unfold" title="Unfold"/>
+                                                      <a href="#" t-att-data-res-id="exp['expense'].id" t-att-data-model="'account.expense'" class="o_mrp_bom_action"><t t-esc="exp['expense'].name"/></a>
+                                              </td>
+                                              <td/>
+                                              <td/>
+                                              <td/>
+                                              <td/>
+                                              <!-- <td class="text-right">-<t t-esc="exp['expense'].amount_total"/></td> -->
+                                              <td class="text-right">-<t t-esc="exp['amount_total']"/></td>
+                                        </tr>
+                                    </t>
+                                    <tr>
+                                        <td>
+                                            <b>Profit</b>
+                                        </td>
+                                        <td/>
+                                        <td/>
+                                        <td/>
+                                        <td/>
+                                        <td class="text-right">
+                                            <b><t t-esc="data['profit']"/></b>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </template>
+
+
+    <template id="report_inv_line">
+      <t t-set="currency" t-value="data['currency']"/>
+      <t t-foreach="data['incomes']" t-as="inv_line">
+          <t t-set="space_td" t-value="'margin-left: '+ str(data['level'] * 20) + 'px;'"/>
+          <tr class="o_mrp_bom_cost" t-att-parent_id="data['inv_id']">
+              <td>
+                  <span t-att-style="space_td"/>
+                  <t t-esc="inv_line['product_name']"/>
+              </td>
+              <td class="text-center"><t t-esc="inv_line['qty']"/></td>
+              <td class="text-center"><t t-esc="inv_line['uom']"/></td>
+              <td class="text-center"><t t-esc="inv_line['price']"/></td>
+              <td/>
+              <td class="text-right"><t t-esc="inv_line['subtotal']"/></td>
+          </tr>
+      </t>
+    </template>
+
+    <template id="report_exp_line">
+      <t t-set="currency" t-value="data['currency']"/>
+      <t t-foreach="data['incomes']" t-as="inv_line">
+          <t t-set="space_td" t-value="'margin-left: '+ str(data['level'] * 20) + 'px;'"/>
+          <tr class="o_mrp_bom_cost" t-att-parent_id="data['exp_id']">
+              <td>
+                  <span t-att-style="space_td"/>
+                  <t t-esc="inv_line['product_name']"/>
+              </td>
+              <td class="text-center"><t t-esc="inv_line['qty']"/></td>
+              <td class="text-center"><t t-esc="inv_line['uom']"/></td>
+              <td class="text-center"><t t-esc="inv_line['price']"/></td>
+              <td class="text-center"><span>For </span><t t-esc="inv_line['total_proj']"/><span>project(s)</span></td>
+              <td class="text-right">-<t t-esc="inv_line['subtotal']"/></td>
+          </tr>
+      </t>
+    </template>
+</odoo>

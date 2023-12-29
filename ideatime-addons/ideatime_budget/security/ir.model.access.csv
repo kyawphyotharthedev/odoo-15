@@ -1,0 +1,24 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_branch_description,branch_description,model_branch_description,base.group_user,1,1,1,1
+access_budget_approval,budget_approval,model_budget_approval,base.group_user,1,1,1,1
+access_project_cost_estimate_line,project_cost_estimate_line,model_project_cost_estimate_line,base.group_user,1,1,1,1
+access_project_approval_budget_line,approval_budget_line,model_approval_budget_line,base.group_user,1,1,1,1
+access_project_approval_budget_order_line,approval_budget_order_line,model_approval_budget_order_line,base.group_user,1,1,1,1
+access_project_budget_order_confirm_line,budget_order_confirm_line,model_budget_order_confirm_line,base.group_user,1,1,1,1
+access_project_budget_client_demand_line,budget_client_demand_line,model_budget_client_demand_line,base.group_user,1,1,1,1
+access_project_budget_parta_cost_cost,budget_parta_cost,model_budget_parta_cost,base.group_user,1,1,1,1
+access_budget_cost_type_total, budget_cost_type_total,model_cost_type_total,base.group_user,1,1,1,1
+
+
+
+access_project_cost_estimate_partc,project_cost_estimate_partc,model_project_cost_estimate_partc,base.group_user,1,1,1,1
+access_budget_calculator_line,budget_calculator_line,model_budget_calculator_line,,1,1,1,1
+access_budget_template,budget_template,model_budget_template,,1,1,1,1
+access_budget_batch_line,budget_batch_line,model_budget_batch_line,,1,1,1,1
+
+access_budget_overview_report,access.budget.overview.report,model_budget_overview_report,base.group_user,1,1,1,0
+access_pec_overview_report,access.pec.overview.report,model_pec_overview_report,base.group_user,1,1,1,0
+
+
+
+

@@ -1,0 +1,26 @@
+<odoo>
+    <record id="ideatime_stock_location_form_view" model="ir.ui.view">
+        <field name="name">ideatime.stock.location.form.view</field>
+        <field name="model">stock.location</field>
+        <field name="inherit_id" ref="stock.view_location_form"/>
+        <field name="arch" type="xml">
+            <field name="return_location" position="after">
+                <field name="location_expense_account_id"/>
+            </field>
+        </field>
+    </record>
+    <record id="ideatime_project_cost_view_picking_form" model="ir.ui.view">
+            <field name="name">ideatime_project_cost_view_picking_form.inherit</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+                <header position="inside">
+                    <field name="project_in_done_stage" invisible="1"/>
+                </header>
+                <xpath expr="//button[@name=%(stock.act_stock_return_picking)d]" position="attributes">
+                    <attribute name="attrs">{'invisible': ['|',('state', '!=', 'done'), ('project_in_done_stage', '=', True)]}</attribute>
+                </xpath>
+            </field>
+
+    </record>
+</odoo>

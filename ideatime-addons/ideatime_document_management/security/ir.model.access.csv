@@ -1,0 +1,17 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_document_management,document.management,model_document_management,,1,1,1,1
+access_function,function,model_function,,1,1,1,1
+access_document_type,document.type,model_document_type,,1,1,1,1
+access_permission_level,permission.level,model_permission_level,,1,1,1,1
+access_related_department,related.department,model_related_department,,1,1,1,1
+
+access_request_info,request.info,model_request_info,,1,1,1,1
+access_request_type,request.type,model_request_type,,1,1,1,1
+access_appendix,info.appendix,model_info_appendix,,1,1,1,1
+access_internal_pic_info,internal.pic.info,model_internal_pic_info,,1,1,1,1
+access_level_statement,level.statement,model_level_statement,,1,1,1,1
+
+access_approval_info,approval.info,model_approval_info,,1,1,1,1
+access_document_lift_time,document.lifttime,model_document_lifttime,,1,1,1,1
+
+

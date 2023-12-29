@@ -1,0 +1,11 @@
+<odoo>
+    <record id="budget_analysis_report" model="ir.actions.report">
+        <field name="name">Project Cost Estimate Analysis</field>
+        <field name="model">budget.approval</field>
+        <field name="report_type">xlsx</field>
+        <field name="report_name">ideatime_budget.budget_analysis_report_id</field>
+        <field name="report_file">ideatime_budget.budget_analysis_report_id</field>
+        <field name="binding_model_id" ref="ideatime_budget.model_budget_approval"/>
+        <field name="binding_type">report</field>
+    </record>
+</odoo>

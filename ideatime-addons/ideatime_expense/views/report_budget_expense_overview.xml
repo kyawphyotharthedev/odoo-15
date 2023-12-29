@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="report_budget_expense_overview">
+        <div class="container o_mrp_bom_report_page">
+            <t t-if="data.get('lines') or data.get('estimate_line')">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h3 style="display:inline;">Cash Transfer</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="mt16">
+                            <table width="100%" class="o_mrp_bom_expandable">
+                                <thead>
+                                    <tr>
+
+
+                                        <th class="text-left">Transfer No</th>
+                                        <th class="text-left">Date</th>
+                                        <th class="text-left">Source</th>
+                                        <th class="text-left">Destination</th>
+                                        <th class="text-left">Bank Reference</th>
+                                        <th class="text-left">Cheque Reference</th>
+                                        <th class="text-left">Memo</th>
+                                        <th class="o_mrp_prod_cost text-right">Amount</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    <t t-if="data['report_type'] == 'html'" t-call="ideatime_expense.accunt_payment"/>
+
+                                </tbody>
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row mt-5">
+                    <div class="col-lg-12">
+                        <h3 style="display:inline;">Budget Overview</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="mt16">
+                            <table width="100%" class="o_mrp_bom_expandable">
+                                <thead>
+                                    <tr>
+
+                                        <th></th>
+                                        <th class="text-right">Quantity</th>
+                                        <th class="text-left"></th>
+                                        <th class="o_mrp_prod_cost text-right">Unit Price</th>
+                                        <th class="o_mrp_prod_cost text-right">Amount</th>
+                                        <th class="o_mrp_bom_cost text-center">Cost Type</th>
+                                        <th class="o_mrp_prod_cost text-right">Estimate Cost</th>
+                                        <th class="o_mrp_prod_cost text-right">Actual Amount</th>
+                                        <th class="o_mrp_prod_cost text-right">Different Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    <t t-if="data['report_type'] == 'html'" t-call="ideatime_expense.cost_estimate"/>
+
+                                </tbody>
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </t>
+            <t t-else="">
+                <h1 class="text-center">No data available.</h1>
+            </t>
+        </div>
+    </template>
+
+    <template id="cost_estimate">
+        <t t-foreach="data['estimate_line']" t-as="line">
+            <t t-set="space_td" t-value="'margin-left: '+ str(line['level'] * 20) + 'px;'"/>
+
+            <tr t-att-class="'o_mrp_bom_report_line '+str(line['show_hide'])" t-att-data-id="line['id']" t-att-parent_id="line['parent_id']" >
+                 <td>
+                     <div t-att-style="space_td">
+                         <t t-if="line['child']">
+                            <div t-att-data-function="'show_child'" class="o_mrp_bom_unfoldable fa fa-fw fa-caret-right" style="display:inline-block;" role="img" aria-label="Unfold" title="Unfold"/>
+                        </t>
+                        <div t-att-class="None if line['child'] else 'o_mrp_bom_no_fold'" style="display:inline-block;">
+
+                            <t t-esc="line['product_name']"/>
+                        </div>
+                     </div>
+
+                </td>
+
+                <td class="text-right">
+                    <span>
+                        <t t-esc="line['product_uom_qty']" />
+                    </span>
+                </td>
+
+                <td>
+                    <span>
+                        <t t-esc="line['product_uom']"/>
+                    </span>
+                </td>
+
+                <td class="o_mrp_prod_cost text-right">
+                        <span>
+                        <t t-esc="line['unit_price']"/>
+                        </span>
+                </td>
+                <td class="o_mrp_bom_cost text-right">
+                    <span t-esc="line['total']" />
+                </td>
+                 <td class="o_mrp_bom_cost text-center">
+                    <span t-esc="line['usage_type']" />
+                </td>
+
+                 <td class="o_mrp_bom_cost text-right">
+                    <span t-esc="line['total']" />
+                </td>
+
+                <td class="o_mrp_bom_cost text-right">
+                    <span t-esc="line['actual_cost']" />
+                </td>
+                <td class="text-right">
+                    <span><t t-esc="line['diff_amount']"/></span>
+                </td>
+            </tr>
+        </t>
+    </template>
+
+
+    <template id="accunt_payment">
+        <t t-foreach="data['account_payment']" t-as="line">
+
+            <tr class='o_mrp_bom_report_line' >
+                 <td class="text-left">
+                    <t t-esc="line['name']"/>
+                </td>
+
+                <td class="text-left">
+                    <span>
+                        <t t-esc="line['date']" />
+                    </span>
+                </td>
+
+                <td>
+                    <span>
+                        <t t-esc="line['source']"/>
+                    </span>
+                </td>
+
+               <td>
+                    <span>
+                        <t t-esc="line['destination']"/>
+                    </span>
+                </td>
+
+                 <td>
+                    <span>
+                        <t t-esc="line['bank_reference']"/>
+                    </span>
+                </td>
+
+                <td>
+                    <span>
+                        <t t-esc="line['cheque_reference']"/>
+                    </span>
+                </td>
+
+                <td>
+                    <span>
+                        <t t-esc="line['memo']"/>
+                    </span>
+                </td>
+                <td class="o_mrp_bom_cost text-right">
+                    <span t-esc="line['amount']" />
+                </td>
+
+
+
+            </tr>
+
+
+
+        </t>
+    </template>
+
+
+    <template id="report_mrp_bom_pdf">
+        <t t-call="web.html_container">
+            <t t-call="ideatime_expense.report_budget_expense_overview"/>
+        </t>
+    </template>
+
+
+    <template id="report_bom_structure">
+        <t t-set="data_report_landscape" t-value="True"/>
+        <t t-call="web.basic_layout">
+            <t t-call-assets="mrp.assets_common" t-js="False"/>
+            <t t-foreach="docs" t-as="data">
+                <div class="page">
+                    <t t-call="ideatime.report_budget_expense_overview"/>
+                </div>
+                <p style="page-break-before:always;"> </p>
+            </t>
+        </t>
+    </template>
+</odoo>

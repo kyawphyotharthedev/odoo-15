@@ -1,0 +1,41 @@
+<odoo>
+    <data>
+    	<record id="action_project_contact_particular" model="ir.actions.act_window">
+            <field name="name">Project Contact Particular</field>
+            <field name="res_model">project.contact.particular</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Create a new record
+              </p>
+            </field>
+        </record>
+
+        <record id="project_contact_particular_view_tree" model="ir.ui.view">
+            <field name="name">project.contact.particular.tree</field>
+            <field name="model">project.contact.particular</field>
+            <field name="arch" type="xml">
+                <tree string="Project Contact Particular">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_project_contact_particular_form" model="ir.ui.view">
+            <field name="name">project.contact.particular.form</field>
+            <field name="model">project.contact.particular</field>
+            <field name="arch" type="xml">
+                <form string="Project Contact Particular">
+                    <sheet>
+                        <group col='2'>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <menuitem id="menu_project_contact_particular" name="Project Particular" parent="project.menu_project_config" sequence="16" action="action_project_contact_particular"/>
+    </data>
+</odoo>

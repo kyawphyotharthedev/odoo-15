@@ -1,0 +1,294 @@
+<odoo>
+
+    <template id="project_cost_estimate_budget_external_layout_standard">
+        <div class="header">
+            <t t-foreach="docs" t-as="doc">
+                <img src='/ideatime_core/static/src/img/ideatime_header.jpg'
+                     style="max-height: 27mm;max-width:221.5mm"/>
+                <h6/>
+                <table width="100%">
+                    <tr height="3mm" style="border:2px solid gray">
+                        <td style="font-family: Arial;font-size:18px;padding-left:14mm;border:2px solid gray"
+                            width="28%">
+                            <span>
+                                <strong>Document name:</strong>
+                            </span>
+                        </td>
+                        <td width="73%"
+                            style="text-align:center;border:2px solid gray;font-size:20px;color:gray">
+                            <strong>Project estimate budget form</strong>
+                        </td>
+                    </tr>
+
+                    <tr height="3mm" style="border:2px solid gray">
+                        <td style="font-family: Arial;font-size:18px;color:bold;padding-left:24mm;border:2px solid gray"
+                            width="28%">
+                            <span>
+                                <strong>Project code:</strong>
+                            </span>
+                        </td>
+                        <td width="73%" style="text-align:center;border:2px solid gray;color:gray">
+                            <strong>
+                                <span t-field="doc.project_id.name"/>
+                            </strong>
+                        </td>
+                    </tr>
+
+                    <tr height="3mm" style="border:2px solid gray">
+                        <td style="font-family: Arial;font-size:18px;padding-left:21mm;border:2px solid gray"
+                            width="28%">
+                            <span>
+                                <strong>Project name:</strong>
+                            </span>
+                        </td>
+                        <td width="73%"
+                            style="text-align:center;border:2px solid gray;color:gray;font-size:18px">
+                            <div style="overflow:hidden;height:8mm">
+                                <strong>
+                                    <t t-if="doc.project_id.site_name">(<span
+                                            t-field="doc.project_id.site_name"/>)
+                                    </t>
+                                    <span t-field="doc.partner_id.name"/>
+                                    -
+                                    <span t-field="doc.project_id.cate_sector_id"/>
+                                    <t t-if="doc.project_id.manual_project_name">
+                                        <span t-field="doc.project_id.manual_project_name"/>
+                                    </t>
+                                </strong>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </t>
+        </div>
+        <div class="article o_report_layout_standard" t-att-data-oe-model="o and o._name"
+             t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
+            <t t-call="web.address_layout"/>
+            <t t-raw="0"/>
+        </div>
+
+        <div class="footer o_standard_footer">
+            <img src='/ideatime_core/static/src/img/Header format for Idea Time Advertising Company down.jpg'
+                 style="max-height: 46mm;max-width:221.5mm"/>
+            <div style="text-align:right;">
+                Page<span class="page"/>/
+                <span class="topage"/>
+            </div>
+        </div>
+    </template>
+
+    <template id="project_cost_estimate_budget_external_layout_so">
+        <t t-if="not o" t-set="o" t-value="doc"/>
+        <t t-call="ideatime_sale.project_cost_estimate_budget_external_layout_standard">
+            <t t-raw="0"/>
+        </t>
+    </template>
+    <template id="project_estimate_budget_report_id">
+
+        <t t-call="web.html_container">
+            <t t-call="ideatime_sale.project_cost_estimate_budget_external_layout_so">
+                <t t-foreach="docs" t-as="doc">
+                    <div class="page">
+
+                        <t t-set="display_discount" t-value="any([l.discount for l in doc.order_line])"/>
+
+                        <table class="table table-sm o_main_table" style="border:2px solid gray;" width="100%">
+                            <thead style="border:2px solid gray;">
+                                <tr style="background-color:#FFEDA9;border:2px solid gray;">
+                                    <t t-set="colspan" t-value="5"/>
+                                    <th height="2mm" width="3%"
+                                        style="border:2px solid gray;text-align:center;font-size:15px">No
+                                    </th>
+                                    <th height="2mm" width="40%"
+                                        style="border:2px solid gray;text-align:center;font-size:15px">Description
+                                    </th>
+                                    <th height="2mm" style="border:2px solid gray;text-align:center;font-size:15px">
+                                        Qty
+                                    </th>
+                                    <th height="2mm" style="border:2px solid gray;text-align:center;font-size:15px">
+                                        Unit
+                                    </th>
+                                    <th height="2mm" style="border:2px solid gray;padding-left:2mm;font-size:15px">
+                                        Unit Price
+                                    </th>
+
+                                    <th height="3mm" style="border:2px solid gray;font-size:15px;padding-left:3mm;">
+                                        Amount
+                                    </th>
+                                </tr>
+                            </thead>
+
+
+                            <tbody style="border:2px solid gray">
+                                <t t-set="total" t-value="0"/>
+                                <t t-set="cost_total" t-value="0"/>
+
+                                <tr>
+                                    <td style="background-color:#C7DFF4;border:2px solid gray;" colspan="6">PartA
+                                        (project cost estimate)
+                                    </td>
+                                </tr>
+
+
+                                <t t-foreach="doc.get_sale_order_line()" t-as="line">
+
+
+                                    <tr style="border:2px solid gray">
+                                        <td style="border:2px solid gray;text-align:right">
+                                            <span t-esc="line['sr']"/>
+                                        </td>
+                                        <td colspan="6" style="border:2px solid gray ">
+                                            <span t-esc="line['name']"/>
+                                        </td>
+                                    </tr>
+
+                                    <t t-foreach="line['data']" t-as="data">
+
+
+                                        <tr style="border:2px solid gray" height="0.2mm">
+
+                                            <td style="text-align:right;border:2px solid gray">
+                                                <span t-esc="line['sr']"/>.
+                                                <span t-esc="data['no']"/>
+
+
+                                            </td>
+
+                                            <td style="border:2px solid gray "><!-- <span>Item name:</span> -->
+                                                Item Name -
+                                                <span t-esc="data['item_name']"/>
+                                                <br/>
+                                                Item Code -
+                                                <span t-esc="data['item_code']"/>
+                                                <!--  Item code:
+                                                 Size/Service:<br/>
+                                                 Specification:<br/>
+
+                                                 Warranty period:<br/>
+                                                 Variants:<br/> -->
+                                            </td>
+
+                                            <td style="text-align:center">
+                                                <span t-esc="round(data['qty'])"/>
+
+                                            </td>
+                                            <td style="border:2px solid gray;text-align:center ">
+                                                <span t-esc="data['unit']"/>
+                                            </td>
+                                            <td style="text-align:center">
+                                                <span t-esc="round(data['price'])"/>
+                                            </td>
+
+                                            <td style="border:2px solid gray;text-align:center ">
+
+                                                <span t-esc="round(data['total_amount'])"/>
+
+                                            </td>
+                                        </tr>
+
+                                        <t t-set="total" t-value="total+data['total_amount']"/>
+                                        <t t-set="cost_total" t-value="cost_total+data['total_amount']"/>
+
+                                    </t>
+                                </t>
+                                <tr>
+                                    <td colspan="5" style="border:2px solid gray" class="text-right">Total Amount
+                                    </td>
+                                    <td style="border-bottom:2px solid gray;border-right:2px solid gray;text-align:right">
+                                        <span t-esc="round(cost_total)"
+                                              t-options="{&quot;widget&quot;: &quot;False&quot;}"/>
+                                    </td>
+                                </tr>
+
+
+                                <tr>
+                                    <td style="background-color:#C7DFF4;border:2px solid gray;" colspan="6">PartB
+                                        (project cost estimate)
+                                    </td>
+                                </tr>
+                                <t t-set="a" t-value="0"/>
+
+                                <t t-foreach="doc.compute_project_cost_estimate()" t-as="summary">
+                                    <t t-set="a" t-value="a+1"/>
+                                    <tr>
+                                        <td style="border:2px solid gray">
+                                            <span t-esc="a"/>
+                                        </td>
+                                        <td style="border:2px solid gray;">
+                                            <t t-esc="summary['name']"/>
+                                        </td>
+                                        <td style="border:2px solid gray;text-align:center ">
+                                            <t t-esc="round(summary['qty'])"/>
+                                        </td>
+                                        <td style="border:2px solid gray;text-align:center ">
+                                            <t t-esc="summary['unit']"/>
+                                        </td>
+
+                                        <td style="border:2px solid gray;text-align:center ">
+                                            <t t-esc="round(summary['unit_price'])"/>
+                                        </td>
+                                        <td style="border:2px solid gray;text-align:center ">
+                                            <span t-esc="round(summary['subtotal'])"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                                <tr>
+                                    <td colspan="5" style="border:2px solid gray" class="text-right">Total Amount
+                                    </td>
+                                    <td style="border-bottom:2px solid gray;border-right:2px solid gray;text-align:right">
+                                        <span t-esc="round(doc.expense_total_amount)"
+                                              t-options="{&quot;widget&quot;: &quot;False&quot;}"/>
+                                    </td>
+                                </tr>
+
+
+                                <tr>
+                                    <div style="height:0.5mm;background-color:#FBBD97;overflow:hidden;border:1px solid gray">
+                                        <td style="background-color:#FBBD97" colspan="7"/>
+                                    </div>
+                                </tr>
+
+                                <tr style="border:2px solid gray ">
+                                    <td style="border:2px solid gray" colspan="4" class="text-right">
+                                        <strong>Grand total:</strong>
+                                    </td>
+                                    <td style="border-bottom:2px solid gray;border-right:0px solid white;text-align:left ">
+
+
+                                        <span t-field="doc.budget_pricelist_id"/>
+                                    </td>
+                                    <td style="border-bottom:2px solid gray;border-right:2px solid gray;text-align:right ">
+
+                                        <span t-esc="round(total+doc.expense_total_amount)"/>
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+    <record id="project_estimate_budget_report" model="ir.actions.report">
+        <field name="name">Project Estimate Budget Form</field>
+        <field name="model">sale.order</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">ideatime_sale.project_estimate_budget_report_id</field>
+        <field name="report_file">ideatime_sale.project_estimate_budget_report_id</field>
+        <field name="binding_model_id" ref="sale.model_sale_order"/>
+        <field name="binding_type">report</field>
+    </record>
+    <record id="project_cost_estimate_summary_a4" model="report.paperformat">
+        <field name="name">Project Cost Estimate Summary Report A4</field>
+        <field name="format">A4</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">50</field>
+        <field name="margin_bottom">15</field>
+        <field name="margin_left">7</field>
+        <field name="margin_right">7</field>
+        <field name="header_spacing">40</field>
+        <field name="report_ids" eval="[(4, ref('ideatime_sale.project_estimate_budget_report'))]"/>
+    </record>
+</odoo>

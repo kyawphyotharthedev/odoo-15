@@ -1,0 +1,1216 @@
+<odoo>
+    <data>
+        <template id="ideatime_decoration_survey_external_layout_standard">
+            <div class="header">
+                <t t-foreach="docs" t-as="o">
+                    <img src='/ideatime_core/static/src/img/ideatime_header.jpg'
+                         style="max-height: 27mm;max-width:100%"/>
+                    <h6/>
+
+                    <table width="100%">
+                        <tr style="border:2px solid gray">
+                            <th style="text-align:right; font-family: Arial; font-size:20px; border:2px solid gray; width:25%;">
+                                Document name :
+                            </th>
+                            <th style="text-align:center; border:2px solid gray; font-size:20px; color:gray">
+                                Decoration process survey form
+                            </th>
+                        </tr>
+
+                        <tr style="border:2px solid gray">
+                            <th style="text-align:right; font-family: Arial; font-size:20px; border:2px solid gray">
+                                Project code :
+                            </th>
+                            <th style="text-align:center; border:2px solid gray; font-size:20px; color:gray">
+                                <t t-if="o.name">
+                                    <span t-field="o.name"/>
+                                </t>
+                            </th>
+                        </tr>
+
+                        <tr style="border:2px solid gray; max-height:50px; min-height:50px;">
+                            <th style="text-align:right; font-family: Arial; font-size:20px; border:2px solid gray">
+                                Project name :
+                            </th>
+                            <th style="text-align:center; border:2px solid gray; font-size:20px; color:gray;">
+                                <t t-if="o.project_site">
+                                    <span t-field="o.project_site"/>
+                                </t>
+                                <!--
+                                                            <div style="overflow:hidden;height:16mm">
+                                                                <strong>
+                                                                    <t t-if="o.site_name">(<span t-field="o.site_name"/>)
+                                                                    </t>
+                                                                    <span t-field="o.partner_id"/>
+                                                                    -
+                                                                    <t t-if="o.cate_sector_id">
+                                                                        <span t-field="o.cate_sector_id"/>
+                                                                    </t>
+                                                                    <t t-if="o.manual_project_name">
+                                                                        <span t-field="o.manual_project_name"/>
+                                                                    </t>
+                                                                </strong>
+                                                            </div>
+                                -->
+                            </th>
+                        </tr>
+                    </table>
+                </t>
+            </div>
+
+            <div class="article o_report_layout_standard" t-att-data-oe-model="o and o._name"
+                 t-att-data-oe-id="o and o.id"
+                 t-att-data-oe-lang="o and o.env.context.get('lang')">
+                <t t-call="web.address_layout"/>
+                <t t-raw="0"/>
+            </div>
+
+            <div class="footer o_standard_footer">
+                <img src='/ideatime_core/static/src/img/Header format for Idea Time Advertising Company down.jpg'
+                     style="max-height: 46mm; width:100%;"/>
+                <div style="text-align:right;">
+                    Page<span class="page"/>/
+                    <span class="topage"/>
+                </div>
+            </div>
+        </template>
+
+        <template id="ideatime_decoration_survey_external_layout_so">
+            <t t-if="not o" t-set="o" t-value="doc"/>
+            <t t-call="ideatime_core.ideatime_decoration_survey_external_layout_standard">
+                <t t-raw="0"/>
+            </t>
+        </template>
+        <template id="decoration_survey_report_id">
+            <t t-call="web.html_container">
+                <t t-call="ideatime_core.ideatime_decoration_survey_external_layout_so">
+                    <t t-foreach="docs" t-as="doc">
+                        <div class="page" style="font-size:14px;">
+
+                            <!-- General information table -->
+                            <table class="table-bordered" style="width:100%; text-align:right;">
+                                <thead>
+                                    <tr>
+                                        <th colspan="3"
+                                            style="background-color:#40180B; text-align:center; font-size:18px; color:white;">
+                                            General Information
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Part A -->
+                                    <tr>
+                                        <th colspan="2" style="background-color:#073054; text-align:left; color:white;">
+                                            Part A
+                                        </th>
+                                        <th rowspan="19" style="text-align:center; width:40%;">
+                                            <div style="height:435px; width:100%; border:1px solid gray;">
+                                                <span t-if="doc.maps" t-field="doc.maps"
+                                                      t-options='{"widget": "image", "style":"height:100%; width:100%;"}'/>
+                                            </div>
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <td style="width:20%;">Client name :</td>
+                                        <td style="width:40%;" class="text-left">
+                                            <span t-field="doc.task_survey_id.partner_id"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>PIC name :</td>
+                                        <td class="text-left">
+                                            <span t-field="doc.client_pic"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Phone no :</td>
+                                        <td class="text-left">
+                                            <span t-field="doc.client_pic.phone"/>
+                                        </td>
+                                    </tr>
+                                    <!-- Part B -->
+                                    <tr>
+                                        <th colspan="2" style="background-color:#073054; text-align:left; color:white;">
+                                            Part B
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <td style="width:20%;">Survey PIC name :</td>
+                                        <td style="width:40%;"
+                                            class="text-left">
+                                            <span t-field="doc.survey_pic"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>ID :</td>
+                                        <td class="text-left">
+                                            <span t-field="doc.survey_pic.id"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Phone no :</td>
+                                        <td class="text-left">
+                                            <span t-field="doc.survey_pic.phone"/>
+                                        </td>
+                                    </tr>
+                                    <!-- Implement site PIC -->
+                                    <tr>
+                                        <th colspan="2" style="background-color:#073054; text-align:left; color:white;">
+                                            Implement site PIC
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <td style="width:20%;">Shop name :</td>
+                                        <td style="width:40%;" class="text-left">
+                                            <span t-field="doc.shop_name"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Project site PIC name :</td>
+                                        <td class="text-left">
+                                            <span t-field="doc.implement_site_pic_name"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Phone no :</td>
+                                        <td class="text-left">
+                                            <span t-field="doc.phoneno"/>
+                                        </td>
+                                    </tr>
+                                    <!-- Project information -->
+                                    <tr>
+                                        <th colspan="2" style="background-color:#073054; text-align:left; color:white;">
+                                            Project information
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <td style="width:20%;">Service group :</td>
+                                        <td style="width:40%;" class="text-left">
+                                            <span t-field="doc.task_survey_id.project_id.cate_group_id"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Service number :</td>
+                                        <td class="text-left">
+                                            <span t-field="doc.task_survey_id.project_id.cate_sector_id"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Business type :</td>
+                                        <td class="text-left">
+                                            <span t-field="doc.task_survey_id.project_id.manual_project_name"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Survey date :</td>
+                                        <td class="text-left">
+                                            <span t-field="doc.survey_date"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Project site address :</td>
+                                        <td>
+                                            <div style="width:100%; height:50px; text-align:left;">
+                                                <span t-field="doc.project_site"/>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <!-- Basic investigation table -->
+                            <table class="table-bordered" style="width:100%; text-align:right;">
+                                <thead>
+                                    <tr>
+                                        <th colspan="2" style="background-color:#073054; text-align:left; color:white;">
+                                            Basic investigation
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th style="width:30%; text-align:center;">Particular</th>
+                                        <th style="width:70%; text-align:center;">Remark</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Building type :</td>
+                                        <td class="text-left" style="padding-left:10px;">
+                                            <t t-if="doc.building_type">
+                                                <span t-field="doc.building_type"/>
+                                            </t>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Structural state :</td>
+                                        <td class="text-left" style="padding-left:10px;">
+                                            <span t-if="doc.structural_state=='yes'">
+                                                <img src='/ideatime_core/static/src/img/checkbox/check.png'
+                                                     style="height:20px; vertical-align:top;"/>
+                                                <span>Yes</span>
+                                                <img src='/ideatime_core/static/src/img/checkbox/uncheck.png'
+                                                     style="height:20px; vertical-align:top;"/>
+                                                <span>No</span>
+                                            </span>
+                                            <span t-if="doc.structural_state=='no'">
+                                                <img src='/ideatime_core/static/src/img/checkbox/uncheck.png'
+                                                     style="height:20px; vertical-align:top;"/>
+                                                <span>Yes</span>
+                                                <img src='/ideatime_core/static/src/img/checkbox/check.png'
+                                                     style="height:20px; vertical-align:top;"/>
+                                                <span>No</span>
+                                            </span>
+                                            <!--<span>(Remark)</span>-->
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Dismantle work :</td>
+                                        <td class="text-left" style="padding-left:10px;">
+                                            <span t-if="doc.dismantle_work=='yes'">
+                                                <img src='/ideatime_core/static/src/img/checkbox/check.png'
+                                                     style="height:20px; vertical-align:top;"/>
+                                                <span>Yes</span>
+                                                <img src='/ideatime_core/static/src/img/checkbox/uncheck.png'
+                                                     style="height:20px; vertical-align:top;"/>
+                                                <span>No</span>
+                                            </span>
+                                            <span t-if="doc.dismantle_work=='no'">
+                                                <img src='/ideatime_core/static/src/img/checkbox/uncheck.png'
+                                                     style="height:20px; vertical-align:top;"/>
+                                                <span>Yes</span>
+                                                <img src='/ideatime_core/static/src/img/checkbox/check.png'
+                                                     style="height:20px; vertical-align:top;"/>
+                                                <span>No</span>
+                                            </span>
+                                            <!--<span>(Remark)</span>-->
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Site preparation work :</td>
+                                        <td class="text-left" style="padding-left:10px;">
+                                            <span t-if="doc.site_preparation_work=='yes'">
+                                                <img src='/ideatime_core/static/src/img/checkbox/check.png'
+                                                     style="height:20px; vertical-align:top;"/>
+                                                <span>Yes</span>
+                                                <img src='/ideatime_core/static/src/img/checkbox/uncheck.png'
+                                                     style="height:20px; vertical-align:top;"/>
+                                                <span>No</span>
+                                            </span>
+                                            <span t-if="doc.site_preparation_work=='no'">
+                                                <img src='/ideatime_core/static/src/img/checkbox/uncheck.png'
+                                                     style="height:20px; vertical-align:top;"/>
+                                                <span>Yes</span>
+                                                <img src='/ideatime_core/static/src/img/checkbox/check.png'
+                                                     style="height:20px; vertical-align:top;"/>
+                                                <span>No</span>
+                                            </span>
+                                            <!--<span>(Remark)</span>-->
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Working Period :</td>
+                                        <td class="text-left" style="padding-left:10px;">
+                                            <span t-if="doc.working_period=='day'">
+                                                <img src='/ideatime_core/static/src/img/checkbox/check.png'
+                                                     style="height:20px; vertical-align:top;"/>
+                                                <span>Day</span>
+                                                <img src='/ideatime_core/static/src/img/checkbox/uncheck.png'
+                                                     style="height:20px; vertical-align:top;"/>
+                                                <span>Night</span>
+                                                <img src='/ideatime_core/static/src/img/checkbox/uncheck.png'
+                                                     style="height:20px; vertical-align:top;"/>
+                                                <span>Day/Night</span>
+                                            </span>
+                                            <span t-if="doc.working_period=='night'">
+                                                <img src='/ideatime_core/static/src/img/checkbox/uncheck.png'
+                                                     style="height:20px; vertical-align:top;"/>
+                                                <span>Day</span>
+                                                <img src='/ideatime_core/static/src/img/checkbox/check.png'
+                                                     style="height:20px; vertical-align:top;"/>
+                                                <span>Night</span>
+                                                <img src='/ideatime_core/static/src/img/checkbox/uncheck.png'
+                                                     style="height:20px; vertical-align:top;"/>
+                                                <span>Day/Night</span>
+                                            </span>
+                                            <span t-if="doc.working_period=='day/night'">
+                                                <img src='/ideatime_core/static/src/img/checkbox/uncheck.png'
+                                                     style="height:20px; vertical-align:top;"/>
+                                                <span>Day</span>
+                                                <img src='/ideatime_core/static/src/img/checkbox/uncheck.png'
+                                                     style="height:20px; vertical-align:top;"/>
+                                                <span>Night</span>
+                                                <img src='/ideatime_core/static/src/img/checkbox/check.png'
+                                                     style="height:20px; vertical-align:top;"/>
+                                                <span>Day/Night</span>
+                                            </span>
+                                            <!--<span>(Remark)</span>-->
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Electricity supply :</td>
+                                        <td class="text-left" style="padding-left:10px;">
+                                            <span t-if="doc.electiricity_supply=='yes'">
+                                                <img src='/ideatime_core/static/src/img/checkbox/check.png'
+                                                     style="height:20px; vertical-align:top;"/>
+                                                <span>Yes</span>
+                                                <img src='/ideatime_core/static/src/img/checkbox/uncheck.png'
+                                                     style="height:20px; vertical-align:top;"/>
+                                                <span>No</span>
+                                            </span>
+                                            <span t-if="doc.electiricity_supply=='no'">
+                                                <img src='/ideatime_core/static/src/img/checkbox/uncheck.png'
+                                                     style="height:20px; vertical-align:top;"/>
+                                                <span>Yes</span>
+                                                <img src='/ideatime_core/static/src/img/checkbox/check.png'
+                                                     style="height:20px; vertical-align:top;"/>
+                                                <span>No</span>
+                                            </span>
+                                            <!--<span>(Remark)</span>-->
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Water supply :</td>
+                                        <td class="text-left" style="padding-left:10px;">
+                                            <span t-if="doc.water_supply=='yes'">
+                                                <img src='/ideatime_core/static/src/img/checkbox/check.png'
+                                                     style="height:20px; vertical-align:top;"/>
+                                                <span>Yes</span>
+                                                <img src='/ideatime_core/static/src/img/checkbox/uncheck.png'
+                                                     style="height:20px; vertical-align:top;"/>
+                                                <span>No</span>
+                                            </span>
+                                            <span t-if="doc.water_supply=='no'">
+                                                <img src='/ideatime_core/static/src/img/checkbox/uncheck.png'
+                                                     style="height:20px; vertical-align:top;"/>
+                                                <span>Yes</span>
+                                                <img src='/ideatime_core/static/src/img/checkbox/check.png'
+                                                     style="height:20px; vertical-align:top;"/>
+                                                <span>No</span>
+                                            </span>
+                                            <!--<span>(Remark)</span>-->
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Permission process :</td>
+                                        <td class="text-left" style="padding-left:10px;">
+                                            <span t-if="doc.permission_process=='yes'">
+                                                <img src='/ideatime_core/static/src/img/checkbox/check.png'
+                                                     style="height:20px; vertical-align:top;"/>
+                                                <span>Yes</span>
+                                                <img src='/ideatime_core/static/src/img/checkbox/uncheck.png'
+                                                     style="height:20px; vertical-align:top;"/>
+                                                <span>No</span>
+                                            </span>
+                                            <span t-if="doc.permission_process=='no'">
+                                                <img src='/ideatime_core/static/src/img/checkbox/uncheck.png'
+                                                     style="height:20px; vertical-align:top;"/>
+                                                <span>Yes</span>
+                                                <img src='/ideatime_core/static/src/img/checkbox/check.png'
+                                                     style="height:20px; vertical-align:top;"/>
+                                                <span>No</span>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Accommodation :</td>
+                                        <td class="text-left" style="padding-left:10px;">
+                                            <span t-if="doc.accommodation=='yes'">
+                                                <img src='/ideatime_core/static/src/img/checkbox/check.png'
+                                                     style="height:20px; vertical-align:top;"/>
+                                                <span>Yes</span>
+                                                <img src='/ideatime_core/static/src/img/checkbox/uncheck.png'
+                                                     style="height:20px; vertical-align:top;"/>
+                                                <span>No</span>
+                                            </span>
+                                            <span t-if="doc.accommodation=='no'">
+                                                <img src='/ideatime_core/static/src/img/checkbox/uncheck.png'
+                                                     style="height:20px; vertical-align:top;"/>
+                                                <span>Yes</span>
+                                                <img src='/ideatime_core/static/src/img/checkbox/check.png'
+                                                     style="height:20px; vertical-align:top;"/>
+                                                <span>No</span>
+                                            </span>
+                                            <!--<span>(Remark)</span>-->
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Material purchase :</td>
+                                        <td class="text-left" style="padding-left:10px;">
+                                            <span t-if="doc.material_purchase=='yes'">
+                                                <img src='/ideatime_core/static/src/img/checkbox/check.png'
+                                                     style="height:20px; vertical-align:top;"/>
+                                                <span>Yes</span>
+                                                <img src='/ideatime_core/static/src/img/checkbox/uncheck.png'
+                                                     style="height:20px; vertical-align:top;"/>
+                                                <span>No</span>
+                                            </span>
+                                            <span t-if="doc.material_purchase=='no'">
+                                                <img src='/ideatime_core/static/src/img/checkbox/uncheck.png'
+                                                     style="height:20px; vertical-align:top;"/>
+                                                <span>Yes</span>
+                                                <img src='/ideatime_core/static/src/img/checkbox/check.png'
+                                                     style="height:20px; vertical-align:top;"/>
+                                                <span>No</span>
+                                            </span>
+                                            <!--<span>(Remark)</span>-->
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Material transporation :</td>
+                                        <td class="text-left" style="padding-left:10px;">
+                                            <span t-if="doc.material_transporaion=='yes'">
+                                                <img src='/ideatime_core/static/src/img/checkbox/check.png'
+                                                     style="height:20px; vertical-align:top;"/>
+                                                <span>Yes</span>
+                                                <img src='/ideatime_core/static/src/img/checkbox/uncheck.png'
+                                                     style="height:20px; vertical-align:top;"/>
+                                                <span>No</span>
+                                            </span>
+                                            <span t-if="doc.material_transporaion=='no'">
+                                                <img src='/ideatime_core/static/src/img/checkbox/uncheck.png'
+                                                     style="height:20px; vertical-align:top;"/>
+                                                <span>Yes</span>
+                                                <img src='/ideatime_core/static/src/img/checkbox/check.png'
+                                                     style="height:20px; vertical-align:top;"/>
+                                                <span>No</span>
+                                            </span>
+                                            <!--<span>(Remark)</span>-->
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Delivery :</td>
+                                        <td class="text-left" style="padding-left:10px;">
+                                            <span t-if="doc.delivery=='yes'">
+                                                <img src='/ideatime_core/static/src/img/checkbox/check.png'
+                                                     style="height:20px; vertical-align:top;"/>
+                                                <span>Yes</span>
+                                                <img src='/ideatime_core/static/src/img/checkbox/uncheck.png'
+                                                     style="height:20px; vertical-align:top;"/>
+                                                <span>No</span>
+                                            </span>
+                                            <span t-if="doc.delivery=='no'">
+                                                <img src='/ideatime_core/static/src/img/checkbox/uncheck.png'
+                                                     style="height:20px; vertical-align:top;"/>
+                                                <span>Yes</span>
+                                                <img src='/ideatime_core/static/src/img/checkbox/check.png'
+                                                     style="height:20px; vertical-align:top;"/>
+                                                <span>No</span>
+                                            </span>
+                                            <!--<span>(Remark)</span>-->
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Passenger transporation :</td>
+                                        <td class="text-left" style="padding-left:10px;">
+                                            <span t-if="doc.passenger_transporation=='yes'">
+                                                <img src='/ideatime_core/static/src/img/checkbox/check.png'
+                                                     style="height:20px; vertical-align:top;"/>
+                                                <span>Yes</span>
+                                                <img src='/ideatime_core/static/src/img/checkbox/uncheck.png'
+                                                     style="height:20px; vertical-align:top;"/>
+                                                <span>No</span>
+                                            </span>
+                                            <span t-if="doc.passenger_transporation=='no'">
+                                                <img src='/ideatime_core/static/src/img/checkbox/uncheck.png'
+                                                     style="height:20px; vertical-align:top;"/>
+                                                <span>Yes</span>
+                                                <img src='/ideatime_core/static/src/img/checkbox/check.png'
+                                                     style="height:20px; vertical-align:top;"/>
+                                                <span>No</span>
+                                            </span>
+                                            <!--<span>(Remark)</span>-->
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Surrounding environment impact :</td>
+                                        <td class="text-left" style="padding-left:10px;">
+                                            <span t-if="doc.surrounding_env_impact=='yes'">
+                                                <img src='/ideatime_core/static/src/img/checkbox/check.png'
+                                                     style="height:20px; vertical-align:top;"/>
+                                                <span>Yes</span>
+                                                <img src='/ideatime_core/static/src/img/checkbox/uncheck.png'
+                                                     style="height:20px; vertical-align:top;"/>
+                                                <span>No</span>
+                                            </span>
+                                            <span t-if="doc.surrounding_env_impact=='no'">
+                                                <img src='/ideatime_core/static/src/img/checkbox/uncheck.png'
+                                                     style="height:20px; vertical-align:top;"/>
+                                                <span>Yes</span>
+                                                <img src='/ideatime_core/static/src/img/checkbox/check.png'
+                                                     style="height:20px; vertical-align:top;"/>
+                                                <span>No</span>
+                                            </span>
+                                            <!--<span>(Remark)</span>-->
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Building water leakage :</td>
+                                        <td class="text-left" style="padding-left:10px;">
+                                            <span t-if="doc.building_water_leakage=='yes'">
+                                                <img src='/ideatime_core/static/src/img/checkbox/check.png'
+                                                     style="height:20px; vertical-align:top;"/>
+                                                <span>Yes</span>
+                                                <img src='/ideatime_core/static/src/img/checkbox/uncheck.png'
+                                                     style="height:20px; vertical-align:top;"/>
+                                                <span>No</span>
+                                            </span>
+                                            <span t-if="doc.building_water_leakage=='no'">
+                                                <img src='/ideatime_core/static/src/img/checkbox/uncheck.png'
+                                                     style="height:20px; vertical-align:top;"/>
+                                                <span>Yes</span>
+                                                <img src='/ideatime_core/static/src/img/checkbox/check.png'
+                                                     style="height:20px; vertical-align:top;"/>
+                                                <span>No</span>
+                                            </span>
+                                            <!--<span>(Remark)</span>-->
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Cable hinder impact :</td>
+                                        <td class="text-left" style="padding-left:10px;">
+                                            <span t-if="doc.cable_hinder_impact=='yes'">
+                                                <img src='/ideatime_core/static/src/img/checkbox/check.png'
+                                                     style="height:20px; vertical-align:top;"/>
+                                                <span>Yes</span>
+                                                <img src='/ideatime_core/static/src/img/checkbox/uncheck.png'
+                                                     style="height:20px; vertical-align:top;"/>
+                                                <span>No</span>
+                                            </span>
+                                            <span t-if="doc.cable_hinder_impact=='no'">
+                                                <img src='/ideatime_core/static/src/img/checkbox/uncheck.png'
+                                                     style="height:20px; vertical-align:top;"/>
+                                                <span>Yes</span>
+                                                <img src='/ideatime_core/static/src/img/checkbox/check.png'
+                                                     style="height:20px; vertical-align:top;"/>
+                                                <span>No</span>
+                                            </span>
+                                            <!--<span>(Remark)</span>-->
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Other construction team impact :</td>
+                                        <td class="text-left" style="padding-left:10px;">
+                                            <span t-if="doc.const_team_impact=='yes'">
+                                                <img src='/ideatime_core/static/src/img/checkbox/check.png'
+                                                     style="height:20px; vertical-align:top;"/>
+                                                <span>Yes</span>
+                                                <img src='/ideatime_core/static/src/img/checkbox/uncheck.png'
+                                                     style="height:20px; vertical-align:top;"/>
+                                                <span>No</span>
+                                            </span>
+                                            <span t-if="doc.const_team_impact=='no'">
+                                                <img src='/ideatime_core/static/src/img/checkbox/uncheck.png'
+                                                     style="height:20px; vertical-align:top;"/>
+                                                <span>Yes</span>
+                                                <img src='/ideatime_core/static/src/img/checkbox/check.png'
+                                                     style="height:20px; vertical-align:top;"/>
+                                                <span>No</span>
+                                            </span>
+                                            <!--<span>(Remark)</span>-->
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Weather rain impact :</td>
+                                        <td class="text-left" style="padding-left:10px;">
+                                            <span t-if="doc.weather_rain_impact=='yes'">
+                                                <img src='/ideatime_core/static/src/img/checkbox/check.png'
+                                                     style="height:20px; vertical-align:top;"/>
+                                                <span>Yes</span>
+                                                <img src='/ideatime_core/static/src/img/checkbox/uncheck.png'
+                                                     style="height:20px; vertical-align:top;"/>
+                                                <span>No</span>
+                                            </span>
+                                            <span t-if="doc.weather_rain_impact=='no'">
+                                                <img src='/ideatime_core/static/src/img/checkbox/uncheck.png'
+                                                     style="height:20px; vertical-align:top;"/>
+                                                <span>Yes</span>
+                                                <img src='/ideatime_core/static/src/img/checkbox/check.png'
+                                                     style="height:20px; vertical-align:top;"/>
+                                                <span>No</span>
+                                            </span>
+                                            <!--<span>(Remark)</span>-->
+                                        </td>
+                                    </tr>
+                                    <tr style="height:20px;">
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr style="height:20px;">
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr style="height:20px;">
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <!-- Survey measurement record table -->
+                            <center>
+                                <h5 style="page-break-before:always; background-color:#40180B; color:white;">
+                                    Survey measurement record
+                                </h5>
+                            </center>
+                            <div style="width:50%; height:300px; float:left;">
+                                <table class="table-bordered" style="width:100%; text-align:right;">
+                                    <tr>
+                                        <th colspan="4"
+                                            style="background-color:#073054; text-align:left; color:white;">
+                                            General information
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <td style="width:25%; height:100px;">Area code :</td>
+                                        <td colspan="3" class="text-left">
+                                            <div>
+                                                <ul>
+                                                    <t t-foreach="doc.survey_info_id" t-as="info">
+                                                        <t t-foreach="info.survey_info_line_id" t-as="info_line">
+                                                            <li>
+                                                                <span t-field="info_line.area_code"/>
+                                                            </li>
+                                                        </t>
+                                                    </t>
+                                                </ul>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th colspan="4"
+                                            style="background-color:#073054; text-align:left; color:white;">
+                                            Area calculation report (Grand total)
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" class="text-center">Particular</td>
+                                        <td style="text-align:center; width:20%;">QTY</td>
+                                        <td style="text-align:center; width:20%;">Unit</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">Item :</td>
+                                        <td>
+                                            <span t-field="doc.item_area"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="doc.unit"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">Floor area :</td>
+                                        <td>
+                                            <span t-field="doc.floor_area"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="doc.unit"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">Wall area :</td>
+                                        <td>
+                                            <span t-field="doc.wall_area"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="doc.unit"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">Wall area (Door, Window excluded) :</td>
+                                        <td>
+                                            <span t-field="doc.only_wall_area"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="doc.unit"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">Door area :</td>
+                                        <td>
+                                            <span t-field="doc.door_area"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="doc.unit"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">Window area :</td>
+                                        <td>
+                                            <span t-field="doc.window_area"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="doc.unit"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div style="width:48%; height:300px; border:1px solid gray; float:right;">
+                                <span t-if="doc.implement_site_photo" t-field="doc.implement_site_photo"
+                                      t-options='{"widget": "image", "style":"width: 100%; height: 100%;"}'/>
+                            </div>
+
+                            <!-- Layout report -->
+                            <div
+                                    style="background-color:#40180B; color:white; width:100%; text-align:center; overflow:hidden;">
+                                <h5>Layout report</h5>
+                            </div>
+                            <t t-foreach="doc.survey_info_id" t-as="info">
+                                <div style="width:50%; height:290px; float:left;">
+                                    <table style="width:100%;">
+                                        <tr>
+                                            <td style="width:50%;">
+                                                <div style="height:200px; width:100%; border:1px solid gray; float:center;">
+                                                    <span t-if="info.layout_photo" t-field="info.layout_photo"
+                                                          t-options='{"widget": "image", "style":"width: 100%; height:100%;"}'/>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="border-bottom:5px solid gray; width:50%;">
+                                                <span>Area code :</span>
+                                                <div style="float:right; width:75%; height:100px;">
+                                                    <ul>
+                                                        <t t-foreach="info.survey_info_line_id"
+                                                           t-as="info_line">
+                                                            <li>
+                                                                <span t-field="info_line.area_code"/>
+                                                            </li>
+                                                        </t>
+                                                    </ul>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div style="height:290px; width:48%; border:1px solid gray; float:right;">
+                                    <span t-if="info.layout_photo" t-field="info.layout_photo"
+                                          t-options='{"widget": "image", "style":"width: 100%; height:100%;"}'/>
+                                </div>
+                            </t>
+
+
+                            <t t-foreach="doc.survey_info_id" t-as="info">
+                                <!-- Survey measurement record table -->
+                                <center>
+                                    <h5 style="background-color:#40180B; color:white; page-break-before:always;">
+                                        Survey measurement record
+                                    </h5>
+                                </center>
+                                <div style="width:50%; height:300px; float:left;">
+                                    <table class="table-bordered text-right" style="width:100%;">
+                                        <tr>
+                                            <th colspan="4"
+                                                style="background-color:#073054; text-align:left; color:white;">
+                                                General information
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:25%; height:100px;">Area code :</td>
+                                            <td colspan="3" class="text-left">
+                                                <div>
+                                                    <ul>
+                                                        <t t-foreach="info.survey_info_line_id" t-as="info_line">
+                                                            <li>
+                                                                <span t-field="info_line.area_code"/>
+                                                            </li>
+                                                        </t>
+                                                    </ul>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th colspan="4"
+                                                style="background-color:#073054; text-align:left; color:white;">
+                                                Area calculation report (Grand total)
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" class="text-center">Particular</td>
+                                            <td style="text-align:center; width:20%;">QTY</td>
+                                            <td style="text-align:center; width:20%;">Unit</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">Item :</td>
+                                            <td>
+                                                <span t-field="info.item"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="info.unit"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">Floor area :</td>
+                                            <td>
+                                                <span t-field="info.floor_area"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="info.unit"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">Wall area :</td>
+                                            <td>
+                                                <span t-field="info.wall_area"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="info.unit"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">Wall area (Door, Window excluded) :</td>
+                                            <td>
+                                                <span t-field="info.only_wall_area"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="info.unit"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">Door area :</td>
+                                            <td>
+                                                <span t-field="info.door_area"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="info.unit"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">Window area :</td>
+                                            <td>
+                                                <span t-field="info.window_area"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="info.unit"/>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div style="width:48%; height:300px; border:1px solid gray; float:right;">
+                                    <span t-if="doc.implement_site_photo"
+                                          t-field="doc.implement_site_photo"
+                                          t-options='{"widget": "image", "style":"width: 100%; height:100%;"}'/>
+                                </div>
+
+                                <!-- Layout report -->
+                                <table style="width:100%;">
+                                    <thead>
+                                        <tr>
+                                            <th colspan="3"
+                                                style="background-color:#40180B; text-align:center; font-size:18px; color:white;">
+                                                Layout report
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr style="border-bottom:5px solid white;">
+                                            <td colspan="3">
+                                                <div style="height:400px; width:100%; border:2px solid gray;">
+                                                    <span t-if="info.layout_photo"
+                                                          t-field="info.layout_photo"
+                                                          t-options='{"widget": "image", "style":"width: 100%; height:100%;"}'/>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr style="border-bottom:5px solid white;">
+                                            <td style="width:30%;">
+                                                <div style="height:200px; width:100%; border:2px solid gray;">
+                                                    <span t-if="info.front_scence_photo"
+                                                          t-field="info.front_scence_photo"
+                                                          t-options='{"widget": "image", "style":"width: 100%; height:100%;"}'/>
+                                                </div>
+                                            </td>
+                                            <td style="width:30%;">
+                                                <div style="height:200px; width:100%; border:2px solid gray;">
+                                                    <span t-if="info.left_scence_photo"
+                                                          t-field="info.left_scence_photo"
+                                                          t-options='{"widget": "image", "style":"width: 100%; height:100%;"}'/>
+                                                </div>
+                                            </td>
+                                            <td style="width:30%;">
+                                                <div style="height:200px; width:100%; border:2px solid gray;">
+                                                    <span t-if="info.right_scence_photo"
+                                                          t-field="info.right_scence_photo"
+                                                          t-options='{"widget": "image", "style":"width: 100%; height:100%;"}'/>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </t>
+
+                            <t t-foreach="doc.survey_info_id" t-as="info">
+                                <t t-foreach="info.survey_info_line_id" t-as="info_line">
+                                    <!-- Survey measurement record table -->
+                                    <table class="table-bordered text-right"
+                                           style="width:100%; page-break-before:always;">
+                                        <thead>
+                                            <tr>
+                                                <th colspan="7"
+                                                    style="background-color:#40180B; text-align:center; font-size:18px; color:white;">
+                                                    Survey measurement record
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th colspan="7"
+                                                    style="background-color:#073054; text-align:left; color:white;">
+                                                    General information
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <td style="width:15%" class="text-left">Area type :</td>
+                                                <td colspan="4" class="text-left">
+                                                    <t t-foreach="info_line.area_calc_line_id" t-as="line">
+                                                        <span t-field="line.area_type"/>
+                                                        <span>,</span>
+                                                    </t>
+                                                </td>
+                                                <td style="width:15%;">Area code :</td>
+                                                <td style="width:20%;" class="text-left">
+                                                    <t t-foreach="info_line.area_calc_line_id" t-as="line">
+                                                        <span t-field="line.area_code"/>
+                                                        <span>,</span>
+                                                    </t>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th colspan="4"
+                                                    style="background-color:#073054; text-align:left; color:white;">
+                                                    Area calculation report (Grand total)
+                                                </th>
+                                                <td colspan="3" class="text-center">Demand</td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2" class="text-center">Particular</td>
+                                                <td style="text-align:center; width:12%;">QTY</td>
+                                                <td style="text-align:center; width:8%;">Unit</td>
+                                                <td style="text-align:center; width:15%">Particular</td>
+                                                <td colspan="2" style="text-align:center;">Description</td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2">Item :</td>
+                                                <td>
+                                                    <span t-field="info_line.item"/>
+                                                </td>
+                                                <td>
+                                                    <span t-field="info_line.unit"/>
+                                                </td>
+                                                <td rowspan="6" class="text-left">
+                                                    <ul>
+                                                        <t t-foreach="info_line.demand_line_id" t-as="demand_line">
+                                                            <li>
+                                                                <span t-field="demand_line.particular"/>
+                                                            </li>
+                                                        </t>
+                                                    </ul>
+                                                </td>
+                                                <td rowspan="6" colspan="2" class="text-left">
+                                                    <ul>
+                                                        <t t-foreach="info_line.demand_line_id" t-as="demand_line">
+                                                            <li>
+                                                                <span t-field="demand_line.description"/>
+                                                            </li>
+                                                        </t>
+                                                    </ul>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2">Floor area :</td>
+                                                <td>
+                                                    <span t-field="info_line.item"/>
+                                                </td>
+                                                <td>
+                                                    <span t-field="info_line.unit"/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2">Wall area :</td>
+                                                <td>
+                                                    <span t-field="info_line.wall_area"/>
+                                                </td>
+                                                <td>
+                                                    <span t-field="info_line.unit"/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2">Wall area (Door, Window excluded) :</td>
+                                                <td>
+                                                    <span t-field="info_line.only_wall_area"/>
+                                                </td>
+                                                <td>
+                                                    <span t-field="info_line.unit"/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2">Door area :</td>
+                                                <td>
+                                                    <span t-field="info_line.door_area"/>
+                                                </td>
+                                                <td>
+                                                    <span t-field="info_line.unit"/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2">Window area :</td>
+                                                <td>
+                                                    <span t-field="info_line.window_area"/>
+                                                </td>
+                                                <td>
+                                                    <span t-field="info_line.unit"/>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                    <!-- Layout report -->
+                                    <table style="width:100%;">
+                                        <thead>
+                                            <tr>
+                                                <th colspan="3"
+                                                    style="background-color:#40180B; text-align:center; font-size:18px; color:white;">
+                                                    Layout report
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr style="border-bottom:5px solid white;">
+                                                <td colspan="3">
+                                                    <div style="height:500px; width:100%; border:3px solid gray;">
+                                                        <span t-if="info_line.layout_photo"
+                                                              t-field="info_line.layout_photo"
+                                                              t-options='{"widget": "image", "style":"width: 100%; height:100%;"}'/>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr style="border-bottom:5px solid white;">
+                                                <td style="width:30%;">
+                                                    <div style="height:200px; width:100%; border:2px solid gray;">
+                                                        <span t-if="info_line.front_scence_photo"
+                                                              t-field="info_line.front_scence_photo"
+                                                              t-options='{"widget": "image", "style":"width: 100%; height:100%;"}'/>
+                                                    </div>
+                                                </td>
+                                                <td style="width:30%;">
+                                                    <div style="height:200px; width:100%; border:2px solid gray;">
+                                                        <span t-if="info_line.left_scence_photo"
+                                                              t-field="info_line.left_scence_photo"
+                                                              t-options='{"widget": "image", "style":"width: 100%; height:100%;"}'/>
+                                                    </div>
+                                                </td>
+                                                <td style="width:30%;">
+                                                    <div style="height:200px; width:100%; border:2px solid gray;">
+                                                        <span t-if="info_line.right_scence_photo"
+                                                              t-field="info_line.right_scence_photo"
+                                                              t-options='{"widget": "image", "style":"width: 100%; height:100%;"}'/>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </t>
+                            </t>
+
+                            <t t-foreach="doc.survey_info_id" t-as="info">
+                                <t t-foreach="info.survey_info_line_id" t-as="info_line">
+                                    <!-- Survey measurement record table -->
+                                    <table class="table-bordered text-right"
+                                           style="width:100%; page-break-before:always;">
+                                        <thead>
+                                            <tr>
+                                                <th colspan="4"
+                                                    style="background-color:#40180B; text-align:center; font-size:18px; color:white;">
+                                                    Survey measurement record
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td style="width:15%">Area type :</td>
+                                                <td style="width:50%" class="text-left">
+                                                    <t t-foreach="info_line.area_calc_line_id" t-as="line">
+                                                        <span t-field="line.area_type"/>
+                                                        <span>,</span>
+                                                    </t>
+                                                </td>
+                                                <td style="width:15%;">Area code :</td>
+                                                <td style="width:20%;" class="text-left">
+                                                    <t t-foreach="info_line.area_calc_line_id" t-as="line">
+                                                        <span t-field="line.area_code"/>
+                                                        <span>,</span>
+                                                    </t>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="4" class="text-center">Remark</td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="4" class="text-left" style="height:200px;">
+                                                    <ul>
+                                                        <t t-foreach="info_line.remark_id" t-as="remark_line">
+                                                            <li>
+                                                                <span t-field="remark_line.description"/>
+                                                            </li>
+                                                        </t>
+                                                    </ul>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                    <!-- Existing photo table -->
+                                    <table style="text-align:center; width:100%;">
+                                        <thead>
+                                            <tr>
+                                                <th style="background-color:#40180B; text-align:center;
+                                                font-size:18px; color:white;">
+                                                    Existing photo
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <t t-foreach="info_line.other_photo_line_ids"
+                                                       t-as="other_photo_line">
+                                                        <div
+                                                                style="height:210px; width:260px; border:1px solid gray; display:inline-block; margin-left:5px; margin-top:10px;">
+                                                            <span t-field="other_photo_line.other_photo"
+                                                                  t-options='{"widget": "image", "style":"width: 100%; height:100%;"}'/>
+                                                        </div>
+                                                    </t>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </t>
+                            </t>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+        <record id="decoration_survey_report" model="ir.actions.report">
+            <field name="name">Decoration Site Survey Form</field>
+            <field name="model">ideatime.task.survey</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">ideatime_core.decoration_survey_report_id</field>
+            <field name="report_file">ideatime_core.decoration_survey_report_id</field>
+            <field name="binding_model_id" ref="ideatime_core.model_ideatime_task_survey"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <record id="decoration_survey_report_a4" model="report.paperformat">
+            <field name="name">Decoration Survey Report A4</field>
+            <field name="format">A4</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">55</field>
+            <field name="margin_bottom">15</field>
+            <field name="margin_left">7</field>
+            <field name="margin_right">7</field>
+            <field name="header_spacing">45</field>
+            <field name="report_ids" eval="[(4, ref('ideatime_core.decoration_survey_report'))]"/>
+        </record>
+    </data>
+</odoo>

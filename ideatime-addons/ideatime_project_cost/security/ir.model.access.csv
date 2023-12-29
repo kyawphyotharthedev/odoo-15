@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_ideatime_project_cost_journal_generate,ideatime_project_cost.project_cost_journal_generate,model_project_cost_journal_generate,base.group_user,1,1,1,1

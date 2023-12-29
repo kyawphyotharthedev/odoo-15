@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <template id="report_blue_project_form" name="Blue Project Form">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <t t-foreach="docs" t-as="o">
+                    <t t-if="o.partner_id.report_template_id">
+                        <div class="page">
+                            <!-- Header table -->
+                            <table class="table table-sm table-bordered">
+                                <tr>
+                                    <th colspan="4" class="text-center"
+                                        style="border:2px solid gray;">
+                                        Quotation
+                                    </th>
+                                    <th rowspan="9"
+                                        style="text-align:center; vertical-align:middle; border-top:1px solid white; border-right:1px solid white; border-bottom:1px solid white;">
+                                        <div
+                                                style="color:white; height:70px; width:100%; text-align:center; vertical-align:middle;">
+                                            <img src='/partner_base_report/static/src/img/ideatimelogo.jpg'
+                                                 style="height:100%; width:80%;"/>
+                                        </div>
+                                       <!--  <h4>Hotline: 09 400 888 300</h4> -->
+                                    </th>
+                                </tr>
+
+                                <tr style="border-bottom:2px solid gray;">
+                                    <th style="width:10%; text-align:right;border:2px solid gray">Date</th>
+                                    <td style="width:20%;">
+                                        <span t-field="o.bd_date"/>
+                                    </td>
+                                    <th style="width:10%; text-align:right;border:2px solid gray">Contact Person</th>
+                                    <td style="width:20%;border:2px solid gray">
+                                        <span t-field="o.employee_id"/>
+                                    </td>
+                                </tr>
+                                <tr style="border-bottom:2px solid gray;">
+                                    <th style="text-align:right;border:2px solid gray">Client</th>
+                                    <td style="border:2px solid gray">
+                                        <span t-field="o.client_name"/>
+                                    </td>
+                                    <th style="text-align:right;border:2px solid gray">Department</th>
+                                    <td style="border:2px solid gray">
+                                        <span t-field="o.employee_id.function"/>
+                                    </td>
+                                </tr>
+                                <tr style="height:50px;border:2px solid gray">
+                                    <th style="text-align:right;">Address</th>
+                                    <td style="border:2px solid gray">
+                                        <span t-field="o.partner_id.project_site"/>
+                                    </td>
+                                    <th style="text-align:right;">Office Location</th>
+                                    <td style="border:2px solid gray">
+                                        <span t-field="o.employee_id.project_site"/>
+                                    </td>
+                                </tr>
+                                <tr style="border-bottom:2px solid gray;">
+                                    <th style="text-align:right;border:2px solid gray;">Business Type</th>
+                                    <td style="border:2px solid gray">
+                                        <span t-field="o.business_type"/>
+                                    </td>
+                                    <th style="text-align:right;border:2px solid gray;">Phone Number</th>
+                                    <td style="border:2px solid gray">
+                                        <span t-field="o.employee_id.phone"/>
+                                    </td>
+                                </tr>
+                                <tr style="border-bottom:2px solid gray;">
+                                    <th style="text-align:right;border:2px solid gray;">Project Name</th>
+                                    <td style="border:2px solid gray;">
+                                        <span t-field="o.bd_project_name"/>
+                                    </td>
+                                    <th style="text-align:right;border:2px solid gray">E-mail</th>
+                                    <td style="border:2px solid gray">
+                                        <span t-field="o.employee_id.email"/>
+                                    </td>
+                                </tr>
+                                <tr style="border:2px solid gray;">
+                                    <th style="text-align:right;">Store Format</th>
+                                    <td style="border:2px solid gray">
+                                        <span t-field="o.store_format"/>
+                                    </td>
+                                    <td style="border:2px solid gray"></td>
+                                    <td style="border:2px solid gray"></td>
+                                </tr>
+                                <tr style="border:2px solid gray">
+                                    <th style="text-align:right;border:2px solid gray;">Location</th>
+                                    <td style="border:2px solid gray">
+                                        <span t-field="o.location"/>
+                                    </td>
+                                    <td style="border:2px solid gray"></td>
+                                    <td style="border:2px solid gray"></td>
+                                </tr>
+                                <tr style="border:2px solid gray;">
+                                    <th style="text-align:right;">Tax ID</th>
+                                    <td style="border:2px solid gray">
+                                        <span t-field="o.tax_id"/>
+                                    </td>
+                                    <td style="border:2px solid gray"></td>
+                                    <td style="border:2px solid gray"></td>
+                                </tr>
+                            </table>
+
+                            <!-- Data table -->
+                            <table class="table table-sm o_main_table table-bordered">
+                                <thead>
+                                    <tr style="border-top:2px solid gray; border-bottom:2px solid gray;">
+                                        <th colspan="8" class="text-center">Blue Project</th>
+                                    </tr>
+                                    <tr class="text-center" style="border-bottom:2px solid gray;">
+                                        <th style="width:3%;">No.</th>
+                                        <th style="width:15%;">Particular</th>
+                                        <th style="width:35%;">Description</th>
+                                        <th style="width:10%;">Size</th>
+                                        <th style="width:5%;">QTY</th>
+                                        <th style="width:5%;">Unit</th>
+                                        <th style="width:10%;">Unit Price</th>
+                                        <th style="width:17%;">Total Price</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-set="count" t-value="1"/>
+                                    <t t-foreach="o.order_line" t-as="line">
+                                        <t t-if="line.product_uom_qty &lt; 1">
+                                            <tr style="background-color:#38ACEC;">
+                                                <td class="text-center">
+                                                    <span t-esc="count"/>
+                                                    <t t-set="count" t-value="count + 1"/>
+                                                </td>
+                                                <th colspan="7">
+                                                    <span t-field="line.name"/>
+                                                </th>
+                                            </tr>
+                                        </t>
+
+                                        <t t-if="line.product_uom_qty &gt; 0">
+                                            <tr>
+                                                <td></td>
+                                                <td>
+                                                    <span t-field="line.product_id"/>
+                                                </td>
+                                                <td>
+                                                    <span t-field="line.name"/>
+                                                </td>
+                                                <td>
+                                                    <span t-field="line.size"/>
+                                                </td>
+                                                <td class="text-right">
+                                                    <span t-esc="round(line.product_uom_qty)"/>
+                                                </td>
+                                                <td class="text-center">
+                                                    <span t-field="line.product_uom"/>
+                                                </td>
+                                                <td class="text-right">
+                                                    <span t-field="line.price_unit"
+                                                          t-options="{'widget': 'float', 'precision': 2}"/>
+                                                </td>
+                                                <td class="text-right">
+                                                    <span t-field="line.price_subtotal"
+                                                          t-options="{'widget': 'float', 'precision': 2}"/>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                    </t>
+
+                                    <tr class="text-right">
+                                        <th colspan="7">Total</th>
+                                        <td>
+                                            <span t-field="o.budget_pricelist_id" style="float:left;"/>
+                                            <span t-field="o.amount_untaxed"
+                                                  t-options="{'widget': 'float', 'precision': 2}"/>
+                                        </td>
+                                    </tr>
+                                    <tr class="text-right">
+                                        <th colspan="7">Commercial Tax(5%)</th>
+                                        <td>
+                                            <span t-field="o.budget_pricelist_id" style="float:left;"/>
+                                            <span t-field="o.amount_tax"
+                                                  t-options="{'widget': 'float', 'precision': 2}"/>
+                                        </td>
+                                    </tr>
+                                    <tr class="text-right" style="border-bottom:2px solid gray;">
+                                        <th colspan="7">Grand Total</th>
+                                        <td>
+                                            <span t-field="o.budget_pricelist_id" style="float:left;"/>
+                                            <span t-field="o.amount_total"
+                                                  t-options="{'widget': 'float', 'precision': 2}"/>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </t>
+                    <t t-else="">
+                        <p>Please choose the template in customer view.</p>
+                    </t>
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>

@@ -1,0 +1,452 @@
+<odoo>
+    <data noupdate="1">
+        <!-- Sequence for Income Expense -->
+
+        <record id="seq_idea_income_expense" model="ir.sequence">
+            <field name="name">Income and Expense Sequence</field>
+            <field name="code">InExSeq</field>
+            <field name="prefix">InEx</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <!-- Sequence for Expense Voucher -->
+        <record id="seq_idea_expense_voucher" model="ir.sequence">
+            <field name="name">Expense Voucher Sequence</field>
+            <field name="code">ExpVou</field>
+            <field name="prefix">EV</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <!-- Sequence for Initial Feedback Process -->
+        <record id="seq_idea_initial_feedback_process" model="ir.sequence">
+            <field name="name">Initial Feedback Process Sequence</field>
+            <field name="code">IniFeedProc</field>
+            <field name="prefix">IFP</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+
+
+        <record id="seq_ideatime_appendix_info" model="ir.sequence">
+            <field name="name">Appendix Info</field>
+            <field name="code">appendix.production.info</field>
+            <field name="prefix">AP</field>
+            <field name="padding">3</field>
+            <field name="company_id" eval="False"/>
+        </record>
+        <record id="seq_ideatime_store_format" model="ir.sequence">
+            <field name="name">Store Format</field>
+            <field name="code">store.format</field>
+            <field name="prefix">SF</field>
+            <field name="padding">3</field>
+            <field name="company_id" eval="False"/>
+        </record>
+        <record id="seq_ideatime_outdoor_env_system" model="ir.sequence">
+            <field name="name">Outdoor Env System</field>
+            <field name="code">out.env.system</field>
+            <field name="prefix">ES</field>
+            <field name="padding">3</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="seq_ideatime_design_proposal" model="ir.sequence">
+            <field name="name">Design Proposal</field>
+            <field name="code">design.proposal</field>
+            <field name="prefix">DP</field>
+            <field name="padding">3</field>
+            <field name="company_id" eval="False"/>
+        </record>
+        <record id="seq_ideatime_meet_visit" model="ir.sequence">
+            <field name="name">Meet Visit Process</field>
+            <field name="code">meet.visit.process</field>
+            <field name="prefix">MV</field>
+            <field name="padding">3</field>
+            <field name="company_id" eval="False"/>
+        </record>
+        <record id="seq_ideatime_jo_accept" model="ir.sequence">
+            <field name="name">JO Acceptance</field>
+            <field name="code">jo.acceptance</field>
+            <field name="prefix">JO</field>
+            <field name="padding">3</field>
+            <field name="company_id" eval="False"/>
+        </record>
+        <record id="seq_ideatime_survey_info" model="ir.sequence">
+            <field name="name">Ideatime Survey Info</field>
+            <field name="code">survey.info</field>
+            <field name="prefix">SI</field>
+            <field name="padding">3</field>
+            <field name="company_id" eval="False"/>
+        </record>
+        <record id="seq_ideatime_survey" model="ir.sequence">
+            <field name="name">Ideatime Survey</field>
+            <field name="code">ideatime.task.survey</field>
+            <field name="prefix">SV</field>
+            <field name="padding">3</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <!-- Sequences for sale.order -->
+        <record id="seq_GA1_ads_signs_production_01" model="ir.sequence">
+            <field name="name">Signword and Decoration Sequence</field>
+            <field name="prefix">ICC20GA1P%(y)s1</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+
+        <record id="seq_GA3_exhibition_display_booth_02" model="ir.sequence">
+            <field name="name">Exhibition display booth Sequence</field>
+            <field name="prefix">ICC20GA3P%(y)s1</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="seq_GA4_Directory_board_production_and_installation_02" model="ir.sequence">
+            <field name="name">Directory board production and installation Sequence</field>
+            <field name="prefix">ICC20GA4P%(y)s1</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+
+        <record id="seq_GB1_Ads_and_Sign_production_03" model="ir.sequence">
+            <field name="name">Ads and Sign production Sequence</field>
+            <field name="prefix">ICC20GB1P%(y)s1</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+
+        <record id="seq_GC1_Digital_graphic_photo_printing_04" model="ir.sequence">
+            <field name="name">Digital graphic photo printing Sequence</field>
+            <field name="prefix">ICC20GC1P%(y)s1</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+
+        <record id="seq_GH1_Maintenanous_service_05" model="ir.sequence">
+            <field name="name">Maintenanous service Sequence</field>
+            <field name="prefix">ICC20GH1P%(y)s1</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="seq_GH3_Event_props_rent_item_05" model="ir.sequence">
+            <field name="name">Event props rent item Sequence</field>
+            <field name="prefix">ICC20GH3P%(y)s1</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="seq_GA1_Signword_and_Decoration_06" model="ir.sequence">
+            <field name="name">ANC Signword and Decoration Sequence</field>
+            <field name="prefix">ANCC20GA1P%(y)s1</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+
+        <record id="seq_GA2_Visual_merchandising_07" model="ir.sequence">
+            <field name="name">ANC Visual merchandising Sequence</field>
+            <field name="prefix">ANCC20GA2P%(y)s1</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+
+        <record id="seq_GA3_Exhibition_display_booth_08" model="ir.sequence">
+            <field name="name">ANC Exhibition display booth Sequence</field>
+            <field name="prefix">ANCC20GA3P%(y)s1</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="seq_GA4_Directory_board_production_and_installation_09" model="ir.sequence">
+            <field name="name">ANC Directory board production and installation Sequence</field>
+            <field name="prefix">ANCC20GA4%(y)s1</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="seq_GA5_LED_displays_for_brand_building_10" model="ir.sequence">
+            <field name="name">ANC LED displays for brand building Sequence</field>
+            <field name="prefix">ANCC20GA5P%(y)s1</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="seq_GB1_Ads_and_Sign_production_11" model="ir.sequence">
+            <field name="name">ANC Ads and Sign production Sequence</field>
+            <field name="prefix">ANCC20GB1P%(y)s1</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="seq_GB2_Display_showcase_12" model="ir.sequence">
+            <field name="name">ANC Display showcase Sequence</field>
+            <field name="prefix">ANCC20GB2P%(y)s1</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="seq_GC1_Digital_graphic_photo_printing_13" model="ir.sequence">
+            <field name="name">ANC Digital graphic photo printing Sequence</field>
+            <field name="prefix">ANCC20GC1P%(y)s1</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+
+        <record id="seq_GC2_Offset_printing_14" model="ir.sequence">
+            <field name="name">ANC Offset printing Sequence</field>
+            <field name="prefix">ANCC20GC2P%(y)s1</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="seq_GC3_Screen_printing_15" model="ir.sequence">
+            <field name="name">ANC Screen printing Sequence</field>
+            <field name="prefix">ANCC20GC3P%(y)s1</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+
+        <record id="seq_GC4_Flexography_printing_16" model="ir.sequence">
+            <field name="name">ANC Flexography printing Sequence</field>
+            <field name="prefix">ANCC20GC4P%(y)s1</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="seq_GD1_POSM_item_17" model="ir.sequence">
+            <field name="name">ANC POSM item Sequence</field>
+            <field name="prefix">ANCC20GD1P%(y)s1</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+
+        <record id="seq_GD2_Display_stand_18" model="ir.sequence">
+            <field name="name">ANC Display stand Sequence</field>
+            <field name="prefix">ANCC20GD2P%(y)s1</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+
+        <record id="seq_GE1_Graphic_design_19" model="ir.sequence">
+            <field name="name">ANC Graphic design Sequence</field>
+            <field name="prefix">ANCC20GE1P%(y)s1</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="seq_GE2_Design_and_Architecture_for_shop_20" model="ir.sequence">
+            <field name="name">ANC Design and Architecture for shop Sequence</field>
+            <field name="prefix">ANCC20GE2P%(y)s1</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="seq_GE3_3D_innovative_design_21" model="ir.sequence">
+            <field name="name">ANC 3D innovative design Sequence</field>
+            <field name="prefix">ANCC20GE3P%(y)s1</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="seq_GE4_Exhibition_display_event_design_22" model="ir.sequence">
+            <field name="name">ANC Exhibition display event design Sequence</field>
+            <field name="prefix">ANCC20GE4P%(y)s1</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="seq_GE5_Event_decoration_design_23" model="ir.sequence">
+            <field name="name">ANC Event decoration design Sequence</field>
+            <field name="prefix">ANCC20GE5P%(y)s1</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+
+        <record id="seq_GF1_Corporate_and_Product_Promotion_event_24" model="ir.sequence">
+            <field name="name">ANC Corporate and Product Promotion event Sequence</field>
+            <field name="prefix">ANCC20GF1P%(y)s1</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="seq_GF2_Promotion_event_25" model="ir.sequence">
+            <field name="name">ANC Promotion event Sequence</field>
+            <field name="prefix">ANCC20GF2P%(y)s1</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+
+        <record id="seq_GF3_Trade_exhibition_display_event_26" model="ir.sequence">
+            <field name="name">ANC Trade exhibition display event Sequence</field>
+            <field name="prefix">ANCC20GF3P%(y)s1</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="seq_GG1_Graphic_media_27" model="ir.sequence">
+            <field name="name">ANC Graphic media Sequence</field>
+            <field name="prefix">ANCC20GG1P%(y)s1</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="seq_GG2_Channel_media_28" model="ir.sequence">
+            <field name="name">ANC Channel media Sequence</field>
+            <field name="prefix">ANCC20GG2P%(y)s1</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+
+        <record id="seq_GG3_Digital_media_29" model="ir.sequence">
+            <field name="name">ANC Digital media Sequence</field>
+            <field name="prefix">ANCC20GG3P%(y)s1</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+
+        <record id="seq_GH1_Maintenanous_service_30" model="ir.sequence">
+            <field name="name">ANC Maintenanous service Sequence</field>
+            <field name="prefix">ANCC20GH1P%(y)s1</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="seq_GH2_Agence_service_31" model="ir.sequence">
+            <field name="name">ANC Agence service Sequence</field>
+            <field name="prefix">ANCC20GH2P%(y)s1</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="seq_GH3_Event_props_rent_item_32" model="ir.sequence">
+            <field name="name">ANC Event props rent item Sequence</field>
+            <field name="prefix">ANCC20GH3P%(y)s1</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+
+        <record id="seq_GB1_Ads_and_Sign_production_33" model="ir.sequence">
+            <field name="name">B2B Ads and Sign production Sequence</field>
+            <field name="prefix">B2BC20GB1P%(y)s1</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+
+        <record id="seq_GC1_Digital_graphic_photo_printing_34" model="ir.sequence">
+            <field name="name">B2B Digital graphic photo printing Sequence</field>
+            <field name="prefix">B2BC20GC1P%(y)s1</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+
+        <record id="seq_GH1_Maintenanous_service_35" model="ir.sequence">
+            <field name="name">B2B Maintenanous service Sequence</field>
+            <field name="prefix">B2BC20GH1P%(y)s1</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="seq_GH3_Event_props_rent_item_36" model="ir.sequence">
+            <field name="name">B2B Event props rent item Sequence</field>
+            <field name="prefix">B2BC20GH3P%(y)s1</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+
+        <record id="seq_GA3_Exhibition_display_booth_37" model="ir.sequence">
+            <field name="name">SPD Exhibition display booth Sequence</field>
+            <field name="prefix">SPD20GA3P%(y)s1</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+
+        <record id="seq_GA5_LED_displays_for_brand_building_38" model="ir.sequence">
+            <field name="name">SPD LED displays for brand building Sequence</field>
+            <field name="prefix">SPDC20GA5P%(y)s1</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="seq_GB1_Ads_and_Sign_production_39" model="ir.sequence">
+            <field name="name">SPD Ads and Sign production Sequence</field>
+            <field name="prefix">SPDC20GB1P%(y)s1</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+
+        <record id="seq_GB2_Display_showcase_40" model="ir.sequence">
+            <field name="name">SPD Display showcase Sequence</field>
+            <field name="prefix">SPDC20GB2P%(y)s1</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="seq_GC1_Digital_graphic_photo_printing_41" model="ir.sequence">
+            <field name="name">SPD Digital graphic photo printing Sequence</field>
+            <field name="prefix">SPDC20GC1%(y)s1</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+
+        <record id="seq_GC2_Offset_printing_42" model="ir.sequence">
+            <field name="name">SPD Offset printing Sequence</field>
+            <field name="prefix">SPDC20GC2P%(y)s1</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+
+        <record id="seq_GC3_Screen_printing_43" model="ir.sequence">
+            <field name="name">SPD Screen printing Sequence</field>
+            <field name="prefix">SPDC20GC3P%(y)s1</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="seq_GC4_Flexography_printing_44" model="ir.sequence">
+            <field name="name">SPD Flexography printing Sequence</field>
+            <field name="prefix">SPDC20GC4%(y)s1</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+
+        <record id="seq_GD1_POSM_item_45" model="ir.sequence">
+            <field name="name">SPD POSM item Sequence</field>
+            <field name="prefix">SPDC20GD1%(y)s1</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="seq_GD2_Display_stand_46" model="ir.sequence">
+            <field name="name">SPD Display stand Sequence</field>
+            <field name="prefix">SPDC20GD2%(y)s1</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+    </data>
+</odoo>

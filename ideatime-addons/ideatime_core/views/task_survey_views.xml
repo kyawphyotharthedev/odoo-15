@@ -1,0 +1,499 @@
+<odoo>
+    <data>
+        <record id="action_ideatime_task_survey_form" model="ir.actions.act_window">
+            <field name="name">Decoration process survey form</field>
+            <field name="res_model">ideatime.task.survey</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{
+                'default_project_id': active_id,
+                }
+            </field>
+            <field name="domain">[('project_id','=',active_id)]</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Click to create a survey form
+                </p>
+            </field>
+        </record>
+
+
+        <record id="view_survey_area_calc_line" model="ir.ui.view">
+            <field name="name">survey.info.line.form</field>
+            <field name="model">survey.info.line</field>
+            <field eval="20" name="priority"/>
+            <field name="arch" type="xml">
+                <form>
+
+                    <separator string='Area Calculation Report'/>
+                    <group>
+                        <group>
+                            <field name="floor_area"/>
+                            <field name="wall_area"/>
+                            <field name="only_wall_area"/>
+                        </group>
+                        <group>
+                            <field name="door_area"/>
+                            <field name="window_area"/>
+                            <hr/>
+                            <field name="item"/>
+                        </group>
+                        <group>
+                            <field name="type"/>
+                        </group>
+
+
+                        <field name="area_calc_line_id" nolabel="1">
+                            <tree string="Area Calculation Line" editable="bottom">
+                                <field name="info_type" invisible="1"/>
+
+                                <field name="area_type"/>
+                                <field name="area_code"/>
+                                <field name="floor_area" attrs="{'invisible': [('info_type','=','item')]}"/>
+                                <field name="wall_area" attrs="{'invisible': [('info_type','=','item')]}"/>
+                                <field name="door_area" attrs="{'invisible': [('info_type','=','item')]}"/>
+                                <field name="window_area" attrs="{'invisible': [('info_type','=','item')]}"/>
+                                <field name="item" attrs="{'invisible': [('info_type','=','area')]}"/>
+                                <field name="uom_id"/>
+
+
+                            </tree>
+                        </field>
+                        <separator string="Demand"/>
+                        <field name="demand_line_id" nolabel="1">
+                            <tree string="Demand Line" editable="bottom">
+                                <field name="particular"/>
+                                <field name="description"/>
+                            </tree>
+                        </field>
+                        <separator string="Remark"/>
+                        <field name="remark_id" nolabel="1">
+                            <tree string="Remark Line" editable="bottom">
+                                <field name="description"/>
+                            </tree>
+                        </field>
+                        <group>
+                            <group>
+                                <separator string="Check Survey"/>
+                                <group>
+                                    <field name="take_photo" widget="radio" options="{'horizontal': true}"
+                                           class="oe_edit_only"/>
+                                    <field name="wall" widget="radio" options="{'horizontal': true}"/>
+                                    <field name="ceiling" widget="radio" options='{"horizontal": 1}'/>
+                                    <field name="floor" widget="radio" options='{"horizontal": 1}'/>
+                                    <field name="window" widget="radio" options='{"horizontal": 1}'/>
+                                    <field name="bean" widget="radio" options='{"horizontal": 1}'/>
+                                    <field name="varender" widget="radio" options='{"horizontal": 1}'/>
+                                    <field name="piping_system" widget="radio" options='{"horizontal": 1}'/>
+                                    <field name="connstanncy_area" widget="radio" options='{"horizontal": 1}'/>
+                                    <field name="stair_area" widget="radio" options='{"horizontal": 1}'/>
+                                    <field name="refrence_exit" widget="radio" options='{"horizontal": 1}'/>
+                                    <field name="description" widget="radio" options='{"horizontal": 1}'/>
+                                </group>
+                            </group>
+
+                            <separator string="Photo Info"/>
+
+                            <field name="layout_photo" widget="image" string="Layout Photo"/>
+                            <field name="front_scence_photo" widget="image" string="Existing Photo(Front side)"/>
+                            <field name="left_scence_photo" widget="image" string="Existing Photo(Left side)"/>
+                            <field name="right_scence_photo" widget="image" string="Existing Photo(Right side)"/>
+                            <separator string="Other Photo"/>
+                            <field name="other_photo_line_ids" class="o_website_sale_image_list"
+                                   context="{ 'default_task_survey_id': active_id}" nolabel="1">
+                                <kanban string="other_photo Photo" class="o_attachments_previews">
+                                    <field name="id"/>
+                                    <field name="file_name"/>
+                                    <field name="other_photo" filename="file_name"/>
+                                    <templates>
+                                        <t t-name="kanban-box">
+                                            <div class="o_attachment oe_kanban_global_click o_website_sale_image_card">
+                                                <div class="o_attachment_wrap">
+                                                    <div class="o_image_box">
+                                                        <div class="o_attachment_image"
+                                                             t-attf-style="background-image:url({{kanban_image('other.photo.line', 'other_photo', record.id.raw_value)}});"/>
+                                                        <div t-attf-class="o_image_overlay"
+                                                             t-att-title="record.file_name.value"/>
+                                                        <div class="o_website_sale_image_card_title"
+                                                             t-att-title="record.file_name.value">
+                                                            <field name="file_name"/>
+                                                        </div>
+                                                    </div>
+
+                                                    <t t-set="size" t-value="[record.other_photo.value][0]"/>
+                                                    <t t-set="size_status" t-value="'normal'"
+                                                       t-if="size.indexOf('Bytes') !== -1 or ( size.indexOf('Kb') !== -1 and size[2]=='.')"/>
+                                                    <t t-set="size_status" t-value="'warning'"
+                                                       t-elif="( size.indexOf('Kb') !== -1 and size[3]=='.')"/>
+                                                    <t t-set="size_status" t-value="'danger'" t-else=""/>
+                                                    <t t-set="message" t-value="'Acceptable file size'"
+                                                       t-if="size_status == 'normal'"></t>
+                                                    <t t-set="message"
+                                                       t-value="'Huge file size. The image should be optimized/reduced.'"
+                                                       t-elif="size_status == 'warning'"></t>
+                                                    <t t-set="message"
+                                                       t-value="'Optimization required! Reduce the image size or increase your compression settings.'"
+                                                       t-else=""></t>
+
+                                                    <span t-attf-class="o_website_sale_image_card_size badge badge-#{size_status}"
+                                                          t-att-title="message">
+                                                        <t t-esc="record.other_photo.value"/>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </t>
+                                    </templates>
+                                </kanban>
+                                <form>
+                                    <form string="Other Photo">
+                                        <group>
+                                            <group>
+                                                <field name="other_photo" filename="file_name"/>
+                                            </group>
+                                            <group>
+                                                <field name="file_name" invisible="1"/>
+                                            </group>
+                                        </group>
+                                    </form>
+                                </form>
+                            </field>
+                        </group>
+
+                    </group>
+
+                    <footer>
+                        <button name="save" type="object" string="Save" class="oe_highlight"/>
+                        <button string="Discard" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="view_survey_info_line" model="ir.ui.view">
+            <field name="name">survey.info.form</field>
+            <field name="model">survey.info</field>
+            <field eval="20" name="priority"/>
+            <field name="arch" type="xml">
+                <form>
+                    <field name="name" invisible="1"/>
+                    <separator string='Survey Info'/>
+                    <group>
+                        <group>
+                            <field name="unit"/>
+                            <field name="floor_area"/>
+                            <field name="wall_area"/>
+                            <field name="only_wall_area"/>
+                        </group>
+                        <group>
+                            <field name="door_area"/>
+                            <field name="window_area"/>
+                            <hr/>
+                            <field name="item"/>
+                        </group>
+
+                        <field name="survey_info_line_id" mode="tree,form" nolabel="1">
+                            <tree string="Survey Info">
+                                <field name="area_type"/>
+                                <field name="area_code"/>
+                                <field name="area_calc_report"/>
+                                <field name="demand"/>
+                                <field name="remark"/>
+                                <field name="info" invisible="1"/>
+
+                            </tree>
+                            <form>
+                                <separator string='Area Calculation Report'/>
+                                <group>
+                                    <group>
+                                        <field name="unit"/>
+                                        <field name="floor_area"/>
+                                        <field name="wall_area"/>
+                                        <field name="only_wall_area"/>
+                                    </group>
+                                    <group>
+                                        <field name="door_area"/>
+                                        <field name="window_area"/>
+                                        <hr/>
+                                        <field name="item"/>
+                                    </group>
+                                    <group>
+                                        <field name="type"/>
+                                    </group>
+
+
+                                    <field name="area_calc_line_id" nolabel="1">
+                                        <tree string="Area Calculation Line" editable="bottom">
+                                            <field name="info_type" invisible="1"/>
+
+                                            <field name="area_type"/>
+                                            <field name="area_code"/>
+                                            <field name="floor_area" attrs="{'invisible': [('info_type','=','item')]}"/>
+                                            <field name="wall_area" attrs="{'invisible': [('info_type','=','item')]}"/>
+                                            <field name="door_area" attrs="{'invisible': [('info_type','=','item')]}"/>
+                                            <field name="window_area"
+                                                   attrs="{'invisible': [('info_type','=','item')]}"/>
+                                            <field name="item" attrs="{'invisible': [('info_type','=','area')]}"/>
+                                            <field name="uom_id"/>
+
+
+                                        </tree>
+                                    </field>
+                                    <separator string="Demand"/>
+                                    <field name="demand_line_id" nolabel="1">
+                                        <tree string="Demand Line" editable="bottom">
+                                            <field name="particular"/>
+                                            <field name="description"/>
+                                        </tree>
+                                    </field>
+                                    <separator string="Remark"/>
+                                    <field name="remark_id" nolabel="1">
+                                        <tree string="Remark Line" editable="bottom">
+                                            <field name="description"/>
+                                        </tree>
+                                    </field>
+                                    <group>
+
+                                        <separator string="Check Survey"/>
+
+
+                                        <field name="take_photo" widget="radio" options="{'horizontal': true}"
+                                               class="oe_edit_only"/>
+                                        <field name="wall" widget="radio" options="{'horizontal': true}"/>
+                                        <field name="ceiling" widget="radio" options='{"horizontal": 1}'/>
+                                        <field name="floor" widget="radio" options='{"horizontal": 1}'/>
+                                        <field name="window" widget="radio" options='{"horizontal": 1}'/>
+                                        <field name="bean" widget="radio" options='{"horizontal": 1}'/>
+                                        <field name="varender" widget="radio" options='{"horizontal": 1}'/>
+                                        <field name="piping_system" widget="radio" options='{"horizontal": 1}'/>
+                                        <field name="connstanncy_area" widget="radio" options='{"horizontal": 1}'/>
+                                        <field name="stair_area" widget="radio" options='{"horizontal": 1}'/>
+                                        <field name="refrence_exit" widget="radio" options='{"horizontal": 1}'/>
+                                        <field name="description" widget="radio" options='{"horizontal": 1}'/>
+                                    </group>
+                                </group>
+                                <separator string="Photo Info"/>
+
+                                <field name="layout_photo" widget="image" string="Layout Photo"/>
+                                <field name="front_scence_photo" widget="image" string="Existing Photo(Front side)"/>
+                                <field name="left_scence_photo" widget="image" string="Existing Photo(Left side)"/>
+                                <field name="right_scence_photo" widget="image" string="Existing Photo(Right side)"/>
+                                <separator string="Existing photo (Other)"/>
+                                <field name="other_scence_photo" widget="image" string="Existing Photo(Other)"/>
+                                <separator string="Other Photo"/>
+
+                                <field name="other_photo_line_ids" class="o_website_sale_image_list" nolabel="1">
+                                    <kanban string="Other Photo" class="o_attachments_previews">
+                                        <field name="id"/>
+                                        <field name="file_name"/>
+                                        <field name="other_photo" filename="file_name"/>
+                                        <templates>
+                                            <t t-name="kanban-box">
+                                                <div class="o_attachment oe_kanban_global_click o_website_sale_image_card">
+                                                    <div class="o_attachment_wrap">
+                                                        <div class="o_image_box">
+                                                            <div class="o_attachment_image"
+                                                                 t-attf-style="background-image:url({{kanban_image('other.photo.line', 'other_photo', record.id.raw_value)}});"/>
+                                                            <div t-attf-class="o_image_overlay"
+                                                                 t-att-title="record.file_name.value"/>
+                                                            <div class="o_website_sale_image_card_title"
+                                                                 t-att-title="record.file_name.value">
+                                                                <field name="file_name"/>
+                                                            </div>
+                                                        </div>
+
+                                                        <t t-set="size" t-value="[record.other_photo.value][0]"/>
+                                                        <t t-set="size_status" t-value="'normal'"
+                                                           t-if="size.indexOf('Bytes') !== -1 or ( size.indexOf('Kb') !== -1 and size[2]=='.')"/>
+                                                        <t t-set="size_status" t-value="'warning'"
+                                                           t-elif="( size.indexOf('Kb') !== -1 and size[3]=='.')"/>
+                                                        <t t-set="size_status" t-value="'danger'" t-else=""/>
+                                                        <t t-set="message" t-value="'Acceptable file size'"
+                                                           t-if="size_status == 'normal'"></t>
+                                                        <t t-set="message"
+                                                           t-value="'Huge file size. The image should be optimized/reduced.'"
+                                                           t-elif="size_status == 'warning'"></t>
+                                                        <t t-set="message"
+                                                           t-value="'Optimization required! Reduce the image size or increase your compression settings.'"
+                                                           t-else=""></t>
+
+                                                        <span t-attf-class="o_website_sale_image_card_size badge badge-#{size_status}"
+                                                              t-att-title="message">
+                                                            <t t-esc="record.other_photo.value"/>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </t>
+                                        </templates>
+                                    </kanban>
+                                    <form>
+                                        <form string="Other Photo">
+                                            <group>
+                                                <group>
+                                                    <field name="other_photo" filename="file_name"/>
+                                                </group>
+                                                <group>
+                                                    <field name="file_name" invisible="1"/>
+                                                </group>
+                                            </group>
+                                        </form>
+                                    </form>
+                                </field>
+                            </form>
+                        </field>
+                        <field name="layout_photo" widget="image" string="Layout Photo"/>
+                        <field name="front_scence_photo" widget="image" string="Existing Photo(Front side)"/>
+                        <field name="left_scence_photo" widget="image" string="Existing Photo(Left side)"/>
+                        <field name="right_scence_photo" widget="image" string="Existing Photo(Right side)"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="ideatime_task_survey_form_view" model="ir.ui.view">
+            <field name="name">ideatime.task.survey.form</field>
+            <field name="model">ideatime.task.survey</field>
+            <field name="arch" type="xml">
+                <form string="Survey Form">
+                    <sheet>
+                        <center>
+                            <h1>Decoration process survey form</h1>
+                        </center>
+
+                        <group>
+                            <group>
+                                <h1>
+                                    <field name="name" readonly="1"/>
+                                </h1>
+                                <separator string="Project information"/>
+                                <field name="survey_date"/>
+                                <field name="jo_accept_id" string="JO Acceptance Form"/>
+                                <field name="map_link"/>
+                            </group>
+                            <field name="maps" widget="image"/>
+                            <group>
+                                <field name="project_site"/>
+                                <field name="country_id"/>
+                                <field name="region" string="Region"
+                                       options="{'no_create':True, 'no_create_edit':True, 'no_open':True}"/>
+                                <field name="city" string="City"
+                                       options="{'no_create':True, 'no_create_edit':True, 'no_open':True}"/>
+                                <field name="township" string="Township"
+                                       options="{'no_create':True, 'no_create_edit':True, 'no_open':True}"/>
+                                <field name="street"/>
+                                <field name="ward"/>
+                                <field name="land_number"/>
+                                <field name="tower_type" string="Building Type"/>
+                                <field name="tower_no" string="Building No"/>
+                                <field name="floor"/>
+                                <field name="site_name"/>
+                                <separator string="Party A"/>
+                                <field name="client_pic" string="Client-Site PIC name" widget="res_partner_many2one"
+                                       context="{ 'show_job_position':1,'show_phone': 1, 'show_mobile': 1,'show_note':1,'show_mail':1,'show_vat': True}"
+                                       options='{"always_reload": True,"no_create": True}'
+                                       domain="[('customer_rank', '>', 0)]"/>
+                                <separator string="Party B"/>
+                                <field name="survey_pic" string="Survey PIC name"
+                                       domain="[('customer_rank', '=', 0),('supplier_rank','=', 0)]"
+                                       context="{ 'show_job_position':1,'show_phone': 1, 'show_mobile': 1,'show_note':1,'show_mail':1,'show_vat': True}"
+                                       options='{"always_reload": True,"no_create": True}'/>
+                                <separator string="Implement Site PIC name"/>
+                                <field name="shop_name" string="Shop name"/>
+                                <field name="implement_site_pic_name" string="Implement site PIC name"/>
+                                <field name="phoneno" string="Phone"/>
+
+
+                            </group>
+                        </group>
+                        <group>
+                            <separator string="Basic investigation"/>
+                            <field name="basic_investigation_ids">
+                                <tree editable="bottom" string="Basic Investigation">
+                                    <field name="particular"/>
+                                    <field name="situation_analysis"/>
+                                </tree>
+                            </field>
+                            <field name="building_type"/>
+                            <field name="structural_state" widget="radio" options="{'horizontal': true}"
+                                   class="oe_edit_only"/>
+                            <field name="dismantle_work" widget="radio" options="{'horizontal': true}"/>
+                            <field name="site_preparation_work" widget="radio" options='{"horizontal": 1}'/>
+                            <field name="working_period" widget="radio" options='{"horizontal": 1}'/>
+                            <field name="electiricity_supply" widget="radio" options='{"horizontal": 1}'/>
+                            <field name="water_supply" widget="radio" options='{"horizontal": 1}'/>
+                            <field name="permission_process" widget="radio" options='{"horizontal": 1}'/>
+                            <field name="accommodation" widget="radio" options='{"horizontal": 1}'/>
+                            <field name="material_purchase" widget="radio" options='{"horizontal": 1}'/>
+                            <field name="material_transporaion" widget="radio" options='{"horizontal": 1}'/>
+                            <field name="delivery" widget="radio" options='{"horizontal": 1}'/>
+                            <field name="passenger_transporation" widget="radio" options='{"horizontal": 1}'/>
+                            <field name="surrounding_env_impact" widget="radio" options='{"horizontal": 1}'
+                                   string="Surrounding environment impact"/>
+                            <field name="building_water_leakage" widget="radio" options='{"horizontal": 1}'/>
+                            <field name="cable_hinder_impact" widget="radio" options='{"horizontal": 1}'/>
+                            <field name="const_team_impact" widget="radio" options='{"horizontal": 1}'
+                                   string="Other construction team impact "/>
+                            <field name="weather_rain_impact" widget="radio" options='{"horizontal": 1}'/>
+
+
+                        </group>
+
+                        <separator string="Survey measurement records"/>
+                        <field name="implement_site_photo" widget="image" string="Implement Site Photo"/>
+                        <separator string="Area calculation report(Grand total)"/>
+                        <group>
+                            <group>
+                                <field name="unit"/>
+                                <field name="floor_area"/>
+                                <field name="wall_area"/>
+                                <field name="only_wall_area"/>
+                            </group>
+                            <group>
+                                <field name="door_area"/>
+                                <field name="wall_area"/>
+                                <hr/>
+                                <field name="item_area" string="Item"/>
+                            </group>
+                        </group>
+                        <separator string="Survey info"/>
+                        <field name="survey_info_id" nolabel="1">
+                            <tree editable="bottom">
+                                <field name="floor" string="Floor"/>
+                                <field name="area_calc" string="Area calculation report"/>
+                                <button name="open_survey_info" string="Survey info" type="object" icon="fa-bars"/>
+                            </tree>
+                        </field>
+                        <separator string="Appendix"/>
+                        <field name="appendix_id" nolabel="1">
+                            <tree editable="bottom">
+                                <field name="name" string="Particular"/>
+                                <field name="file_name" invisible="1"/>
+                                <field name="upload" filename="file_name"/>
+                                <field name="file_path" widget="url"/>
+                                <field name="remark"/>
+                            </tree>
+                        </field>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="ideatime_survey_tree_view" model="ir.ui.view">
+            <field name="name">ideatime.task.survey.tree</field>
+            <field name="model">ideatime.task.survey</field>
+            <field eval="2" name="priority"/>
+            <field name="arch" type="xml">
+                <tree string="Survey">
+                    <field name="name"/>
+                    <field name="survey_date"/>
+                    <field name="client_pic" string="Client PIC"/>
+                    <field name="survey_pic" string="Survey PIC"/>
+                    <field name="shop_name"/>
+                    <field name="implement_site_pic_name" string="Implement Site PIC Name"/>
+                    <field name="project_site"/>
+                </tree>
+            </field>
+        </record>
+
+
+    </data>
+</odoo>

@@ -1,0 +1,15 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="view_order_form_inherit">
+            <field name="name">uom.category.inherit</field>
+            <field name="model">uom.category</field>
+            <field name="inherit_id" ref="uom.product_uom_categ_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="after">
+                    <field name="company_id"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
+ 

@@ -1,0 +1,94 @@
+<odoo>
+    <data>
+    	<record id="action_idea_cost_type" model="ir.actions.act_window">
+            <field name="name">Cost Type</field>
+            <field name="res_model">cost.type</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Create a new record
+              </p>
+            </field>
+        </record>
+
+        <record id="idea_cost_type_tree" model="ir.ui.view">
+            <field name="name">cost.type.tree</field>
+            <field name="model">cost.type</field>
+            <field name="arch" type="xml">
+                <tree string="Cost Type">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="idea_cost_type_form" model="ir.ui.view">
+            <field name="name">cost.type.form</field>
+            <field name="model">cost.type</field>
+            <field name="arch" type="xml">
+                <form string="Cost Type">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+
+        <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+
+
+
+<!--        <record id="action_idea_cost_option" model="ir.actions.act_window">-->
+<!--            <field name="name">Cost Option</field>-->
+<!--            <field name="res_model">cost.option</field>-->
+<!--            <field name="view_mode">tree,form</field>-->
+<!--            <field name="help" type="html">-->
+<!--              <p class="o_view_nocontent_smiling_face">-->
+<!--                Create a new record-->
+<!--              </p>-->
+<!--            </field>-->
+<!--        </record>-->
+
+<!--        <record id="idea_cost_option_tree" model="ir.ui.view">-->
+<!--            <field name="name">cost.option.tree</field>-->
+<!--            <field name="model">cost.option</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <tree string="Cost Type">-->
+<!--                    <field name="name"/>-->
+<!--                </tree>-->
+<!--            </field>-->
+<!--        </record>-->
+
+<!--        <record id="idea_cost_option_form" model="ir.ui.view">-->
+<!--            <field name="name">cost.option.form</field>-->
+<!--            <field name="model">cost.option</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <form string="Cost Type">-->
+<!--                    <sheet>-->
+<!--                        <group>-->
+<!--                            <group>-->
+<!--                                <field name="name"/>-->
+<!--                                <field name="type_id" options="{'no_create': True}"/>-->
+<!--                                <field name="require_detail"/>-->
+<!--                            </group>-->
+<!--                        </group>-->
+<!--                    </sheet>-->
+<!--                </form>-->
+<!--            </field>-->
+<!--        </record>-->
+
+
+
+        <menuitem id="menu_idea_cost_type" name="Cost Type"
+                parent="project.menu_project_config"
+                action="action_idea_cost_type" sequence="10"/>
+<!--        <menuitem id="menu_idea_cost_option" name="Cost Option"-->
+<!--                parent="project.menu_project_config"-->
+<!--                action="action_idea_cost_option" sequence="11"/>-->
+    </data>
+</odoo>

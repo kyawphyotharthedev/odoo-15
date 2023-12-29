@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_ideatime_assest_config_ideatime_assest_config,ideatime_assest_config.ideatime_assest_config,model_ideatime_assest_config_ideatime_assest_config,base.group_user,1,1,1,1

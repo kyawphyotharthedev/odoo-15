@@ -1,0 +1,134 @@
+<odoo>
+    <data>
+        <record id="ideatime_view_calendar_event_form" model="ir.ui.view">
+            <field name="name">calendar.event.form</field>
+            <field name="model">calendar.event</field>
+            <field name="inherit_id" ref="calendar.view_calendar_event_form"/>
+            <field name="priority" eval="1"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='start_date']" position="before">
+                    <field name="calldate"/>
+                    <field name="meeting_min_type"/>
+                </xpath>
+                <xpath expr="//field[@name='location']" position="replace">
+                    <field name="location"/>
+                </xpath>
+
+                <xpath expr="//notebook" position="inside">
+                    <page string="Meeting Participant">
+                        <field name="meeting_participant_id" mode="tree,form">
+                            <tree editable="bottom">
+                                <field name="model_type"/>
+                                <field name="employee_id"/>
+                                <field name="customer_id"/>
+                                <field name="supplier_id"/>
+                                <field name="thirtparty_id"/>
+                                <field name="government_id"/>
+                                <field name="participant_name" string="Name"/>
+                                <field name="department_id"/>
+                                <field name="position"/>
+                            </tree>
+                        </field>
+                    </page>
+                    <page string="CC">
+                        <field name="meeting_cc_id" widget="section_and_note_one2many">
+                            <tree editable="bottom" string="CC">
+                                <field name="model_type"/>
+                                <field name="customer_id" string="Name"/>
+                                <field name="email"/>
+                            </tree>
+                        </field>
+                    </page>
+
+                    <page string="Topic of discussion">
+
+                        <separator string="Topic of Discussion"/>
+                        <field name="meeting_topic_id" mode="tree,form">
+                            <tree editable="bottom">
+                                <field name="particular"/>
+                                <field name="des"/>
+                            </tree>
+                        </field>
+
+                        <separator string="Discussion summary"/>
+                        <field name="meeting_summary_id" mode="tree,form">
+                            <tree editable="bottom">
+                                <field name="particular"/>
+                                <field name="des"/>
+                            </tree>
+                        </field>
+
+                        <separator string="Conclusions"/>
+                        <field name="meeting_conclusion_id" mode="tree,form">
+                            <tree editable="bottom">
+                                <field name="particular"/>
+                                <field name="des"/>
+                            </tree>
+                        </field>
+                    </page>
+
+                    <page string="Action">
+                        <field name="meeting_action_id" widget="section_and_note_one2many">
+                            <tree editable="bottom">
+
+                                <field name="task_id"/>
+                                <field name="res_person"/>
+                                <field name="deadline"/>
+                            </tree>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
+
+        </record>
+        <record id="ideatime_calendar_month_view" model="ir.ui.view">
+            <field name="name">calendar.event.form</field>
+            <field name="model">calendar.event</field>
+            <field name="inherit_id" ref="calendar.view_calendar_event_calendar"/>
+            <field name="priority" eval="1"/>
+            <field name="arch" type="xml">
+                <calendar position="attributes">
+                    <attribute name="mode">month</attribute>
+                </calendar>
+            </field>
+        </record>
+        <record id="action_project_task_meeting_calendar_event" model="ir.actions.act_window">
+            <field name="name">Meetings</field>
+            <field name="res_model">calendar.event</field>
+            <field name="view_mode">calendar,tree,form</field>
+            <field name="search_view_id" ref="calendar.view_calendar_event_search"/>
+            <field name="domain">[('task_id', '=', active_id)]</field>
+            <field name="context">{'default_task_id': active_id}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Schedule a new meeting
+                </p>
+                <p>
+                    The calendar is shared between employees and fully integrated with
+                    other applications such as the employee leaves or the business
+                    opportunities.
+                </p>
+            </field>
+        </record>
+        <record id="action_project_meeting_calendar_event" model="ir.actions.act_window">
+            <field name="name">Meetings</field>
+            <field name="res_model">calendar.event</field>
+            <field name="view_mode">calendar,tree,form</field>
+            <field name="search_view_id" ref="calendar.view_calendar_event_search"/>
+            <field name="domain">[('project_id', '=', active_id)]</field>
+            <field name="context">{'default_project_id': active_id}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Schedule a new meeting
+                </p>
+                <p>
+                    The calendar is shared between employees and fully integrated with
+                    other applications such as the employee leaves or the business
+                    opportunities.
+                </p>
+            </field>
+        </record>
+    </data>
+</odoo>
+

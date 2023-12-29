@@ -1,0 +1,302 @@
+<odoo>
+    <data>
+
+        <!-- actions opening views on models -->
+        <record model="ir.actions.act_window" id="ideatime_document_management.action_window">
+            <field name="name">Document Management</field>
+            <field name="res_model">document.management</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="approve_info_detail_view" model="ir.ui.view">
+            <field name="name">approval.info.form</field>
+            <field name="model">approval.info</field>
+            <field name="arch" type="xml">
+                <form string="Internal Data Approval info">
+                    <header>
+                        <button name="action_request_by" string="Submit By" class="btn-primary" type="object"
+                                attrs="{'invisible': [('state','!=','draft')]}"
+                                groups='ideatime_document_management.group_request_permission'/>
+                        <button name="action_audit_by" string="Audit By" class="btn-primary" type="object"
+                                attrs="{'invisible': [('state','!=','request_by')]}"
+                                groups='ideatime_document_management.group_audit_permission'/>
+                        <button name="action_approved_by" string="Approved By" class="btn-primary" type="object"
+                                attrs="{'invisible': [('state','!=','audit_by')]}"
+                                groups='ideatime_document_management.group_approve_permission'/>
+                        <button name="action_by" string="Action" class="btn-primary" type="object"
+                                attrs="{'invisible': [('state','!=','approved_by')]}"
+                                groups='ideatime_document_management.group_action_permission'/>
+                        <button name="action_cancel_by" string="Cancel" class="btn-primary" type="object"
+                                attrs="{'invisible': [('state','=','cancel')]}"/>
+                        <button name="action_set_to_draft" string="Set to draft" class="btn-primary" type="object"
+                                attrs="{'invisible': [('state','not in','cancel')]}"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <h1>
+                            <center>Internal Data Approval info</center>
+                        </h1>
+
+                        <separator string="Idea Time PIC Info"/>
+                        <field name="internal_pic_id" attrs="{'readonly':[('state','not in',('draft'))]}">
+                            <tree editable="bottom">
+                                <field name="user_id" options="{'no_create': True}" string="Name"/>
+                                <field name="emp_id"/>
+                                <field name="job_position"/>
+                                <field name="employee_email"/>
+                                <field name="contact_number"/>
+                            </tree>
+                        </field>
+
+                        <group>
+
+                            <group>
+                                <separator string="Data Info"/>
+                                <field name="preparation_date" attrs="{'readonly':[('state','not in',('draft'))]}"/>
+                                <field name="current_version" attrs="{'readonly':[('state','not in',('draft'))]}"/>
+                                <field name="weakness_content" attrs="{'readonly':[('state','not in',('draft'))]}"/>
+                                <field name="update_content" attrs="{'readonly':[('state','not in',('draft'))]}"/>
+                                <field name="update_version" attrs="{'readonly':[('state','not in',('draft'))]}"/>
+                                <field name="file_name" attrs="{'readonly':[('state','not in',('draft'))]}"/>
+                                <field name="valid_date" attrs="{'readonly':[('state','not in',('draft'))]}"/>
+                                <field name="review_date" attrs="{'readonly':[('state','not in',('draft'))]}"/>
+                                <field name="document_lifttime_id" string="Document Life-Time"
+                                       attrs="{'readonly':[('state','not in',('draft'))]}"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+                                <h5>Upload Version File</h5>
+
+                                <field name="upload" string="Upload(File must not exceeded 25MB)"
+                                       attrs="{'readonly':[('state','not in',('draft'))]}"/>
+                            </group>
+                            <group>
+                                <field name="url" string="Url(If file size exceeded more than 25MB)" widget="url"
+                                       attrs="{'readonly':[('state','not in',('draft'))]}"/>
+                                <field name="show_password" attrs="{'readonly':[('state','not in',('draft'))]}"/>
+
+                                <field name="url_password" password='True'
+                                       attrs="{ 'invisible':[('show_password','=',True)],'readonly':[('state','not in',('draft'))]}"/>
+                                <field name="url_show_password"
+                                       attrs="{ 'invisible':[('show_password','=',False)],'readonly':[('state','not in',('draft'))]}"
+                                       string="Url Password"/>
+                            </group>
+                        </group>
+
+
+                        <!--  </group> -->
+
+                        <separator string="Appendix"/>
+                        <field name='info_appendix_id' attrs="{'readonly':[('state','not in',('draft'))]}">
+                            <tree editable="bottom">
+                                <field name="particular"/>
+                                <field name="upload_file"/>
+                                <field name="url" widget="url"/>
+                            </tree>
+                        </field>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="request_info_detail_view" model="ir.ui.view">
+            <field name="name">request.info.form</field>
+            <field name="model">request.info</field>
+            <field name="arch" type="xml">
+                <form string="Internal Data New/Edition Request Info">
+                    <header>
+                        <button name="action_request_by" string="Submit By" class="btn-primary" type="object"
+                                attrs="{'invisible': [('state','!=','draft')]}"
+                                groups='ideatime_document_management.group_request_permission'/>
+                        <button name="action_audit_by" string="Audit By" class="btn-primary" type="object"
+                                attrs="{'invisible': [('state','!=','request_by')]}"
+                                groups='ideatime_document_management.group_audit_permission'/>
+                        <button name="action_approved_by" string="Approved By" class="btn-primary" type="object"
+                                attrs="{'invisible': [('state','!=','audit_by')]}"
+                                groups='ideatime_document_management.group_approve_permission'/>
+                        <button name="action_cancel_by" string="Cancel" class="btn-primary" type="object"
+                                attrs="{'invisible': [('state','=','cancel')]}"/>
+                        <button name="action_set_to_draft" string="Set to draft" class="btn-primary" type="object"
+                                attrs="{'invisible': [('state','not in','cancel')]}"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <h1>
+                            <center>Internal Data New/Edition Request info</center>
+                        </h1>
+                        <separator string="Idea Time PIC Info"/>
+                        <field name="internal_pic_id" attrs="{'readonly':[('state','not in',('draft'))]}">
+                            <tree editable="bottom">
+                                <field name="user_id" options="{'no_create': True}" string="Responsible"/>
+                                <field name="emp_id"/>
+                                <field name="job_position"/>
+                                <field name="employee_email"/>
+                                <field name="contact_number"/>
+                            </tree>
+                        </field>
+                        <group>
+
+                            <group>
+                                <separator string="Data Info"/>
+                                <field name="request_date" attrs="{'readonly':[('state','not in',('draft'))]}"/>
+                                <field name="request_type_id" attrs="{'readonly':[('state','not in',('draft'))]}"/>
+                                <field name="analysis_review" attrs="{'readonly':[('state','not in',('draft'))]}"/>
+                                <field name="suggestion" attrs="{'readonly':[('state','not in',('draft'))]}"/>
+                                <field name="level_statement" attrs="{'readonly':[('state','not in',('draft'))]}"/>
+                                <field name="audit_review" attrs="{'readonly':[('state','not in',('draft'))]}"/>
+                            </group>
+                        </group>
+                        <separator string="Appendix"/>
+                        <field name='request_info_appendix_id' attrs="{'readonly':[('state','not in',('draft'))]}">
+                            <tree editable="bottom">
+                                <field name="particular"/>
+                                <field name="upload_file"/>
+                                <field name="url" widget="url"/>
+                            </tree>
+                        </field>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="ideatime_document_management.list" model="ir.ui.view">
+            <field name="name">Document Management Info List</field>
+            <field name="model">document.management</field>
+            <field name="arch" type="xml">
+                <tree string="Document Management Info List">
+                    <!--  <field name="name"/> -->
+                    <field name="used_business_unit"/>
+                    <field name="function_id"/>
+                    <field name="document_type_id"/>
+                    <field name="file_name"/>
+                    <field name="description"/>
+                    <field name="remark"/>
+                    <field name="review_date"/>
+                    <field name="information"/>
+                    <field name="related_department_id"/>
+                    <field name="permission_level_id" string="Document Permission Level"/>
+                    <field name="update_version_file"/>
+                    <field name="show_password" invisible='1'/>
+                    <field name="url_password" password='True' attrs="{ 'invisible':[('show_password','=',True)]}"/>
+                    <field name="url_show_password" attrs="{ 'invisible':[('show_password','=',False)]}"
+                           string="Url Show Password"/>
+                    <field name="used_policy_template"/>
+
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="ideatime_document_management.form" model="ir.ui.view">
+            <field name="name">Document Management Info Form</field>
+            <field name="model">document.management</field>
+            <field name="arch" type="xml">
+                <form string="Document Management Info Form">
+
+                    <sheet>
+                        <h1 style='color:blue'>
+                            <center>Idea Time Company Document Management Info</center>
+                        </h1>
+                        <p style='padding-left:10mm;color:red'>This document is intended for Idea Time Company internal
+                            purposes only. The information contained is proprietary and confidential Any use, copying
+                            referene, retention or disclosure by any person other than the intended recipient is
+                            strictly prohibited
+                        </p>
+                        <h1>
+                            <field name="name" invisible='1'/>
+                        </h1>
+                        <group>
+                            <field name="file_name"/>
+                            <field name="update_version_file"/>
+                            <field name="url" widget="url"/>
+                            <field name="show_password"/>
+                            <field name="url_password" password='True'
+                                   attrs="{ 'invisible':[('show_password','=',True)]}"/>
+                            <field name="url_show_password" attrs="{ 'invisible':[('show_password','=',False)]}"
+                                   string="Url Password"/>
+                            <field name="remark"/>
+                            <field name="used_policy_template"/>
+                            <field name="document_type_id"/>
+                            <field name="document_name"/>
+                            <field name="document_number"/>
+                            <field name="update_version"/>
+                            <field name="description"/>
+                            <field name="function_id"/>
+                            <field name="related_department_id" widget="many2many_tags"
+                                   options="{'no_quick_create':True,'no_create_edit':True}"/>
+                            <field name="check_job_position" invisible="1"/>
+                            <field name="job_position_id" widget="many2many_tags"
+                                   attrs="{'invisible':[('check_job_position','=',False)]}"
+                                   options="{'no_quick_create':True,'no_create_edit':True}"/>
+                            <field name="permission_level_id" widget="many2many_tags"
+                                   string="Document Permission Level"/>
+                            <field name="valid_date"/>
+                            <field name="document_lift_time"/>
+                            <field name="review_date"/>
+                            <field name="used_business_unit"/>
+                            <field name="used_process"/>
+                            <field name="audit_by"/>
+                            <field name="approved_by"/>
+                            <field name="responsible_person"/>
+                            <field name="information" invisible="1"/>
+
+                        </group>
+                        <separator string="Internal Data New/Edition Request info"/>
+                        <field name="request_info_id">
+                            <tree editable="bottom">
+                                <field name="date"/>
+                                <field name="document_number"/>
+                                <field name="version"/>
+                                <field name="summary"/>
+                                <button name="open_request_info" type="object" string="Inf link" icon="fa-bars"/>
+                            </tree>
+                        </field>
+
+                        <separator string="Internal Data Approval info"/>
+                        <field name="approval_info_id">
+                            <tree editable="bottom">
+                                <field name="preparation_date"/>
+                                <field name="document_number"/>
+                                <field name="version"/>
+                                <field name="summary"/>
+                                <button name="open_approval_info" type="object" string="Inf link" icon="fa-bars"/>
+                            </tree>
+                        </field>
+
+
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+
+        <!-- Top menu item -->
+        <menuitem name="Document Management" id="ideatime_document_management.menu_root"/>
+
+        <!-- menu categories -->
+        <menuitem name="Document" id="ideatime_document_management.document_menu"
+                  parent="ideatime_document_management.menu_root"/>
+
+        <!--     actions -->
+        <menuitem name="Document Management" id="ideatime_document_management.document_menu_list"
+                  parent="ideatime_document_management.document_menu"
+                  action="ideatime_document_management.action_window"/>
+    </data>
+</odoo>

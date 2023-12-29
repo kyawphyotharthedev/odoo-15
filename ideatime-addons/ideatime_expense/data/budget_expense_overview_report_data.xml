@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="action_budget_expense_overview_report" model="ir.actions.client">
+        <field name="name">Budget Overview</field>
+        <field name="tag">budget_expense_overview_report</field>
+        <field name="context" eval="{'model': 'budget.expense.overview.report'}" />
+    </record>
+
+</odoo>

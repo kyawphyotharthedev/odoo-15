@@ -1,0 +1,518 @@
+<odoo>
+    <data>
+
+        <record id="view_appendix" model="ir.ui.view">
+            <field name="name">appendix.production.info.form</field>
+            <field name="model">appendix.production.info</field>
+            <field eval="20" name="priority"/>
+            <field name="arch" type="xml">
+                <form>
+                    <separator string="Overview"/>
+                    <field name="name" invisible="1"/>
+                    <group>
+                        <field name="overview" widget="image" nolabel="1"/>
+                    </group>
+                    <separator string="Information Design"/>
+                    <field name="information_design_id">
+                        <tree editable="bottom">
+                            <field name="no"/>
+
+                            <field name="label_color"/>
+                            <field name="zone_design" widget="image" width="20%" height="20%"/>
+                            <field name="zone_name"/>
+                            <field name="product_id"/>
+                            <field name="item_code"/>
+                            <field name="sample_photo" widget="image" width="30%" height="30%"/>
+                            <field name="remark"/>
+                            <field name="design" widget="image" width="20%" height="20%"/>
+                            <field name="upload"/>
+                            <field name="url"/>
+                        </tree>
+                    </field>
+
+
+                </form>
+            </field>
+        </record>
+        <record id="view_store_format" model="ir.ui.view">
+            <field name="name">store.format.form</field>
+            <field name="model">store.format</field>
+            <field eval="20" name="priority"/>
+            <field name="arch" type="xml">
+                <form>
+                    <field name="name" invisible="1"/>
+                    <separator string="Store Format Defination Info"/>
+                    <field name="store_format_def_id">
+                        <tree editable="bottom">
+                            <field name="particular"/>
+
+                            <field name="description"/>
+                        </tree>
+                    </field>
+                    <group>
+                        <group>
+                            <field name="design_photo" widget="image" width="20%" height="10%"/>
+                        </group>
+                    </group>
+
+                    <separator string="Defination"/>
+                    <field name="defination_id">
+                        <tree editable="bottom">
+                            <field name="particular"/>
+
+                            <field name="description"/>
+                        </tree>
+                    </field>
+
+
+                </form>
+            </field>
+        </record>
+        <record id="view_outdoor_env_system" model="ir.ui.view">
+            <field name="name">outdoor.env.system.form</field>
+            <field name="model">outdoor.env.system</field>
+            <field eval="20" name="priority"/>
+            <field name="arch" type="xml">
+                <form>
+                    <field name="name" invisible="1"/>
+                    <separator string="Preliminary Docking"/>
+                    <separator string="Design Concept"/>
+                    <field name="design_concept_id" mode="tree,form" nolabel="1">
+                        <tree>
+                            <field name="date"/>
+                            <field name="particular"/>
+                            <field name="business_type"/>
+                            <field name="store_type"/>
+                            <field name="design_req" string="Design Requirement"/>
+                            <field name="submit_date"/>
+                        </tree>
+                        <form>
+                            <separator string='Design Concept Info'/>
+                            <separator string='Design Concept Directory Upload File(PDF) set setting'/>
+
+                            <separator string="Unique Design"/>
+                            <field name="unique_design_id">
+                                <tree editable="bottom">
+                                    <field name="business_type"/>
+                                    <field name='store_type'/>
+                                    <field name='design_style'/>
+                                    <field name="design_theme"/>
+                                    <field name="appendix"/>
+
+                                </tree>
+                            </field>
+                            <separator string="Client SI Design"/>
+                            <field name="client_design_id">
+                                <tree editable="bottom">
+                                    <field name="business_type"/>
+                                    <field name='store_type'/>
+                                    <field name='store_format'/>
+                                    <field name="appendix_upload"/>
+                                    <field name="appendix_url" widget="url"/>
+
+
+                                </tree>
+                            </field>
+                            <separator string="Design Requirements"/>
+                            <field name="design_req_id">
+                                <tree editable="bottom">
+                                    <field name="particular"/>
+                                    <field name='description'/>
+
+                                </tree>
+                            </field>
+                        </form>
+
+                    </field>
+                    <separator string="Preliminary Design Layout Distribution"/>
+                    <field name="preliminary_design_id">
+                        <tree editable="bottom">
+                            <field name="date"/>
+                            <field name="particular"/>
+                            <field name="design_layout"/>
+                            <field name="submit_date"/>
+                        </tree>
+                    </field>
+                    <separator string="Design Prepartion Demand"/>
+                    <group>
+                        <group>
+                            <field name="design_preparation_demand" widget="radio"/>
+                            <separator string="Survey Information"/>
+                            <field name="area_code"/>
+                            <separator string="Design Layout Distribution"/>
+                            <field name="design_layout" widget="image" width="20%" height="20%" nolabel="1"/>
+                        </group>
+                    </group>
+
+                    <separator string="Design View"/>
+                    <field name="design_view_id">
+                        <tree editable="bottom">
+
+                            <field name="particular"/>
+                            <field name="design" widget="image" width="10%" height="5%"/>
+
+                        </tree>
+                    </field>
+
+                    <separator string="Design Description(Overview Description)"/>
+                    <field name="design_description_id" mode="tree,form" nolabel="1">
+                        <tree>
+
+                            <field name="particular"/>
+                            <field name="description"/>
+                            <field name="design" widget="image" width="10%" height="5%"/>
+
+                        </tree>
+                        <form>
+                            <separator string="Design Description Info(Overview Description)"/>
+                            <field name="design_des_info_id">
+                                <tree editable="bottom">
+                                    <field name="no"/>
+                                    <field name="label_color"/>
+                                    <field name="particular"/>
+
+                                </tree>
+                            </field>
+                            <group>
+                                <group>
+                                    <field name="design" widget="image" width="20%" height="10%"/>
+                                </group>
+                            </group>
+                        </form>
+                    </field>
+
+                    <separator string="Design Description(Fixture Description)"/>
+                    <field name="fixture_design_id" mode="tree,form" nolabel="1">
+                        <tree>
+
+                            <field name="particular"/>
+                            <field name="description"/>
+                            <field name="design" widget="image" width="10%" height="5%"/>
+
+                        </tree>
+                        <form>
+                            <separator string="Design Description Info(Fixture Description)"/>
+                            <field name="fix_design_info_line_id">
+                                <tree editable="bottom">
+                                    <field name="no"/>
+                                    <field name="label_color"/>
+                                    <field name="particular"/>
+                                </tree>
+                            </field>
+                            <group>
+                                <group>
+                                    <field name="design" widget="image" width="20%" height="10%"/>
+                                    <field name="Layout_view" widget="image" width="20%" height="10%"/>
+                                </group>
+                            </group>
+
+                        </form>
+                    </field>
+
+                    <separator string="Product Information"/>
+                    <field name="product_info_id" mode="tree,form">
+                        <tree>
+
+                            <field name="particular"/>
+                            <field name="design" widget="image" width="10%" height="5%"/>
+
+                        </tree>
+                        <form>
+                            <group>
+                                <group>
+                                    <field name="design" widget="image" width="20%" height="10%"
+                                           string="Design Layout Distribution"/>
+                                    <field name="product_size" widget="image" width="20%" height="10%"/>
+                                    <field name="details_drawing" widget="image" width="20%" height="10%"/>
+                                </group>
+                            </group>
+                            <separator string="Material Information"/>
+                            <field name="material_info_id" mode="tree,form">
+                                <tree>
+                                    <field name="particular"/>
+                                    <field name="remark"/>
+                                    <field name="sample_photo" widget="image" width="20%" height="10%"/>
+                                </tree>
+                                <form>
+                                    <separator string="Material Information Info"/>
+                                    <separator string="Decorative Material Details"/>
+                                    <field name="decorative_material_id">
+                                        <tree editable="bottom">
+                                            <field name="label_no"/>
+                                            <field name="label_color"/>
+                                            <field name="title"/>
+                                            <field name="description"/>
+                                            <field name="specification"/>
+                                            <field name="product_info" string="Product Information"/>
+                                            <field name="particular"/>
+                                            <field name="sample_photo" widget="image" width="20%" height="10%"/>
+
+                                        </tree>
+                                    </field>
+                                    <separator string="Basic Material Details"/>
+                                    <field name="basic_material_id">
+                                        <tree editable="bottom">
+                                            <field name="label_no"/>
+                                            <field name="label_color"/>
+                                            <field name="specification"/>
+                                            <field name="particular"/>
+
+                                        </tree>
+                                    </field>
+                                </form>
+                            </field>
+
+                            <separator string="Lighting Info"/>
+                            <field name="lighting_info_id" mode="tree,form">
+                                <tree>
+                                    <field name="particular"/>
+                                    <field name="remark"/>
+                                    <field name="sample_photo" widget="image" width="20%" height="10%"/>
+                                </tree>
+                                <form>
+                                    <separator string="Lighting Info"/>
+                                    <separator string="Overview"/>
+                                    <field name="lighting_info_line_id">
+                                        <tree editable="bottom">
+                                            <field name="label_no"/>
+                                            <field name="label_color"/>
+                                            <field name="title"/>
+                                            <field name="description"/>
+                                        </tree>
+                                    </field>
+                                    <separator string="Details"/>
+                                    <field name="lighting_details_id">
+                                        <tree editable="bottom">
+                                            <field name="title"/>
+                                            <field name="lighting_template" string="Lighting and Template"/>
+                                            <field name="description"/>
+                                            <field name="product_info" string="Product Information"/>
+                                            <field name="sample_photo" widget="image" width="20%" height="10%"/>
+                                        </tree>
+                                    </field>
+                                </form>
+
+                            </field>
+                        </form>
+
+                    </field>
+
+                    <separator string="Working Drawing"/>
+                    <field name="working_drawing_id">
+                        <tree editable="bottom">
+
+                            <field name="particular"/>
+                            <field name="design" widget="image" width="10%" height="5%"/>
+
+                        </tree>
+                    </field>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="action_ideatime_design_proposal_form" model="ir.actions.act_window">
+            <field name="name">Design Proposal form</field>
+            <field name="res_model">design.proposal</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{
+                'default_project_id': active_id,
+                }
+            </field>
+            <field name="domain">[('project_id','=',active_id)]</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Click to create a Design Proposal form
+                </p>
+            </field>
+        </record>
+        <record id="view_design_form" model="ir.ui.view">
+            <field name="name">design.proposal.form</field>
+            <field name="model">design.proposal</field>
+            <field eval="20" name="priority"/>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <center>
+                            <h1>Design Proposal for Decoration</h1>
+                        </center>
+                        <separator string="Idea Time PIC info"/>
+                        <field name="name" invisible="1"/>
+
+                        <field name="internal_pic_ids"></field>
+                        <separator string="Project Information"/>
+                        <separator string="Project Site Name"/>
+                        <group>
+                            <group>
+                                <field name="particular"/>
+                                <field name="map_link" widget="url"/>
+                            </group>
+                            <field name="map_photo" widget="image"/>
+                            <group>
+                                <field name="project_site"/>
+                                <field name="country_id"/>
+                                <field name="region" string="Region"
+                                       options="{'no_create':True, 'no_create_edit':True, 'no_open':True}"/>
+                                <field name="city" string="City"
+                                       options="{'no_create':True, 'no_create_edit':True, 'no_open':True}"/>
+                                <field name="township" string="Township"
+                                       options="{'no_create':True, 'no_create_edit':True, 'no_open':True}"/>
+                                <field name="street"/>
+                                <field name="ward"/>
+                                <field name="land_number"/>
+                                <field name="tower_type" string="Building Type"/>
+                                <field name="tower_no" string="Building No"/>
+                                <field name="floor"/>
+                            </group>
+                            <field name="site_name"/>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="overview_design" widget="image" width="20%" height="20%"/>
+
+                            </group>
+                        </group>
+                        <group>
+
+                            <group>
+                                <separator string="Cover Design"/>
+                                <field name="cover_design" widget="image" width="20%" height="20%" nolabel="1"/>
+                                <separator string="Introduction"/>
+                                <field name="intro_design" widget="image" width="20%" height="20%" nolabel="1"/>
+                                <separator string="Design Overview"/>
+                                <field name="design_overview" widget="image" width="20%" height="20%" nolabel="1"/>
+                                <separator string="Summary Overview"/>
+                                <field name="design_summary" widget="image" width="20%" height="20%" nolabel="1"/>
+                            </group>
+                        </group>
+                        <h5>Design Basic</h5>
+                        <field name="objective_id">
+                            <tree editable="bottom">
+                                <field name="particular"/>
+                                <field name="description"/>
+                            </tree>
+                        </field>
+                        <h5>Design Basic</h5>
+                        <field name="particular_id">
+                            <tree editable="bottom">
+                                <field name="name" string="Particular"/>
+                            </tree>
+                        </field>
+                        <h5>Design Ideas</h5>
+                        <field name="design_ideas_ids">
+                            <tree editable="bottom">
+                                <field name="particular"/>
+                                <field name="description"/>
+                            </tree>
+                        </field>
+                        <h5>Making Process</h5>
+                        <field name="making_process_id">
+                            <tree editable="bottom">
+                                <field name="name" string="Particular"/>
+                            </tree>
+                        </field>
+                        <h5>Scope of Application</h5>
+                        <field name="scope_application_id">
+                            <tree editable="bottom">
+                                <field name="name" string="Particular"/>
+                            </tree>
+                        </field>
+                        <h5>Use</h5>
+                        <field name="use_design_ids">
+                            <tree editable="bottom">
+                                <field name="particular"/>
+                                <field name="description"/>
+                            </tree>
+                        </field>
+                        <h5>Maintain</h5>
+                        <field name="maintain_id">
+                            <tree editable="bottom">
+                                <field name="name" string="Particular"/>
+                            </tree>
+                        </field>
+                        <h5>Explansion</h5>
+                        <field name="explansion_id">
+                            <tree editable="bottom">
+                                <field name="name" string="Particular"/>
+                            </tree>
+                        </field>
+                        <separator string="Outdoor Enviornment System"/>
+
+                        <h5>Particular</h5>
+                        <group>
+                            <group>
+                                <field name="particular" widget="image" width="20%" height="20%" nolabel="1"/>
+                            </group>
+                        </group>
+                        <field name="outdoor_env_system_id">
+                            <tree editable="bottom">
+                                <field name="date"/>
+                                <field name="particular"/>
+                                <field name="pre_demand"/>
+                                <field name="submit_date"/>
+                                <button name="open_preliminary_docking" type="object" icon="fa-bars"/>
+
+                            </tree>
+                        </field>
+                        <h5>Store Format Defination</h5>
+                        <!--  <separator string="Store Format Defination"/>  -->
+                        <field name="store_format_id">
+                            <tree editable="bottom">
+                                <field name="type"/>
+                                <field name="design" widget="image" width="20%" height="20%"/>
+                                <field name="defination"/>
+                                <button name="open_store_format" type="object" icon="fa-bars"/>
+                            </tree>
+                        </field>
+                        <h5>Design by Store Format</h5>
+                        <field name="design_store_format_id">
+                            <tree editable="bottom">
+                                <field name="type"/>
+                                <field name="description"/>
+                                <field name="design_format1" widget="image" width="20%" height="20%"/>
+                                <field name="design_format2" widget="image" width="20%" height="20%"/>
+                                <field name="design_format3" widget="image" width="20%" height="20%"/>
+                            </tree>
+                        </field>
+                        <separator string="Appendix"/>
+                        <h5>Appendix of Production Info</h5>
+                        <field name="appendix_pro_info_id">
+                            <tree editable="bottom">
+                                <field name="particular"/>
+                                <field name="remark"/>
+                                <field name="overview" widget="image" width="30%" height="20%"/>
+                                <button name="open_appendix" type="object" icon="fa-bars"/>
+                            </tree>
+                        </field>
+                        <h5>Appendix Info</h5>
+                        <field name="appendix_info_id">
+                            <tree editable="bottom">
+                                <field name="particular"/>
+                                <field name="remark"/>
+                                <field name="upload"/>
+                                <field name="url"/>
+                            </tree>
+                        </field>
+                    </sheet>
+                </form>
+
+            </field>
+        </record>
+
+        <record id="ideatime_design_proposal_tree_view" model="ir.ui.view">
+            <field name="name">design.proposal.tree</field>
+            <field name="model">design.proposal</field>
+            <field eval="2" name="priority"/>
+            <field name="arch" type="xml">
+                <tree string="Design Proposal">
+                    <field name="name"/>
+                    <field name="map_link"/>
+                    <field name="project_site"/>
+                    <field name="create_uid"/>
+                    <field name="write_uid"/>
+                </tree>
+            </field>
+        </record>
+
+
+    </data>
+</odoo>

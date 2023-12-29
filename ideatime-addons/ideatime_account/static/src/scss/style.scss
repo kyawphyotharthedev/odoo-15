@@ -1,0 +1,17 @@
+.py-search-business_unit,
+.py-search-ideatime-company,
+.py-search-projects{
+    white-space: nowrap;
+    display: inline-block;
+    cursor: pointer;
+    user-select: none;
+    position: relative;
+}
+
+.py-filters-menu{
+    overflow: auto;
+    z-index: 1;
+    display: none;
+    position: absolute;
+    padding: 5px;
+}
